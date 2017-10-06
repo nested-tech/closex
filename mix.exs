@@ -28,6 +28,7 @@ defmodule Closex.Mixfile do
   defp deps do
     [
       {:poison, "~> 3.1.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev},
       {:httpoison, "~> 0.13.0"},
       {:exvcr, "~> 0.8", only: :test},
     ]
