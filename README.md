@@ -6,8 +6,7 @@ Documentation is available on [HexDocs](https://hexdocs.pm/closex).
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `closex` to your list of dependencies in `mix.exs`:
+Add `closex` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
