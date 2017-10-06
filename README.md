@@ -19,3 +19,18 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/closex](https://hexdocs.pm/closex).
 
+## Configuration
+
+In your config.exs:
+
+```elixir
+config :closex,
+  api_key: "YOUR_API_KEY"
+```
+
+You can also read from an environment variable:
+
+```elixir
+config :closex,
+  api_key: {:system, "MY_ENV_VAR"}
+```

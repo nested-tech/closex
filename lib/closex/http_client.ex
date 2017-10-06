@@ -13,6 +13,8 @@ defmodule Closex.HTTPClient do
   @type error :: {:error, any}
   @type result :: success | error
 
+  @base_url "https://app.close.io/api/v1"
+
   # Leads
 
   @doc "List or search for leads: https://developer.close.io/#leads-list-or-search-for-leads"
@@ -155,7 +157,7 @@ defmodule Closex.HTTPClient do
   end
 
   defp process_url(path) do
-    base_url() <> path
+    @base_url <> path
   end
 
   defp api_key do
@@ -163,9 +165,5 @@ defmodule Closex.HTTPClient do
       {:system, env} -> System.get_env(env)
       key when is_binary(key) -> key
     end
-  end
-
-  def base_url do
-    Application.fetch_env!(:closex, :base_url)
   end
 end
