@@ -1,0 +1,15 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/closex
+    docker:
+      - image: elixir:1.5.1
+
+    steps:
+      - checkout
+      - run: mix local.hex --force
+      - run: mix local.rebar --force
+      - run: elixir --version
+      - run: mix deps.get
+      - run: mix test
+
