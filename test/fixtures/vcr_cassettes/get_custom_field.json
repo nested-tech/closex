@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "{}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": {
+        "basic_auth": [
+          "FAKE_CLOSEIO_TOKEN",
+          ""
+        ]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/custom_fields/lead/lcf_8cL4GPyF0uTbp9c87c2kBTvHO8Wnnv8c8bw0RqMgrZU/"
+    },
+    "response": {
+      "body": "{\"name\": \"Listing Reference\", \"date_updated\": \"2017-08-31T15:44:04.890000+00:00\", \"created_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"choices\": [\"bar\", \"baz\", \"foo\", \"waa\"], \"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"date_created\": \"2017-08-31T15:42:56.925000+00:00\", \"type\": \"choices\", \"id\": \"lcf_8cL4GPyF0uTbp9c87c2kBTvHO8Wnnv8c8bw0RqMgrZU\", \"updated_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\"}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Date": "Fri, 29 Sep 2017 10:18:32 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "600",
+        "X-Rate-Limit-Remaining": "598",
+        "X-Rate-Limit-Reset": "12.495309",
+        "Content-Length": "453",
+        "Connection": "keep-alive"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "{\"name\":\"Bob Fleming\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "put",
+      "options": {
+        "basic_auth": [
+          "FAKE_CLOSEIO_TOKEN",
+          ""
+        ]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/lead/wibble/"
+    },
+    "response": {
+      "body": "{\"error\": \"Empty query: Lead matching query does not exist.\"}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Date": "Fri, 29 Sep 2017 10:18:35 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "600",
+        "X-Rate-Limit-Remaining": "597",
+        "X-Rate-Limit-Reset": "13.540725",
+        "Content-Length": "61",
+        "Connection": "keep-alive"
+      },
+      "status_code": 404,
+      "type": "ok"
+    }
+  }
+]

@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "{}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": {
+        "basic_auth": [
+          "FAKE_CLOSEIO_TOKEN",
+          ""
+        ]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/status/opportunity/"
+    },
+    "response": {
+      "body": "{\"has_more\": false, \"data\": [{\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"active\", \"id\": \"stat_7AT1l4L15KoZWeJlHXminAcPxPG0qKWMRsziU9UOEKH\", \"label\": \"S03: Qualified\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"won\", \"id\": \"stat_MBQNyevXlkrXlo8NKULnG8wTW7nJOyblaGeoI1VxZrW\", \"label\": \"Won\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"lost\", \"id\": \"stat_dgarFhdpfh95YD3F5EX9fVmmeWPeOrdEnEsyA4f8MF1\", \"label\": \"Lost\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"active\", \"id\": \"stat_encUzwVmBig37Xbrsg01AwFwSnVq4rLjKA1awaFNOoU\", \"label\": \"S02: Connected\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"active\", \"id\": \"stat_gc2L6rDDQV9evg1PbdEW0LvgtBrnu1EhMQUgJXZ6Kuy\", \"label\": \"S01: Received Offer Request\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"active\", \"id\": \"stat_vQWQtofUTvlcdgo1R1lsauc5Inez29fxk0SEOKC8qBg\", \"label\": \"Active\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"active\", \"id\": \"stat_y21fzqd7VuEXY1gMspJuWfTEOfWQ3AkzUb8F74zH0nW\", \"label\": \"S04: Indicative valuation complete\"}]}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Date": "Fri, 29 Sep 2017 10:18:30 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "600",
+        "X-Rate-Limit-Remaining": "599",
+        "X-Rate-Limit-Reset": "14.316173",
+        "Content-Length": "1260",
+        "Connection": "keep-alive"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

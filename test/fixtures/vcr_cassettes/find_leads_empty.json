@@ -1,0 +1,37 @@
+[
+  {
+    "request": {
+      "body": "\"\"",
+      "headers": {
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": {
+        "basic_auth": [
+          "FAKE_CLOSEIO_TOKEN",
+          ""
+        ]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/lead/?query=FOO"
+    },
+    "response": {
+      "body": "{\"has_more\": false, \"total_results\": 0, \"data\": []}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Date": "Fri, 29 Sep 2017 10:18:32 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "600",
+        "X-Rate-Limit-Remaining": "599",
+        "X-Rate-Limit-Reset": "14.470475",
+        "Content-Length": "51",
+        "Connection": "keep-alive"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

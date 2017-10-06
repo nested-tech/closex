@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "{\"value_period\":\"monthly\",\"value\":500,\"status_id\":\"stat_vQWQtofUTvlcdgo1R1lsauc5Inez29fxk0SEOKC8qBg\",\"note\":\"i hope this deal closes...\",\"lead_id\":\"lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm\",\"confidence\":90}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": {
+        "basic_auth": [
+          "FAKE_CLOSEIO_TOKEN",
+          ""
+        ]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/opportunity/"
+    },
+    "response": {
+      "body": "{\"date_updated\": \"2017-09-29T11:07:23.962000+00:00\", \"created_by_name\": \"API User (DO NOT DELETE)\", \"value_currency\": \"USD\", \"contact_id\": null, \"lead_name\": \"Luke Skywalker\", \"contact_name\": null, \"id\": \"oppo_otkBudcuHXq90sC43gex0ddp5XYQjvKndlOGMHjE9Ph\", \"confidence\": 90, \"user_id\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"value_period\": \"monthly\", \"created_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"note\": \"i hope this deal closes...\", \"updated_by_name\": \"API User (DO NOT DELETE)\", \"user_name\": \"API User (DO NOT DELETE)\", \"status_type\": \"active\", \"updated_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"status_id\": \"stat_vQWQtofUTvlcdgo1R1lsauc5Inez29fxk0SEOKC8qBg\", \"value_formatted\": \"$5 monthly\", \"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"integration_links\": [], \"date_won\": null, \"lead_id\": \"lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm\", \"date_lost\": null, \"value\": 500, \"status_label\": \"Active\", \"date_created\": \"2017-09-29T11:07:23.962000+00:00\"}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Date": "Fri, 29 Sep 2017 11:07:23 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "600",
+        "X-Rate-Limit-Remaining": "599",
+        "X-Rate-Limit-Reset": "14.047826",
+        "Content-Length": "1032",
+        "Connection": "keep-alive"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

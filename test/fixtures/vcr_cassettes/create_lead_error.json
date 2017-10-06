@@ -1,0 +1,38 @@
+[
+  {
+    "request": {
+      "body": "{\"status_id\":\"foo\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": {
+        "basic_auth": [
+          "FAKE_CLOSEIO_TOKEN",
+          ""
+        ]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/lead/"
+    },
+    "response": {
+      "body": "{\"errors\": [], \"field-errors\": {\"status\": \"Not a valid choice. Please go to Customizations in your organization settings and add \\\"foo\\\" to the list of lead statuses.\"}}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Date": "Fri, 29 Sep 2017 10:40:36 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "600",
+        "X-Rate-Limit-Remaining": "597",
+        "X-Rate-Limit-Reset": "0.778773",
+        "Content-Length": "169",
+        "Connection": "keep-alive"
+      },
+      "status_code": 400,
+      "type": "ok"
+    }
+  }
+]
