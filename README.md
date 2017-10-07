@@ -1,5 +1,8 @@
 # Closex
 
+[![CircleCI](https://img.shields.io/circleci/project/github/nextdayproperty/closex.svg)](https://circleci.com/gh/nextdayproperty/closex/tree/master)
+[![Package Version](https://img.shields.io/hexpm/v/closex.svg)](https://hex.pm/packages/closex)
+
 Elixir Close.IO client.
 
 Documentation is available on [HexDocs](https://hexdocs.pm/closex).
