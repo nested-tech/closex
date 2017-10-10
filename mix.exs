@@ -43,9 +43,9 @@ defmodule Closex.Mixfile do
       files: ["lib", "mix.exs", "README.md"],
       maintainers: ["Sam Davies", "Darren Oakley"],
       licenses: ["MIT"],
-      source_url: "https://github.com/nextdayproperty/closex",
-      homepage_url: "https://github.com/nextdayproperty/closex",
-      links: %{"Nested" => "https://nested.com", "Close.io" => "https://close.io", "GitHub" => "https://github.com/nextdayproperty/closex"}
+      source_url: "https://github.com/nested-tech/closex",
+      homepage_url: "https://github.com/nested-tech/closex",
+      links: %{"Nested" => "https://nested.com", "Close.io" => "https://close.io", "GitHub" => "https://github.com/nested-tech/closex"}
     ]
   end
 end

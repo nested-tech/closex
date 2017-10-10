@@ -1,6 +1,6 @@
 # Closex
 
-[![CircleCI](https://img.shields.io/circleci/project/github/nextdayproperty/closex.svg)](https://circleci.com/gh/nextdayproperty/closex/tree/master)
+[![CircleCI](https://img.shields.io/circleci/project/github/nested-tech/closex.svg)](https://circleci.com/gh/nested-tech/closex/tree/master)
 [![Package Version](https://img.shields.io/hexpm/v/closex.svg)](https://hex.pm/packages/closex)
 
 Elixir Close.IO client.
