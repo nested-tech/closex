@@ -1,11 +1,13 @@
-# Closex
+# Closex ✨
 
 [![CircleCI](https://img.shields.io/circleci/project/github/nested-tech/closex.svg)](https://circleci.com/gh/nested-tech/closex/tree/master)
 [![Package Version](https://img.shields.io/hexpm/v/closex.svg)](https://hex.pm/packages/closex)
 
-Elixir Close.IO client.
+✨ Elixir wrapper for the Close.io API.
 
-Documentation is available on [HexDocs](https://hexdocs.pm/closex).
+Learn more about the Close.io API: [http://developer.close.io](http://developer.close.io)
+
+Documentation for this package is available on [HexDocs](https://hexdocs.pm/closex).
 
 ## Installation
 
@@ -51,6 +53,33 @@ Closex.HTTPClient.get_lead("my_lead_id")
 # Update a lead
 Closex.HTTPClient.update_lead("my_lead_id", %{status_id: "new_status_id"})
 {:ok, %{"id" => "my_lead_id", "status_id" => "new_status_id", ...}}
+
+# many more ...
 ```
 
 See [the docs](https://hexdocs.pm/closex) for more examples.
+
+## Options
+
+Options will be passed through to HTTPoison. For example, to set a shorter timeout:
+
+```elixir
+Closex.HTTPClient.get_lead("my_lead_id", timeout: 500, recv_timeout: 1_000)
+```
+
+## Contributing
+
+Everyone is encouraged to help improve this project. Here are a few ways you can help:
+
+- Report bugs
+- Fix bugs and submit pull requests
+- Write, clarify, or fix documentation
+- Suggest or add new features
+
+## License
+
+MIT
+
+## Copyright
+
+Copyright NextDayProperty Ltd (see LICENSE for details)
