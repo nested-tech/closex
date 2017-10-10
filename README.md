@@ -61,7 +61,7 @@ See [the docs](https://hexdocs.pm/closex) for more examples.
 
 ## Options
 
-Options will be passed through to HTTPoison. For example, to set a shorter timeout:
+Options will be passed through to [HTTPoison](https://github.com/edgurgel/httpoison#options). For example, to set a shorter timeout:
 
 ```elixir
 Closex.HTTPClient.get_lead("my_lead_id", timeout: 500, recv_timeout: 1_000)
