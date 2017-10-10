@@ -3,11 +3,11 @@
 [![CircleCI](https://img.shields.io/circleci/project/github/nested-tech/closex.svg)](https://circleci.com/gh/nested-tech/closex/tree/master)
 [![Package Version](https://img.shields.io/hexpm/v/closex.svg)](https://hex.pm/packages/closex)
 
-✨ Elixir wrapper for the Close.io API.
+Elixir wrapper for the Close.io API.
 
-Learn more about the Close.io API: [http://developer.close.io](http://developer.close.io)
+📔 Learn more about the Close.io API: [http://developer.close.io](http://developer.close.io)
 
-Documentation for this package is available on [HexDocs](https://hexdocs.pm/closex).
+📖 Documentation for this package is available on [HexDocs](https://hexdocs.pm/closex).
 
 ## Installation
 
