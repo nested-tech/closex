@@ -34,3 +34,23 @@ You can also read from an environment variable:
 config :closex,
   api_key: {:system, "MY_ENV_VAR"}
 ```
+
+## Usage
+
+The client is essentially a wrapper around the Close.IO [REST API](https://developer.close.io/).
+
+It follows the Close.IO API naming conventions as closely as possible. It supports almost everything that the REST API supports including querying leads, opportunities, users, organizations, statuses and more.
+
+Example usage:
+
+```elixir
+# Get a lead
+Closex.HTTPClient.get_lead("my_lead_id")
+{:ok, %{"id" => "my_lead_id", "status_id" => "my_status_id", ...}}
+
+# Update a lead
+Closex.HTTPClient.update_lead("my_lead_id", %{status_id: "new_status_id"})
+{:ok, %{"id" => "my_lead_id", "status_id" => "new_status_id", ...}}
+```
+
+See [the docs](https://hexdocs.pm/closex) for more examples.
