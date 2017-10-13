@@ -5,7 +5,7 @@
 [![Package Version](https://img.shields.io/hexpm/v/closex.svg)](https://hex.pm/packages/closex)
 [![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://hexdocs.pm/closex/)
 
-Elixir wrapper for the Close.io API.
+Elixir wrapper for the Close.io API with optional caching support.
 
 📔 Learn more about the Close.io API: [http://developer.close.io](http://developer.close.io)
 
@@ -55,6 +55,14 @@ Closex.HTTPClient.get_lead("my_lead_id")
 # Update a lead
 Closex.HTTPClient.update_lead("my_lead_id", %{status_id: "new_status_id"})
 {:ok, %{"id" => "my_lead_id", "status_id" => "new_status_id", ...}}
+
+# With caching
+:timer.tc fn -> Closex.CachingClient.get_opportunity_statuses end
+{907682, {:loaded, {:ok, %{"data" => [% ...lots of data... ]}}}}
+# 900ms response time
+:timer.tc fn -> Closex.CachingClient.get_opportunity_statuses end
+{17, {:loaded, {:ok, %{"data" => [% ...lots of data... ]}}}}
+# 17us response time with caching
 
 # many more ...
 ```

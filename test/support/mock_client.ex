@@ -1,6 +1,11 @@
 defmodule Closex.MockClient do
   @behaviour Closex.ClientBehaviour
 
+  @moduledoc """
+  TODO: Add documentation for using MockClient
+  TODO: Expose in hex package
+  """
+
   @not_found_id "not_found"
 
   def get_lead(id, opts \\ [])
