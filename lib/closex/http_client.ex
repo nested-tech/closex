@@ -7,18 +7,12 @@ defmodule Closex.HTTPClient do
   See: https://developer.close.io/
   """
 
-  @type id :: String.t
-  @type opts :: Keyword.t
-  @type success :: {:ok, map}
-  @type error :: {:error, any}
-  @type result :: success | error
-
   @base_url "https://app.close.io/api/v1"
+  @behaviour Closex.ClientBehaviour
 
   # Leads
 
   @doc "List or search for leads: https://developer.close.io/#leads-list-or-search-for-leads"
-  @spec find_leads(String.t, opts) :: result
   def find_leads(search_term, opts \\ []) do
     opts = opts
     |> Keyword.put(:params, %{query: search_term})
@@ -26,35 +20,28 @@ defmodule Closex.HTTPClient do
   end
 
   @doc "Fetch a single lead: https://developer.close.io/#leads-retrieve-a-single-lead"
-  @spec get_lead(id, opts) :: result
   def get_lead(lead_id, opts \\ []), do: fetch_object("lead", lead_id, opts)
 
   @doc "Create a new lead: https://developer.close.io/#leads-create-a-new-lead"
-  @spec create_lead(map, opts) :: result
   def create_lead(payload, opts \\ []), do: create_object("lead", payload, opts)
 
   @doc "Update an existing lead: https://developer.close.io/#leads-update-an-existing-lead"
-  @spec update_lead(id, map, opts) :: result
   def update_lead(lead_id, payload, opts \\ []), do: update_object("lead", lead_id, payload, opts)
 
   # Opportunity
 
   @doc "Fetch a single opportunity: https://developer.close.io/#opportunities-retrieve-an-opportunity"
-  @spec get_opportunity(id, opts) :: result
   def get_opportunity(opportunity_id, opts \\ []), do: fetch_object("opportunity", opportunity_id, opts)
 
   @doc "Create an opportunity: https://developer.close.io/#opportunities-create-an-opportunity"
-  @spec create_opportunity(map, opts) :: result
   def create_opportunity(payload, opts \\ []), do: create_object("opportunity", payload, opts)
 
   @doc "Update an opportunity: https://developer.close.io/#opportunities-update-an-opportunity"
-  @spec update_opportunity(id, map, opts) :: result
   def update_opportunity(opportunity_id, payload, opts \\ []), do: update_object("opportunity", opportunity_id, payload, opts)
 
   # Lead Custom Fields
 
   @doc "Fetch a custom fields details: https://developer.close.io/#custom-fields-fetch-custom-fields-details"
-  @spec get_lead_custom_field(id, opts) :: result
   def get_lead_custom_field(custom_field_id, opts \\ []), do: fetch_object("custom_fields/lead", custom_field_id, opts)
 
   # Organization
@@ -64,25 +51,21 @@ defmodule Closex.HTTPClient do
 
   NOTE: Use American spelling of "organization" since this is how Close.IO refers to it.
   """
-  @spec get_organization(id, opts) :: result
   def get_organization(organization_id, opts \\ []), do: fetch_object("organization", organization_id, opts)
 
   # Statuses
 
   # TODO: rename this function - as it's a list operation it feels odd calling it GET in the same sense as the singular getters.
   @doc "List lead statuses for your organization: https://developer.close.io/#lead-statuses-list-lead-statuses-for-your-organization"
-  @spec get_lead_statuses(opts) :: result
   def get_lead_statuses(opts \\ []), do: fetch_object("status", "lead", opts)
 
   # TODO: rename this function - as it's a list operation it feels odd calling it GET in the same sense as the singular getters.
   @doc "List opportunity statuses for your organization: https://developer.close.io/#opportunity-statuses-list-opportunity-statuses-for-your-organization"
-  @spec get_opportunity_statuses(opts) :: result
   def get_opportunity_statuses(opts \\ []), do: fetch_object("status", "opportunity", opts)
 
   # Emails
 
   @doc "Create an email activity: https://developer.close.io/#activities-create-an-email-activity"
-  @spec send_email(map, opts) :: result
   def send_email(payload, opts \\ []) do
     post("/activity/email/", payload, [{"Content-Type", "application/json"}], opts)
     |> handle_response
@@ -92,7 +75,6 @@ defmodule Closex.HTTPClient do
 
   # TODO: at some point we'll need to build a generic pagination/fetch more routine when we hit 50+ users
   @doc "List all users in your organization: https://developer.close.io/#users-list-all-the-users-who-are-members-of-the-same-organizations-as-you-are"
-  @spec get_users(opts) :: result
   def get_users(opts \\ []) do
     request(:get, "/user/", %{}, [{"Content-Type", "application/json"}], opts) |> handle_response
   end
