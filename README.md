@@ -1,7 +1,9 @@
 # Closex ✨
 
 [![CircleCI](https://img.shields.io/circleci/project/github/nested-tech/closex.svg)](https://circleci.com/gh/nested-tech/closex/tree/master)
+[![Coverage Status](https://img.shields.io/coveralls/nested-tech/closex.svg)](https://coveralls.io/github/nested-tech/closex.svg)
 [![Package Version](https://img.shields.io/hexpm/v/closex.svg)](https://hex.pm/packages/closex)
+[![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://hexdocs.pm/closex/)
 
 Elixir wrapper for the Close.io API.
 
