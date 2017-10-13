@@ -1,0 +1,23 @@
+{
+    "status_id": "stat_4ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+    "status_label": "Active",
+    "status_type": "active",
+    "date_won": null,
+    "confidence": 75,
+    "user_id": "user_scOgjLAQD6aBSJYBVhIeNr6FJDp8iDTug8Mv6VqYoFn",
+    "contact_id": null,
+    "updated_by": null,
+    "date_updated": "2013-02-01T00:54:51.337000+00:00",
+    "created_by": null,
+    "lead_id": "lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O",
+    "note": "Bruce needs new software for the Bat Cave.",
+    "value": 50000,
+    "value_period": "one_time",
+    "value_formatted": "$500",
+    "value_currency": "USD",
+    "date_created": "2013-02-01T00:54:51.337000+00:00",
+    "organization_id": "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen",
+    "lead_name": "Wayne Enterprises (Sample Lead)",
+    "user_name": "P F",
+    "id": "oppo_8eB77gAdf8FMy6GsNHEy84f7uoeEWv55slvUjKQZpJt"
+}
