@@ -5,7 +5,7 @@ jobs:
     docker:
       - image: elixir:1.5
       - environment:
-        COVERALLS_REPO_TOKEN: 3T8c9tUBXMAmGPmnBO1SUv7xGFr32gbLs
+          COVERALLS_REPO_TOKEN: 3T8c9tUBXMAmGPmnBO1SUv7xGFr32gbLs
 
     steps:
       - checkout
