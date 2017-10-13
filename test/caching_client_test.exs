@@ -25,4 +25,27 @@ defmodule Closex.CachingClientTest do
       assert_received {:closex_mock_client, :get_lead, [@not_found_id, []]}
     end
   end
+
+  describe "get_opportunity/1" do
+    @opportunity_id "oppo_8eB77gAdf8FMy6GsNHEy84f7uoeEWv55slvUjKQZpJt"
+
+    test "when called in quick succession returns cached copy" do
+      {:loaded, fallback} = Closex.CachingClient.get_opportunity(@opportunity_id)
+      assert_received {:closex_mock_client, :get_opportunity, [@opportunity_id, []]}
+
+      assert {:ok, cache_hit} = Closex.CachingClient.get_opportunity(@opportunity_id)
+      refute_received {:closex_mock_client, :get_opportunity, _}
+
+      assert fallback == cache_hit
+      assert {:ok, %{"id" => @opportunity_id}} = cache_hit
+    end
+
+    test "does not cache error response" do
+      {:loaded, {:error, _}} = Closex.CachingClient.get_opportunity(@not_found_id)
+      assert_received {:closex_mock_client, :get_opportunity, [@not_found_id, []]}
+
+      assert {:loaded, {:error, _}} = Closex.CachingClient.get_opportunity(@not_found_id)
+      assert_received {:closex_mock_client, :get_opportunity, [@not_found_id, []]}
+    end
+  end
 end
