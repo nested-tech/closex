@@ -106,14 +106,6 @@ defmodule Closex.CachingClientTest do
       assert fallback == cache_hit
       assert {:ok, %{"data" => [_|_]}} = cache_hit
     end
-
-    test "does not cache error response" do
-      {:loaded, {:error, _}} = Closex.CachingClient.get_lead_statuses([timeout: true])
-      assert_received {:closex_mock_client, :get_lead_statuses, [[timeout: true]]}
-
-      assert {:loaded, {:error, _}} = Closex.CachingClient.get_lead_statuses([timeout: true])
-      assert_received {:closex_mock_client, :get_lead_statuses, [[timeout: true]]}
-    end
   end
 
   describe "get_opportunity_statuses/1" do
@@ -127,13 +119,18 @@ defmodule Closex.CachingClientTest do
       assert fallback == cache_hit
       assert {:ok, %{"data" => [_|_]}} = cache_hit
     end
+  end
 
-    test "does not cache error response" do
-      {:loaded, {:error, _}} = Closex.CachingClient.get_opportunity_statuses([timeout: true])
-      assert_received {:closex_mock_client, :get_opportunity_statuses, [[timeout: true]]}
+  describe "get_users/1" do
+    test "when called in quick succession returns cached copy" do
+      {:loaded, fallback} = Closex.CachingClient.get_users
+      assert_received {:closex_mock_client, :get_users, [[]]}
 
-      assert {:loaded, {:error, _}} = Closex.CachingClient.get_opportunity_statuses([timeout: true])
-      assert_received {:closex_mock_client, :get_opportunity_statuses, [[timeout: true]]}
+      assert {:ok, cache_hit} = Closex.CachingClient.get_users
+      refute_received {:closex_mock_client, :get_users, _}
+
+      assert fallback == cache_hit
+      assert {:ok, %{"data" => [_|_]}} = cache_hit
     end
   end
 end

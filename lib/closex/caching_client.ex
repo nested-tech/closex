@@ -36,7 +36,9 @@ defmodule Closex.CachingClient do
 
   defdelegate send_email(payload, opts \\ []), to: @fallback_client
 
-  defdelegate get_users(opts \\ []), to: @fallback_client
+  def get_users(opts \\ []) do
+    get_cached(:get_users, {:get_users, [opts]})
+  end
 
   defp get_cached(key, {fun, args}) do
     Cachex.get(:closex_cache, key, fallback: fn key ->
