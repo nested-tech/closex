@@ -1,0 +1,21 @@
+{
+    "has_more": false,
+    "data": [
+        {
+            "id": "stat_1ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+            "label": "Potential"
+        },
+        {
+            "id": "stat_2ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+            "label": "Bad Fit"
+        },
+        {
+            "id": "stat_3ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+            "label": "Qualified"
+        },
+        {
+            "id": "stat_8ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+            "label": "Not Serious"
+        }
+    ]
+}

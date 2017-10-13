@@ -94,4 +94,25 @@ defmodule Closex.CachingClientTest do
       assert_received {:closex_mock_client, :get_organization, [@not_found_id, []]}
     end
   end
+
+  describe "get_lead_statuses/1" do
+    test "when called in quick succession returns cached copy" do
+      {:loaded, fallback} = Closex.CachingClient.get_lead_statuses
+      assert_received {:closex_mock_client, :get_lead_statuses, [[]]}
+
+      assert {:ok, cache_hit} = Closex.CachingClient.get_lead_statuses
+      refute_received {:closex_mock_client, :get_lead_statuses, _}
+
+      assert fallback == cache_hit
+      assert {:ok, %{"data" => [_|_]}} = cache_hit
+    end
+
+    test "does not cache error response" do
+      {:loaded, {:error, _}} = Closex.CachingClient.get_lead_statuses([timeout: true])
+      assert_received {:closex_mock_client, :get_lead_statuses, [[timeout: true]]}
+
+      assert {:loaded, {:error, _}} = Closex.CachingClient.get_lead_statuses([timeout: true])
+      assert_received {:closex_mock_client, :get_lead_statuses, [[timeout: true]]}
+    end
+  end
 end
