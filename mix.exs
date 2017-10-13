@@ -31,6 +31,7 @@ defmodule Closex.Mixfile do
     [
       {:poison, "~> 3.1.0"},
       {:httpoison, "~> 0.13.0"},
+      {:cachex, "~> 2.1.0"},
       {:exvcr, "~> 0.8", only: :test, optional: true},
       {:ex_doc, ">= 0.0.0", only: :dev, optional: true},
       {:excoveralls, "~> 0.4", only: :test, optional: true},
