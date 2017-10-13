@@ -41,7 +41,7 @@ defmodule Closex.CachingClient do
   end
 
   defp get_cached(key, {fun, args}) do
-    Cachex.get(:closex_cache, key, fallback: fn key ->
+    Cachex.get(:closex_cache, key, fallback: fn _key ->
       case apply(@fallback_client, fun, args) do
         success = {:ok, _} ->
           {:commit, success}
