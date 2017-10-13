@@ -1,0 +1,86 @@
+{
+  "name": "Sample Data",
+  "lead_statuses": [
+    {
+      "id": "stat_1ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+      "label": "Potential"
+    },
+    {
+      "id": "stat_2ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+      "label": "Bad Fit"
+    },
+    {
+      "id": "stat_3ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+      "label": "Qualified"
+    }
+  ],
+  "opportunity_statuses": [
+    {
+      "id": "stat_4ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+      "label": "Active",
+      "type": "active"
+    },
+    {
+      "id": "stat_5ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+      "label": "Won",
+      "type": "won"
+    },
+    {
+      "id": "stat_6ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+      "label": "Lost",
+      "type": "lost"
+    },
+    {
+      "id": "stat_7ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+      "label": "On hold",
+      "type": "active"
+    }
+  ],
+  "created_by": null,
+  "memberships": [
+    {
+      "user_id": "user_scOgjLAQD6aBSJYBVhIeNr6FJDp8iDTug8Mv6VqYoFn",
+      "user_phone": "16502822245",
+      "user_first_name": "P",
+      "user_full_name": "P F",
+      "user_last_name": "F",
+      "track_email_opens": true,
+      "role_id": "role_y6eLquXvRUdmwqi61tsmgCJUU7uGfxaRbDuLoONZL9p",
+      "permissions_granted": ["export", "bulk_edit"],
+      "id": "memb_wLKueFux8M2u2jshQPichvA5V44hpECtoljWbJS1PeY",
+      "record_calls": false,
+      "user_email": "phil+sample@close.io"
+    },
+    {
+      "user_id": "user_04EJPREurd0b3KDozVFqXSRbt2uBjw3QfeYa7ZaGTwI",
+      "user_phone": "16502822248",
+      "user_first_name": "Phil",
+      "user_full_name": "Phil Freo",
+      "user_last_name": "Freo",
+      "track_email_opens": true,
+      "role_id": "role_y6eLquXvRUdmwqi61tsmgCJUU7uGfxaRbDuLoONZL9p",
+      "permissions_granted": ["export", "bulk_edit"],
+      "id": "memb_hLHF3LsUI6N7twH1derRHiHEKeE843ttSYmsun4xkCn",
+      "record_calls": false,
+      "user_email": "phil@close.io"
+    },
+    {
+      "user_id": "user_MvDoAZA889UMrgsZbnXmHkJSomSi7qk2Iwc4JnGHTbo",
+      "user_phone": "16502822249",
+      "user_first_name": "Anthony",
+      "user_full_name": "Anthony Nemitz",
+      "user_last_name": "Nemitz",
+      "track_email_opens": true,
+      "role_id": "role_y6eLquXvRUdmwqi61tsmgCJUU7uGfxaRbDuLoONZL9p",
+      "permissions_granted": ["export", "bulk_edit"],
+      "id": "memb_I4Tx9tZwz5npqdGtd0baWtjjlpeFf45OBlkAAKcF3Gc",
+      "record_calls": false,
+      "user_email": "anthony@close.io"
+    }
+  ],
+  "inactive_memberships": [],
+  "date_updated": "2013-02-20T04:38:01.961000+00:00",
+  "date_created": "2013-02-01T00:54:51.097000+00:00",
+  "id": "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen",
+  "updated_by": null
+}

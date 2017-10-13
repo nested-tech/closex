@@ -36,6 +36,16 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   end
 
+  def get_organization(id = "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen", opts \\ []) do
+    lead = load("organization.json")
+    send self(), {:closex_mock_client, :get_organization, [id, opts]}
+    {:ok, lead}
+  end
+  def get_organization(id = @not_found_id, opts) do
+    send self(), {:closex_mock_client, :get_organization, [id, opts]}
+    {:error, :mock_not_found}
+  end
+
   @fixtures_path Path.join([File.cwd!, "test", "fixtures"])
   defp load(filename) do
     [@fixtures_path, filename]
