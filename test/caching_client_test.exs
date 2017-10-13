@@ -71,4 +71,27 @@ defmodule Closex.CachingClientTest do
       assert_received {:closex_mock_client, :get_lead_custom_field, [@not_found_id, []]}
     end
   end
+
+  describe "get_organization/1" do
+    @organization_id "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen"
+
+    test "when called in quick succession returns cached copy" do
+      {:loaded, fallback} = Closex.CachingClient.get_organization(@organization_id)
+      assert_received {:closex_mock_client, :get_organization, [@organization_id, []]}
+
+      assert {:ok, cache_hit} = Closex.CachingClient.get_organization(@organization_id)
+      refute_received {:closex_mock_client, :get_organization, _}
+
+      assert fallback == cache_hit
+      assert {:ok, %{"id" => @organization_id}} = cache_hit
+    end
+
+    test "does not cache error response" do
+      {:loaded, {:error, _}} = Closex.CachingClient.get_organization(@not_found_id)
+      assert_received {:closex_mock_client, :get_organization, [@not_found_id, []]}
+
+      assert {:loaded, {:error, _}} = Closex.CachingClient.get_organization(@not_found_id)
+      assert_received {:closex_mock_client, :get_organization, [@not_found_id, []]}
+    end
+  end
 end
