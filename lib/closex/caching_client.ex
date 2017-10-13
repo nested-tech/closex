@@ -26,7 +26,9 @@ defmodule Closex.CachingClient do
     get_cached(organization_id, {:get_organization, [organization_id, opts]})
   end
 
-  defdelegate get_lead_statuses(opts \\ []), to: @fallback_client
+  def get_lead_statuses(opts \\ []) do
+    get_cached(:get_lead_statuses, {:get_lead_statuses, [opts]})
+  end
 
   defdelegate get_opportunity_statuses(opts \\ []), to: @fallback_client
 

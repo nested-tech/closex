@@ -46,6 +46,16 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   end
 
+  def get_lead_statuses([]) do
+    lead = load("lead_statuses.json")
+    send self(), {:closex_mock_client, :get_lead_statuses, [[]]}
+    {:ok, lead}
+  end
+  def get_lead_statuses(opts = [timeout: true]) do
+    send self(), {:closex_mock_client, :get_lead_statuses, [opts]}
+    {:error, :mock_timeout}
+  end
+
   @fixtures_path Path.join([File.cwd!, "test", "fixtures"])
   defp load(filename) do
     [@fixtures_path, filename]
