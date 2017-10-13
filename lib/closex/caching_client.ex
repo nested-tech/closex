@@ -30,7 +30,9 @@ defmodule Closex.CachingClient do
     get_cached(:get_lead_statuses, {:get_lead_statuses, [opts]})
   end
 
-  defdelegate get_opportunity_statuses(opts \\ []), to: @fallback_client
+  def get_opportunity_statuses(opts \\ []) do
+    get_cached(:get_opportunity_statuses, {:get_opportunity_statuses, [opts]})
+  end
 
   defdelegate send_email(payload, opts \\ []), to: @fallback_client
 
