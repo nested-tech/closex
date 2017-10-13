@@ -48,4 +48,27 @@ defmodule Closex.CachingClientTest do
       assert_received {:closex_mock_client, :get_opportunity, [@not_found_id, []]}
     end
   end
+
+  describe "get_lead_custom_field/1" do
+    @lead_custom_field_id "lcf_v6S011I6MqcbVvB2FA5Nk8dr5MkL8sWuCiG8cUleO9c"
+
+    test "when called in quick succession returns cached copy" do
+      {:loaded, fallback} = Closex.CachingClient.get_lead_custom_field(@lead_custom_field_id)
+      assert_received {:closex_mock_client, :get_lead_custom_field, [@lead_custom_field_id, []]}
+
+      assert {:ok, cache_hit} = Closex.CachingClient.get_lead_custom_field(@lead_custom_field_id)
+      refute_received {:closex_mock_client, :get_lead_custom_field, _}
+
+      assert fallback == cache_hit
+      assert {:ok, %{"id" => @lead_custom_field_id}} = cache_hit
+    end
+
+    test "does not cache error response" do
+      {:loaded, {:error, _}} = Closex.CachingClient.get_lead_custom_field(@not_found_id)
+      assert_received {:closex_mock_client, :get_lead_custom_field, [@not_found_id, []]}
+
+      assert {:loaded, {:error, _}} = Closex.CachingClient.get_lead_custom_field(@not_found_id)
+      assert_received {:closex_mock_client, :get_lead_custom_field, [@not_found_id, []]}
+    end
+  end
 end
