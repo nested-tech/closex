@@ -1,0 +1,25 @@
+{
+  "has_more": false,
+  "data": [
+    {
+      "id": "stat_4ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+      "label": "Active",
+      "type": "active"
+    },
+    {
+      "id": "stat_5ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+      "label": "Won",
+      "type": "won"
+    },
+    {
+      "id": "stat_6ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+      "label": "Lost",
+      "type": "lost"
+    },
+    {
+      "id": "stat_7ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+      "label": "On hold",
+      "type": "active"
+    }
+  ]
+}

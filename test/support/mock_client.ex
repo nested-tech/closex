@@ -56,6 +56,16 @@ defmodule Closex.MockClient do
     {:error, :mock_timeout}
   end
 
+  def get_opportunity_statuses([]) do
+    opportunity = load("opportunity_statuses.json")
+    send self(), {:closex_mock_client, :get_opportunity_statuses, [[]]}
+    {:ok, opportunity}
+  end
+  def get_opportunity_statuses(opts = [timeout: true]) do
+    send self(), {:closex_mock_client, :get_opportunity_statuses, [opts]}
+    {:error, :mock_timeout}
+  end
+
   @fixtures_path Path.join([File.cwd!, "test", "fixtures"])
   defp load(filename) do
     [@fixtures_path, filename]
