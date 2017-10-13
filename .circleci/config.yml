@@ -14,6 +14,5 @@ jobs:
       - run: elixir --version
       - run: mix deps.get
       - run: mix test
-test:
-  override:
-    - mix coveralls.circle
+      - run: mix coveralls.circle
+
