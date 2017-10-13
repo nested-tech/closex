@@ -3,6 +3,7 @@ defmodule Closex.Application do
 
   use Application
 
+  # TODO: make this ttl configurable
   @default_ttl :timer.seconds(15)
 
   def start(_type, _args) do
