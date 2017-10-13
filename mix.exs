@@ -21,7 +21,7 @@ defmodule Closex.Mixfile do
   end
 
   def application do
-    []
+    [mod: {Closex.Application, []}]
   end
 
   defp elixirc_paths(:test), do: ["lib", "test/support"]
