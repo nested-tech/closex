@@ -1,5 +1,10 @@
 defmodule Closex.CachingClient do
   @behaviour Closex.ClientBehaviour
+
+  @moduledoc """
+  TODO: Add documentation for using CachingClient
+  """
+
   @fallback_client Application.get_env(:closex, :fallback_client, Closex.HTTPClient)
 
   defdelegate find_leads(search_term, opts \\ []), to: @fallback_client
