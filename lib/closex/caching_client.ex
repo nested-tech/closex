@@ -46,13 +46,20 @@ defmodule Closex.CachingClient do
   end
 
   defp get_cached(key, {fun, args}) do
-    Cachex.get(:closex_cache, key, fallback: fn _key ->
+    cache_result = Cachex.get(:closex_cache, key, fallback: fn _key ->
       case apply(@fallback_client, fun, args) do
-        success = {:ok, _} ->
-          {:commit, success}
+        result = {:ok, _} ->
+          {:commit, result}
         error = {:error, _} ->
           {:ignore, error}
       end
     end)
+
+    case cache_result do
+      {status, result} when status in [:loaded, :ok] ->
+        result
+      error ->
+        {:error, error}
+    end
   end
 end
