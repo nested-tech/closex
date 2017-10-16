@@ -12,6 +12,8 @@ defmodule Closex.HTTPClient do
 
   # Leads
 
+  ## TODO: httpoison opts should move underneath the `:httpoison` key
+
   @doc "List or search for leads: https://developer.close.io/#leads-list-or-search-for-leads"
   def find_leads(search_term, opts \\ []) do
     opts = opts
