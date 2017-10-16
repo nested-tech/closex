@@ -56,9 +56,14 @@ defmodule Closex.CachingClient do
     end)
 
     case cache_result do
-      {status, result} when status in [:loaded, :ok] ->
+      {:loaded, result} ->
+        Closex.log fn -> "[Closex.CachingClient] MISS for key: #{key}" end
+        result
+      {:ok, result} ->
+        Closex.log fn -> "[Closex.CachingClient] HIT for key: #{key}" end
         result
       error ->
+        Closex.log fn -> "[Closex.CachingClient] ERROR for key: #{key}" end
         {:error, error}
     end
   end
