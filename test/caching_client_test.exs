@@ -133,4 +133,6 @@ defmodule Closex.CachingClientTest do
       assert {:ok, %{"data" => [_|_]}} = cache_hit
     end
   end
+
+  # TODO: tests for other functions
 end
