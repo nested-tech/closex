@@ -70,6 +70,7 @@ defmodule Closex.MockClient do
     {:ok, opportunity}
   end
 
+  # TODO: implement these mocks
   def create_lead(_payload, _opts \\ []), do: :noop
   def update_lead(_lead_id, _payload, _opts \\ []), do: :noop
   def create_opportunity(_payload, _opts \\ []), do: :noop

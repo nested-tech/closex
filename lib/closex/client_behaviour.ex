@@ -1,5 +1,9 @@
 defmodule Closex.ClientBehaviour do
-  @moduledoc "Tools for interacting with the Close.io API"
+  @moduledoc """
+  Tools for interacting with the Close.io API
+
+  TODO: Add more docs
+  """
 
   @type id :: String.t
   @type opts :: Keyword.t
