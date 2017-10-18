@@ -137,38 +137,32 @@ defmodule Closex.CachingClientTest do
   describe "update_lead/2" do
     @update_lead_id "update_lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O"
     test "invalidates cache when updating lead" do
-      result = Closex.CachingClient.get_lead(@update_lead_id)
+      {:ok, result} = Closex.CachingClient.get_lead(@update_lead_id)
       assert_received {:closex_mock_client, :get_lead, [@update_lead_id, []]}
-      assert Cachex.get!(:closex_cache, @update_lead_id) == result
+      assert result["name"] != "New Name"
 
       {:ok, updated_lead} = Closex.CachingClient.update_lead(@update_lead_id, %{"name" => "New Name"})
       assert_received {:closex_mock_client, :update_lead, [@update_lead_id, %{"name" => "New Name"}, []]}
       assert updated_lead["id"] == @update_lead_id
       assert updated_lead["name"] == "New Name"
 
-      assert Cachex.get(:closex_cache, @update_lead_id) == {:missing, nil}
-
-      {:ok, _lead} = Closex.CachingClient.get_lead(@update_lead_id)
-      assert_received {:closex_mock_client, :get_lead, [@update_lead_id, []]}
+      assert Closex.CachingClient.get_lead(@update_lead_id) == updated_lead
     end
   end
 
   describe "update_opportunity/2" do
     @update_opportunity_id "update_oppo_8eB77gAdf8FMy6GsNHEy84f7uoeEWv55slvUjKQZpJt"
     test "invalidates cache when updating opportunity" do
-      result = Closex.CachingClient.get_opportunity(@update_opportunity_id)
+      {:ok, result} = Closex.CachingClient.get_opportunity(@update_opportunity_id)
       assert_received {:closex_mock_client, :get_opportunity, [@update_opportunity_id, []]}
-      assert Cachex.get!(:closex_cache, @update_opportunity_id) == result
+      assert result["confidence"] != 50
 
-      {:ok, updated_opportunity} = Closex.CachingClient.update_opportunity(@update_opportunity_id, %{"name" => "New Name"})
-      assert_received {:closex_mock_client, :update_opportunity, [@update_opportunity_id, %{"name" => "New Name"}, []]}
+      {:ok, updated_opportunity} = Closex.CachingClient.update_opportunity(@update_opportunity_id, %{"confidence" => 50})
+      assert_received {:closex_mock_client, :update_opportunity, [@update_opportunity_id, %{"confidence" => 50}, []]}
       assert updated_opportunity["id"] == @update_opportunity_id
-      assert updated_opportunity["name"] == "New Name"
+      assert updated_opportunity["confidence"] == 50
 
-      assert Cachex.get(:closex_cache, @update_opportunity_id) == {:missing, nil}
-
-      {:ok, _opportunity} = Closex.CachingClient.get_opportunity(@update_opportunity_id)
-      assert_received {:closex_mock_client, :get_opportunity, [@update_opportunity_id, []]}
+      assert Closex.CachingClient.get_opportunity(@update_opportunity_id) == updated_opportunity
     end
   end
 

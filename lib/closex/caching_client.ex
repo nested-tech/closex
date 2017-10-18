@@ -14,14 +14,26 @@ defmodule Closex.CachingClient do
   end
 
   defdelegate create_lead(payload, opts \\ []), to: @fallback_client
-  defdelegate update_lead(lead_id, payload, opts \\ []), to: @fallback_client
+
+  def update_lead(lead_id, payload, opts \\ []) do
+    case apply(@fallback_client, :update_lead, [lead_id, payload, opts]) do
+      {:ok, updated_lead} -> {:ok, set_cached(lead_id, updated_lead)}
+      {:error, reason} -> {:error, reason}
+    end
+  end
 
   def get_opportunity(opportunity_id, opts \\ []) do
     get_cached(opportunity_id, {:get_opportunity, [opportunity_id, opts]})
   end
 
   defdelegate create_opportunity(payload, opts \\ []), to: @fallback_client
-  defdelegate update_opportunity(opportunity_id, payload, opts \\ []), to: @fallback_client
+
+  def update_opportunity(opportunity_id, payload, opts \\ []) do
+    case apply(@fallback_client, :update_opportunity, [opportunity_id, payload, opts]) do
+      {:ok, updated_opportunity} -> {:ok, set_cached(opportunity_id, updated_opportunity)}
+      {:error, reason} -> {:error, reason}
+    end
+  end
 
   def get_lead_custom_field(custom_field_id, opts \\ []) do
     get_cached(custom_field_id, {:get_lead_custom_field, [custom_field_id, opts]})
@@ -66,5 +78,10 @@ defmodule Closex.CachingClient do
         Closex.log fn -> "[Closex.CachingClient] ERROR for key: #{key}" end
         {:error, error}
     end
+  end
+
+  defp set_cached(key, value) do
+    {:ok, _} = Cachex.set(:closex_cache, key, value)
+    value
   end
 end
