@@ -18,7 +18,10 @@ defmodule Closex do
   different caching strategies while still having a reasonable fallback.
   """
   def cache do
-    Application.get_env(:closex, :cache, Closex.CachexCache)
+    case Application.get_env(:closex, :cache) do
+      "cachex" -> Closex.CachexCache
+      "mnesia" -> Closex.MnesiaCache
+    end
   end
 
   @doc "Log using standard Logger"
