@@ -2,86 +2,58 @@ defmodule Closex.CachingClient do
   @behaviour Closex.ClientBehaviour
 
   @moduledoc """
-  TODO: Add documentation for using CachingClient
+  Provides a cache wrapper around calls made to close.io
+
+  The cache layer itself has been abstracted away in order to allow us to experiment with and support different caching strategies.
   """
 
-  @fallback_client Application.get_env(:closex, :fallback_client, Closex.HTTPClient)
-
-  defdelegate find_leads(search_term, opts \\ []), to: @fallback_client
+  defdelegate find_leads(search_term, opts \\ []), to: Closex.fallback_client
 
   def get_lead(lead_id, opts \\ []) do
-    get_cached(lead_id, {:get_lead, [lead_id, opts]})
+    Closex.cache.get(lead_id, {:get_lead, [lead_id, opts]})
   end
 
-  defdelegate create_lead(payload, opts \\ []), to: @fallback_client
+  defdelegate create_lead(payload, opts \\ []), to: Closex.fallback_client
 
   def update_lead(lead_id, payload, opts \\ []) do
-    case apply(@fallback_client, :update_lead, [lead_id, payload, opts]) do
-      {:ok, updated_lead} -> {:ok, set_cached(lead_id, updated_lead)}
+    case apply(Closex.fallback_client, :update_lead, [lead_id, payload, opts]) do
+      {:ok, updated_lead} -> {:ok, Closex.cache.set(lead_id, updated_lead)}
       {:error, reason} -> {:error, reason}
     end
   end
 
   def get_opportunity(opportunity_id, opts \\ []) do
-    get_cached(opportunity_id, {:get_opportunity, [opportunity_id, opts]})
+    Closex.cache.get(opportunity_id, {:get_opportunity, [opportunity_id, opts]})
   end
 
-  defdelegate create_opportunity(payload, opts \\ []), to: @fallback_client
+  defdelegate create_opportunity(payload, opts \\ []), to: Closex.fallback_client
 
   def update_opportunity(opportunity_id, payload, opts \\ []) do
-    case apply(@fallback_client, :update_opportunity, [opportunity_id, payload, opts]) do
-      {:ok, updated_opportunity} -> {:ok, set_cached(opportunity_id, updated_opportunity)}
+    case apply(Closex.fallback_client, :update_opportunity, [opportunity_id, payload, opts]) do
+      {:ok, updated_opportunity} -> {:ok, Closex.cache.set(opportunity_id, updated_opportunity)}
       {:error, reason} -> {:error, reason}
     end
   end
 
   def get_lead_custom_field(custom_field_id, opts \\ []) do
-    get_cached(custom_field_id, {:get_lead_custom_field, [custom_field_id, opts]})
+    Closex.cache.get(custom_field_id, {:get_lead_custom_field, [custom_field_id, opts]})
   end
 
   def get_organization(organization_id, opts \\ []) do
-    get_cached(organization_id, {:get_organization, [organization_id, opts]})
+    Closex.cache.get(organization_id, {:get_organization, [organization_id, opts]})
   end
 
   def get_lead_statuses(opts \\ []) do
-    get_cached(:get_lead_statuses, {:get_lead_statuses, [opts]})
+    Closex.cache.get(:get_lead_statuses, {:get_lead_statuses, [opts]})
   end
 
   def get_opportunity_statuses(opts \\ []) do
-    get_cached(:get_opportunity_statuses, {:get_opportunity_statuses, [opts]})
+    Closex.cache.get(:get_opportunity_statuses, {:get_opportunity_statuses, [opts]})
   end
 
-  defdelegate send_email(payload, opts \\ []), to: @fallback_client
+  defdelegate send_email(payload, opts \\ []), to: Closex.fallback_client
 
   def get_users(opts \\ []) do
-    get_cached(:get_users, {:get_users, [opts]})
-  end
-
-  defp get_cached(key, {fun, args}) do
-    cache_result = Cachex.get(:closex_cache, key, fallback: fn _key ->
-      case apply(@fallback_client, fun, args) do
-        result = {:ok, _} ->
-          {:commit, result}
-        error = {:error, _} ->
-          {:ignore, error}
-      end
-    end)
-
-    case cache_result do
-      {:loaded, result} ->
-        Closex.log fn -> "[Closex.CachingClient] MISS for key: #{key}" end
-        result
-      {:ok, result} ->
-        Closex.log fn -> "[Closex.CachingClient] HIT for key: #{key}" end
-        result
-      error ->
-        Closex.log fn -> "[Closex.CachingClient] ERROR for key: #{key}" end
-        {:error, error}
-    end
-  end
-
-  defp set_cached(key, value) do
-    {:ok, _} = Cachex.set(:closex_cache, key, value)
-    value
+    Closex.cache.get(:get_users, {:get_users, [opts]})
   end
 end
