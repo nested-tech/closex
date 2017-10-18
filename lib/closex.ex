@@ -21,6 +21,7 @@ defmodule Closex do
     case Application.get_env(:closex, :cache) do
       "cachex" -> Closex.CachexCache
       "mnesia" -> Closex.MnesiaCache
+      "redis" -> Closex.RedisCache
     end
   end
 

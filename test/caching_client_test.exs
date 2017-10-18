@@ -1,6 +1,11 @@
 defmodule Closex.CachingClientTest do
   use ExUnit.Case, async: true
 
+  setup do
+    if Application.get_env(:closex, :cache) == "redis", do: Redix.command(:redix, ["FLUSHDB"])
+    :ok
+  end
+
   @not_found_id "not_found"
 
   describe "get_lead/1" do

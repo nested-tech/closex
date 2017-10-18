@@ -10,6 +10,7 @@ defmodule Closex.Application do
     case Application.get_env(:closex, :cache) do
       "cachex" -> start_cachex()
       "mnesia" -> start_mnesia()
+      "redis" -> start_redis()
     end
   end
 
@@ -27,5 +28,15 @@ defmodule Closex.Application do
 
   defp start_mnesia do
     Supervisor.start_link [], strategy: :one_for_one
+  end
+
+  defp start_redis do
+    import Supervisor.Spec, warn: false
+
+    children = [
+      worker(Redix, [[], [name: :redix]])
+    ]
+    opts = [strategy: :one_for_one, name: Closex.Supervisor]
+    Supervisor.start_link(children, opts)
   end
 end
