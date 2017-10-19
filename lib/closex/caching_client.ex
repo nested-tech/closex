@@ -16,9 +16,8 @@ defmodule Closex.CachingClient do
   defdelegate create_lead(payload, opts \\ []), to: @fallback_client
 
   def update_lead(lead_id, payload, opts \\ []) do
-    case apply(@fallback_client, :update_lead, [lead_id, payload, opts]) do
-      {:ok, updated_lead} -> {:ok, set_cached(lead_id, updated_lead)}
-      {:error, reason} -> {:error, reason}
+    with {:ok, updated_lead} <- apply(@fallback_client, :update_lead, [lead_id, payload, opts]) do
+      {:ok, set_cached(lead_id, updated_lead)}
     end
   end
 
@@ -29,9 +28,8 @@ defmodule Closex.CachingClient do
   defdelegate create_opportunity(payload, opts \\ []), to: @fallback_client
 
   def update_opportunity(opportunity_id, payload, opts \\ []) do
-    case apply(@fallback_client, :update_opportunity, [opportunity_id, payload, opts]) do
-      {:ok, updated_opportunity} -> {:ok, set_cached(opportunity_id, updated_opportunity)}
-      {:error, reason} -> {:error, reason}
+    with {:ok, updated_opportunity} <- apply(@fallback_client, :update_opportunity, [opportunity_id, payload, opts]) do
+      {:ok, set_cached(opportunity_id, updated_opportunity)}
     end
   end
 
