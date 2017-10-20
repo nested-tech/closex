@@ -238,10 +238,9 @@ defmodule Closex.MockClient do
 
   def update_opportunity(_opportunity_id, _payload, _opts \\ [])
   def update_opportunity(opportunity_id = @opportunity_id, payload, opts) do
-    stringified_payload = for {key, val} <- payload, into: %{}, do: {Atom.to_string(key), val}
     opportunity = load("opportunity.json")
-    |> Map.merge(stringified_payload)
-    send self(), {:closex_mock_client, :update_opportunity, [opportunity_id, stringified_payload, opts]}
+    |> Map.merge(payload)
+    send self(), {:closex_mock_client, :update_opportunity, [opportunity_id, payload, opts]}
     {:ok, opportunity}
   end
   def update_opportunity(@not_found_id, _payload, _opts) do
