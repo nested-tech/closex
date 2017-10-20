@@ -230,6 +230,7 @@ defmodule Closex.MockClient do
     {:ok, lead}
   end
   def create_opportunity(_payload, _opts \\ []), do: :noop
+  # TODO: use @opportunity_id
   def update_opportunity(opportunity_id, payload, opts \\ []) do
     opportunity = load("opportunity.json")
     |> Map.merge(payload)
