@@ -71,6 +71,11 @@ defmodule Closex.MockClient do
     @lead_custom_field_id
   end
 
+  @organization_id "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen"
+  def get_organization_id do
+    @organization_id
+  end
+
   @doc """
   Gets a lead from CloseIO.
 
@@ -122,7 +127,7 @@ defmodule Closex.MockClient do
   end
 
   @doc """
-  Gets a lead_custom_field from CloseIO.
+  Gets a lead custom field from CloseIO.
 
   Returns `{:ok, lead_custom_field}`.
 
@@ -146,9 +151,23 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   end
 
+  @doc """
+  Gets an organization from CloseIO.
+
+  Returns `{:ok, organization}`.
+
+  ## Examples
+
+    iex> Closex.MockClient.get_organization("1")
+    nil
+    > Closex.MockClient.get_organization(Closex.MockClient.get_organization_id)
+    ...contents of test/fixtures/organization.json...
+    iex> Closex.MockClient.get_organization(Closex.MockClient.get_not_found_id)
+    {:error, :mock_not_found}
+  """
   def get_organization(id, opts \\ [])
-  def get_organization(id = "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen", opts) do
-    organization = load("organization.json")
+  def get_organization(id = , opts) do
+    lead = load("organization.json")
     send self(), {:closex_mock_client, :get_organization, [id, opts]}
     {:ok, organization}
   end
