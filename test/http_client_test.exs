@@ -101,6 +101,13 @@ defmodule Closex.HTTPClientTest do
         assert reason == "Empty query: Lead matching query does not exist."
       end
     end
+
+    test "with invalid key" do
+      use_cassette "get_lead_invalid_key" do
+        {:error, reason} = get_lead(@valid_lead_id)
+        assert reason == "The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required."
+      end
+    end
   end
   describe "get_opportunity/1" do
     test "when close.io is up and we are passed a valid opportunity_id, it returns the opportunity" do

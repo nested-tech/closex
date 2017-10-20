@@ -83,7 +83,7 @@ defmodule Closex.HTTPClient do
 
   # Private stuff...
 
-  defp handle_response({:ok, %{status_code: 404, body: %{"error" => reason}}}) do
+  defp handle_response({:ok, %{status_code: _, body: %{"error" => reason}}}) do
     {:error, reason}
   end
   defp handle_response({:ok, %{status_code: 400, body: reason = %{"errors" => _errors, "field-errors" => _field_errors}}}) do

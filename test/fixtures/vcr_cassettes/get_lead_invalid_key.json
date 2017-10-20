@@ -1,0 +1,36 @@
+[
+  {
+    "request": {
+      "body": "{}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "get",
+      "options": {
+        "basic_auth": [
+          "FAKE_CLOSEIO_TOKEN",
+          ""
+        ]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/lead/lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm/"
+    },
+    "response": {
+      "body": "{\n  \"error\": \"The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required.\"\n}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Date": "Fri, 20 Oct 2017 10:47:42 GMT",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "600",
+        "X-Rate-Limit-Remaining": "599",
+        "X-Rate-Limit-Reset": "14.510896",
+        "Content-Length": "238",
+        "Connection": "keep-alive"
+      },
+      "status_code": 401,
+      "type": "ok"
+    }
+  }
+]
