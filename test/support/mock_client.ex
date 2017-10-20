@@ -48,21 +48,42 @@ defmodule Closex.MockClient do
 
   For more detail on the test objects see the `test/fixtures/*.json` files.
 
-  If you'd like to emulate not finding an object, pass in the @not_found_id value.
+  If you'd like to emulate not finding an object, pass in the `Closex.MockClient.get_not_found_id` value.
   """
 
   @not_found_id "not_found"
+  def get_not_found_id do
+    @not_found_id
+  end
 
+  @lead_id "lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O"
+  def get_lead_id do
+    @lead_id
+  end
+
+  @doc """
+  Gets a lead from CloseIO.
+
+  Returns `{:ok, lead}`.
+
+  ## Examples
+
+    iex> Closex.MockClient.get_lead(1)
+    nil
+    > Closex.MockClient.get_lead(Closex.MockClient.get_lead_id)
+    ...contents of test/fixtures/lead.json...
+    iex> Closex.MockClient.get_lead(Closex.MockClient.get_not_found_id)
+    {:error, :mock_not_found}
+  """
   def get_lead(id, opts \\ [])
+  def get_lead(id = @lead_id, opts) do
+    lead = load("lead.json")
+    send self(), {:closex_mock_client, :get_lead, [id, opts]}
+    {:ok, lead}
+  end
   def get_lead(id = @not_found_id, opts) do
     send self(), {:closex_mock_client, :get_lead, [id, opts]}
     {:error, :mock_not_found}
-  end
-  def get_lead(id, opts) do
-    lead = load("lead.json")
-    |> Map.merge(%{"id" => id})
-    send self(), {:closex_mock_client, :get_lead, [id, opts]}
-    {:ok, lead}
   end
 
   def get_opportunity(id, opts \\ [])
