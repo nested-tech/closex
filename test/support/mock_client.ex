@@ -117,9 +117,9 @@ defmodule Closex.MockClient do
   """
   def get_opportunity(id, opts \\ [])
   def get_opportunity(id = @opportunity_id, opts) do
-    lead = load("opportunity.json")
+    opportunity = load("opportunity.json")
     send self(), {:closex_mock_client, :get_opportunity, [id, opts]}
-    {:ok, lead}
+    {:ok, opportunity}
   end
   def get_opportunity(id = @not_found_id, opts) do
     send self(), {:closex_mock_client, :get_opportunity, [id, opts]}
@@ -166,8 +166,8 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_organization(id, opts \\ [])
-  def get_organization(id = , opts) do
-    lead = load("organization.json")
+  def get_organization(id = @organization_id, opts) do
+    organization = load("organization.json")
     send self(), {:closex_mock_client, :get_organization, [id, opts]}
     {:ok, organization}
   end
@@ -176,18 +176,122 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   end
 
+  @doc """
+  Gets the potential statuses of a lead from CloseIO.
+
+  Returns `{:ok, lead_statuses}`.
+
+  ## Examples
+
+    iex> Closex.MockClient.get_lead_statuses()
+    {
+        "has_more": false,
+        "data": [
+            {
+                "id": "stat_1ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+                "label": "Potential"
+            },
+            {
+                "id": "stat_2ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+                "label": "Bad Fit"
+            },
+            {
+                "id": "stat_3ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+                "label": "Qualified"
+            },
+            {
+                "id": "stat_8ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+                "label": "Not Serious"
+            }
+        ]
+    }
+  """
   def get_lead_statuses(opts \\ []) do
     lead_statuses = load("lead_statuses.json")
     send self(), {:closex_mock_client, :get_lead_statuses, [opts]}
     {:ok, lead_statuses}
   end
 
+  @doc """
+  Gets the potential statuses of an opportunity from CloseIO.
+
+  Returns `{:ok, opportunity_statuses}`.
+
+  ## Examples
+
+    iex> Closex.MockClient.get_opportunity_statuses()
+    {
+      "has_more": false,
+      "data": [
+        {
+          "id": "stat_4ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+          "label": "Active",
+          "type": "active"
+        },
+        {
+          "id": "stat_5ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+          "label": "Won",
+          "type": "won"
+        },
+        {
+          "id": "stat_6ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+          "label": "Lost",
+          "type": "lost"
+        },
+        {
+          "id": "stat_7ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+          "label": "On hold",
+          "type": "active"
+        }
+      ]
+    }
+  """
   def get_opportunity_statuses(opts \\ []) do
     opportunity_statuses = load("opportunity_statuses.json")
     send self(), {:closex_mock_client, :get_opportunity_statuses, [opts]}
     {:ok, opportunity_statuses}
   end
 
+  @doc """
+  Gets the users available in CloseIO.
+
+  Returns `{:ok, users}`.
+
+  ## Examples
+
+    iex> Closex.MockClient.get_users()
+    {
+      "has_more": true,
+      "data": [
+        {
+          "id": "user_912jAIAEWR0b3KDozVFqXSRbt2uBjw3QfeYa7ZaGTwI",
+          "email": "stefan@close.io",
+          "first_name": "Stefan",
+          "last_name": "Wojcik",
+          "image": "https://secure.gravatar.com/avatar/a4bec4594864f1896c4750328b1d7470",
+          "organizations": [
+            "orga_aksjdflkjkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+            "orga_QH587V0alskjdomnIWUEfaslsalkjfT7U5XGYRtTrLq"
+          ],
+          "date_created": "2012-08-29T00:33:22.720000+00:00",
+          "date_updated": "2013-05-08T01:57:15.204000+00:00"
+        },
+        {
+          "id": "user_ihsdjlkasjdf3KDozVFqXSRbt2uBjw3QfeYa7ZaGTwI",
+          "email": "kevin@close.io",
+          "first_name": "Kevin",
+          "last_name": "Ramani",
+          "image": "https://secure.gravatar.com/avatar/37b6e80dc105b9a8d0d16ef51b5d68c7",
+          "organizations": [
+            "orga_aksjdflkjkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+            "orga_QH587V0alskjdomnIWUEfaslsalkjfT7U5XGYRtTrLq"
+          ],
+          "date_created": "2012-08-10T00:00:11.000000+00:00",
+          "date_updated": "2013-05-08T02:00:13.000000+00:00"
+        }
+      ]
+    }
+  """
   def get_users(opts \\ []) do
     users = load("users.json")
     send self(), {:closex_mock_client, :get_users, [opts]}
