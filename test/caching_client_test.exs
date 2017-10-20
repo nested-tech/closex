@@ -143,6 +143,7 @@ defmodule Closex.CachingClientTest do
     @update_lead_id Closex.MockClient.get_lead_id
     test "invalidates cache when updating lead" do
       {:ok, result} = Closex.CachingClient.get_lead(@update_lead_id)
+      assert_received {:closex_mock_client, :get_lead, [@update_lead_id, []]}
       assert result["name"] == "Wayne Enterprises (Sample Lead)"
 
       {:ok, updated_lead} = Closex.CachingClient.update_lead(@update_lead_id, %{"name" => "New Name"})
@@ -158,6 +159,7 @@ defmodule Closex.CachingClientTest do
     @update_opportunity_id Closex.MockClient.get_opportunity_id
     test "invalidates cache when updating opportunity" do
       {:ok, result} = Closex.CachingClient.get_opportunity(@update_opportunity_id)
+      assert_received {:closex_mock_client, :get_opportunity, [@update_opportunity_id, []]}
       assert result["confidence"] == 75
 
       {:ok, updated_opportunity} = Closex.CachingClient.update_opportunity(@update_opportunity_id, %{"confidence" => 50})
