@@ -3,7 +3,6 @@ defmodule Closex.MockClient do
 
   @moduledoc """
   TODO: Add documentation for using MockClient
-  TODO: Expose in hex package
   """
 
   @not_found_id "not_found"
