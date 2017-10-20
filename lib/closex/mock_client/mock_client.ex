@@ -241,7 +241,7 @@ defmodule Closex.MockClient do
   def send_email(_payload, _opts \\ []), do: :noop
   def find_leads(_search_term, _opts \\ []), do: :noop
 
-  @fixtures_path Path.join([File.cwd!, "test", "fixtures"])
+  @fixtures_path Path.join([File.cwd!, "lib", "closex", "mock_client", "fixtures"])
   defp load(filename) do
     [@fixtures_path, filename]
     |> Path.join

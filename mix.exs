@@ -45,7 +45,7 @@ defmodule Closex.Mixfile do
 
   defp package() do
     [
-      files: ["lib", "mix.exs", "test/support/mock_client.ex", "test/support/fixtures/*.json", "README.md"],
+      files: ["lib", "mix.exs", "README.md"],
       maintainers: ["Sam Davies", "Darren Oakley"],
       licenses: ["MIT"],
       source_url: "https://github.com/nested-tech/closex",
