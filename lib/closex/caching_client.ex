@@ -17,7 +17,7 @@ defmodule Closex.CachingClient do
 
   def update_lead(lead_id, payload, opts \\ []) do
     with {:ok, updated_lead} <- apply(@fallback_client, :update_lead, [lead_id, payload, opts]) do
-      {:ok, set_cached(lead_id, updated_lead)}
+      set_cached(lead_id, {:ok, updated_lead})
     end
   end
 
@@ -29,7 +29,7 @@ defmodule Closex.CachingClient do
 
   def update_opportunity(opportunity_id, payload, opts \\ []) do
     with {:ok, updated_opportunity} <- apply(@fallback_client, :update_opportunity, [opportunity_id, payload, opts]) do
-      {:ok, set_cached(opportunity_id, updated_opportunity)}
+      set_cached(opportunity_id, {:ok, updated_opportunity})
     end
   end
 

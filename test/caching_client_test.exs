@@ -146,7 +146,7 @@ defmodule Closex.CachingClientTest do
       assert updated_lead["id"] == @update_lead_id
       assert updated_lead["name"] == "New Name"
 
-      assert Closex.CachingClient.get_lead(@update_lead_id) == updated_lead
+      assert Closex.CachingClient.get_lead(@update_lead_id) == {:ok, updated_lead}
     end
   end
 
@@ -162,7 +162,7 @@ defmodule Closex.CachingClientTest do
       assert updated_opportunity["id"] == @update_opportunity_id
       assert updated_opportunity["confidence"] == 50
 
-      assert Closex.CachingClient.get_opportunity(@update_opportunity_id) == updated_opportunity
+      assert Closex.CachingClient.get_opportunity(@update_opportunity_id) == {:ok, updated_opportunity}
     end
   end
 
