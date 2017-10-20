@@ -66,6 +66,11 @@ defmodule Closex.MockClient do
     @opportunity_id
   end
 
+  @lead_custom_field_id "lcf_v6S011I6MqcbVvB2FA5Nk8dr5MkL8sWuCiG8cUleO9c"
+  def get_lead_custom_field_id do
+    @lead_custom_field_id
+  end
+
   @doc """
   Gets a lead from CloseIO.
 
@@ -106,27 +111,32 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_opportunity(id, opts \\ [])
-<<<<<<< HEAD
-=======
   def get_opportunity(id = @opportunity_id, opts) do
     lead = load("opportunity.json")
     send self(), {:closex_mock_client, :get_opportunity, [id, opts]}
     {:ok, lead}
   end
->>>>>>> Docs for opportunity id
   def get_opportunity(id = @not_found_id, opts) do
     send self(), {:closex_mock_client, :get_opportunity, [id, opts]}
     {:error, :mock_not_found}
   end
-  def get_opportunity(id, opts) do
-    opportunity = load("opportunity.json")
-    |> Map.merge(%{"id" => id})
-    send self(), {:closex_mock_client, :get_opportunity, [id, opts]}
-    {:ok, opportunity}
-  end
 
+  @doc """
+  Gets a lead_custom_field from CloseIO.
+
+  Returns `{:ok, lead_custom_field}`.
+
+  ## Examples
+
+    iex> Closex.MockClient.get_lead_custom_field("1")
+    nil
+    > Closex.MockClient.get_lead_custom_field(Closex.MockClient.get_lead_custom_field_id)
+    ...contents of test/fixtures/lead_custom_field.json...
+    iex> Closex.MockClient.get_lead_custom_field(Closex.MockClient.get_not_found_id)
+    {:error, :mock_not_found}
+  """
   def get_lead_custom_field(id, opts \\ [])
-  def get_lead_custom_field(id = "lcf_v6S011I6MqcbVvB2FA5Nk8dr5MkL8sWuCiG8cUleO9c", opts) do
+  def get_lead_custom_field(id = @lead_custom_field_id, opts) do
     lead_custom_field = load("lead_custom_field.json")
     send self(), {:closex_mock_client, :get_lead_custom_field, [id, opts]}
     {:ok, lead_custom_field}
