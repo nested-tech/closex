@@ -162,7 +162,7 @@ defmodule Closex.CachingClientTest do
       assert_received {:closex_mock_client, :get_opportunity, [@update_opportunity_id, []]}
       assert result["confidence"] == 75
 
-      {:ok, updated_opportunity} = Closex.CachingClient.update_opportunity(@update_opportunity_id, %{"confidence" => 50})
+      {:ok, updated_opportunity} = Closex.CachingClient.update_opportunity(@update_opportunity_id, %{confidence: 50})
       assert_received {:closex_mock_client, :update_opportunity, [@update_opportunity_id, %{"confidence" => 50}, []]}
       assert updated_opportunity["id"] == @update_opportunity_id
       assert updated_opportunity["confidence"] == 50
