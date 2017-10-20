@@ -61,6 +61,11 @@ defmodule Closex.MockClient do
     @lead_id
   end
 
+  @opportunity_id "oppo_8eB77gAdf8FMy6GsNHEy84f7uoeEWv55slvUjKQZpJt"
+  def get_opportunity_id do
+    @opportunity_id
+  end
+
   @doc """
   Gets a lead from CloseIO.
 
@@ -68,7 +73,7 @@ defmodule Closex.MockClient do
 
   ## Examples
 
-    iex> Closex.MockClient.get_lead(1)
+    iex> Closex.MockClient.get_lead("1")
     nil
     > Closex.MockClient.get_lead(Closex.MockClient.get_lead_id)
     ...contents of test/fixtures/lead.json...
@@ -86,7 +91,29 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   end
 
+  @doc """
+  Gets an opportunity from CloseIO.
+
+  Returns `{:ok, opportunity}`.
+
+  ## Examples
+
+    iex> Closex.MockClient.get_opportunity("1")
+    nil
+    > Closex.MockClient.get_opportunity(Closex.MockClient.get_opportunity_id)
+    ...contents of test/fixtures/opportunity.json...
+    iex> Closex.MockClient.get_opportunity(Closex.MockClient.get_not_found_id)
+    {:error, :mock_not_found}
+  """
   def get_opportunity(id, opts \\ [])
+<<<<<<< HEAD
+=======
+  def get_opportunity(id = @opportunity_id, opts) do
+    lead = load("opportunity.json")
+    send self(), {:closex_mock_client, :get_opportunity, [id, opts]}
+    {:ok, lead}
+  end
+>>>>>>> Docs for opportunity id
   def get_opportunity(id = @not_found_id, opts) do
     send self(), {:closex_mock_client, :get_opportunity, [id, opts]}
     {:error, :mock_not_found}
