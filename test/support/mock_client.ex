@@ -2,7 +2,53 @@ defmodule Closex.MockClient do
   @behaviour Closex.ClientBehaviour
 
   @moduledoc """
-  TODO: Add documentation for using MockClient
+  This module is for testing, it allows you to stub requests to CloseIO.
+
+  It behaves like the standard client so you can drop it into your code via
+  configuration in your testing environment.
+
+  First you ned to set the default client you want to use, either HTTPClient
+  or CachingClient.
+
+  ```
+  $ cat your_app/config/config.exs
+
+  config :yourapp,
+    closeio_client: Closex.HTTPClient,
+    ...other configuration...
+  ```
+
+  Then in your tests you can set the MockClient:
+
+  ```
+  $ cat your_app/config/test.exs
+
+  config :yourapp,
+    closeio_client: Closex.MockClient,
+    ...other configuration...
+  ```
+
+  Next, use it in your code:
+
+  ```
+  $ cat your_app/lib/module_which_uses_closeio.ex
+
+  defmodule YourApp.ModuleWhichUsesCloseIO do
+    
+    @closeio_client Application.fetch_env!(:your_app, :closeio_client)
+
+    def do_things_with_a_close_io_lead(id) do
+      @closeio_client.get_lead(id)
+      # do things
+    end
+  end
+  ```
+
+  In test env, the client will return the test values for each method.
+
+  For more detail on the test objects see the `test/fixtures/*.json` files.
+
+  If you'd like to emulate not finding an object, pass in the @not_found_id value.
   """
 
   @not_found_id "not_found"
