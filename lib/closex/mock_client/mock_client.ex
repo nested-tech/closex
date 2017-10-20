@@ -221,25 +221,35 @@ defmodule Closex.MockClient do
   end
 
   # TODO: implement these mocks
-  def create_lead(_payload, _opts \\ []), do: :noop
-  def update_lead(lead_id, payload, opts \\ []) do
+  def create_lead(payload, opts \\ []), do: Closex.HTTPClient.create_lead(payload, opts)
+
+  def update_lead(lead_id, payload, opts \\ [])
+  def update_lead(lead_id = @lead_id, payload, opts) do
     lead = load("lead.json")
     |> Map.merge(payload)
-    |> Map.merge(%{"id" => lead_id})
     send self(), {:closex_mock_client, :update_lead, [lead_id, payload, opts]}
     {:ok, lead}
   end
-  def create_opportunity(_payload, _opts \\ []), do: :noop
-  # TODO: use @opportunity_id
-  def update_opportunity(opportunity_id, payload, opts \\ []) do
+  def update_lead(@not_found_id, _payload, _opts) do
+    {:error, :mock_not_found}
+  end
+
+  def create_opportunity(payload, opts \\ []), do: Closex.HTTPClient.create_opportunity(payload, opts)
+
+  def update_opportunity(_opportunity_id, _payload, _opts \\ [])
+  def update_opportunity(opportunity_id = @opportunity_id, payload, opts) do
+    stringified_payload = for {key, val} <- payload, into: %{}, do: {Atom.to_string(key), val}
     opportunity = load("opportunity.json")
-    |> Map.merge(payload)
-    |> Map.merge(%{"id" => opportunity_id})
-    send self(), {:closex_mock_client, :update_opportunity, [opportunity_id, payload, opts]}
+    |> Map.merge(stringified_payload)
+    send self(), {:closex_mock_client, :update_opportunity, [opportunity_id, stringified_payload, opts]}
     {:ok, opportunity}
   end
-  def send_email(_payload, _opts \\ []), do: :noop
-  def find_leads(_search_term, _opts \\ []), do: :noop
+  def update_opportunity(@not_found_id, _payload, _opts) do
+    {:error, :mock_not_found}
+  end
+
+  def send_email(payload, opts \\ []), do: Closex.HTTPClient.send_email(payload, opts)
+  def find_leads(search_term, opts \\ []), do: Closex.HTTPClient.find_leads(search_term, opts)
 
   @fixtures_path Path.join([File.cwd!, "lib", "closex", "mock_client", "fixtures"])
   defp load(filename) do
