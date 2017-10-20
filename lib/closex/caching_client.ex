@@ -55,6 +55,10 @@ defmodule Closex.CachingClient do
     get_cached(:get_users, {:get_users, [opts]})
   end
 
+  def clear_cache() do
+    Cachex.clear(:closex_cache)
+  end
+
   defp get_cached(key, {fun, args}) do
     cache_result = Cachex.get(:closex_cache, key, fallback: fn _key ->
       case apply(@fallback_client, fun, args) do

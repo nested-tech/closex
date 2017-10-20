@@ -1,7 +1,12 @@
 defmodule Closex.CachingClientTest do
-  use ExUnit.Case, async: true
+  use ExUnit.Case, async: false
 
   @not_found_id "not_found"
+
+  setup do
+    Closex.CachingClient.clear_cache
+    :ok
+  end
 
   describe "get_lead/1" do
     @lead_id Closex.MockClient.get_lead_id
@@ -164,5 +169,16 @@ defmodule Closex.CachingClientTest do
     end
   end
 
+  describe "clear_cache/0" do
+    test "it clears the cache" do
+      Closex.CachingClient.get_lead(@lead_id)
+      assert_received {:closex_mock_client, :get_lead, [@lead_id, []]}
+
+      Closex.CachingClient.clear_cache()
+
+      Closex.CachingClient.get_lead(@lead_id)
+      assert_received {:closex_mock_client, :get_lead, _}
+    end
+  end
   # TODO: tests for other functions
 end
