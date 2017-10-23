@@ -9,7 +9,7 @@ defmodule Closex.CachingClientTest do
   end
 
   describe "get_lead/1" do
-    @lead_id Closex.MockClient.get_lead_id
+    @lead_id Closex.MockClient.lead_id
 
     test "when called in quick succession returns cached copy" do
       fallback = Closex.CachingClient.get_lead(@lead_id)
@@ -55,7 +55,7 @@ defmodule Closex.CachingClientTest do
   end
 
   describe "get_lead_custom_field/1" do
-    @lead_custom_field_id "lcf_v6S011I6MqcbVvB2FA5Nk8dr5MkL8sWuCiG8cUleO9c"
+    @lead_custom_field_id Closex.MockClient.lead_custom_field_id
 
     test "when called in quick succession returns cached copy" do
       fallback = Closex.CachingClient.get_lead_custom_field(@lead_custom_field_id)
@@ -78,7 +78,7 @@ defmodule Closex.CachingClientTest do
   end
 
   describe "get_organization/1" do
-    @organization_id "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen"
+    @organization_id Closex.MockClient.organization_id
 
     test "when called in quick succession returns cached copy" do
       fallback = Closex.CachingClient.get_organization(@organization_id)
@@ -140,7 +140,7 @@ defmodule Closex.CachingClientTest do
   end
 
   describe "update_lead/2" do
-    @update_lead_id Closex.MockClient.get_lead_id
+    @update_lead_id Closex.MockClient.lead_id
     test "invalidates cache when updating lead" do
       {:ok, result} = Closex.CachingClient.get_lead(@update_lead_id)
       assert_received {:closex_mock_client, :get_lead, [@update_lead_id, []]}
@@ -156,7 +156,7 @@ defmodule Closex.CachingClientTest do
   end
 
   describe "update_opportunity/2" do
-    @update_opportunity_id Closex.MockClient.get_opportunity_id
+    @update_opportunity_id Closex.MockClient.opportunity_id
     test "invalidates cache when updating opportunity" do
       {:ok, result} = Closex.CachingClient.get_opportunity(@update_opportunity_id)
       assert_received {:closex_mock_client, :get_opportunity, [@update_opportunity_id, []]}

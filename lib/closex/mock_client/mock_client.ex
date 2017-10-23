@@ -34,31 +34,31 @@ defmodule Closex.MockClient do
     mock_client_fixtures_dir: Path.join([File.cwd!, "path", "to", "your", "fixtures"])
   ```
 
-  If you'd like to emulate not finding an object, pass in the `Closex.MockClient.get_not_found_id` value.
+  If you'd like to emulate not finding an object, pass in the `Closex.MockClient.not_found_id` value.
   """
 
   @not_found_id "not_found"
-  def get_not_found_id do
+  def not_found_id do
     @not_found_id
   end
 
   @lead_id "lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O"
-  def get_lead_id do
+  def lead_id do
     @lead_id
   end
 
   @opportunity_id "oppo_8eB77gAdf8FMy6GsNHEy84f7uoeEWv55slvUjKQZpJt"
-  def get_opportunity_id do
+  def opportunity_id do
     @opportunity_id
   end
 
   @lead_custom_field_id "lcf_v6S011I6MqcbVvB2FA5Nk8dr5MkL8sWuCiG8cUleO9c"
-  def get_lead_custom_field_id do
+  def lead_custom_field_id do
     @lead_custom_field_id
   end
 
   @organization_id "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen"
-  def get_organization_id do
+  def organization_id do
     @organization_id
   end
 
@@ -69,10 +69,10 @@ defmodule Closex.MockClient do
 
   ## Examples
 
-    > Closex.MockClient.get_lead(Closex.MockClient.get_lead_id())
+    > Closex.MockClient.get_lead(Closex.MockClient.lead_id())
     ...contents of test/fixtures/lead.json...
 
-    iex> Closex.MockClient.get_lead(Closex.MockClient.get_not_found_id())
+    iex> Closex.MockClient.get_lead(Closex.MockClient.not_found_id())
     {:error, :mock_not_found}
   """
   def get_lead(id, opts \\ [])
@@ -93,10 +93,10 @@ defmodule Closex.MockClient do
 
   ## Examples
 
-    > Closex.MockClient.get_opportunity(Closex.MockClient.get_opportunity_id())
+    > Closex.MockClient.get_opportunity(Closex.MockClient.opportunity_id())
     ...contents of test/fixtures/opportunity.json...
 
-    iex> Closex.MockClient.get_opportunity(Closex.MockClient.get_not_found_id())
+    iex> Closex.MockClient.get_opportunity(Closex.MockClient.not_found_id())
     {:error, :mock_not_found}
   """
   def get_opportunity(id, opts \\ [])
@@ -117,10 +117,10 @@ defmodule Closex.MockClient do
 
   ## Examples
 
-    > Closex.MockClient.get_lead_custom_field(Closex.MockClient.get_lead_custom_field_id())
+    > Closex.MockClient.get_lead_custom_field(Closex.MockClient.lead_custom_field_id())
     ...contents of test/fixtures/lead_custom_field.json...
 
-    iex> Closex.MockClient.get_lead_custom_field(Closex.MockClient.get_not_found_id())
+    iex> Closex.MockClient.get_lead_custom_field(Closex.MockClient.not_found_id())
     {:error, :mock_not_found}
   """
   def get_lead_custom_field(id, opts \\ [])
@@ -141,10 +141,10 @@ defmodule Closex.MockClient do
 
   ## Examples
 
-    > Closex.MockClient.get_organization(Closex.MockClient.get_organization_id())
+    > Closex.MockClient.get_organization(Closex.MockClient.organization_id())
     ...contents of test/fixtures/organization.json...
 
-    iex> Closex.MockClient.get_organization(Closex.MockClient.get_not_found_id())
+    iex> Closex.MockClient.get_organization(Closex.MockClient.not_found_id())
     {:error, :mock_not_found}
   """
   def get_organization(id, opts \\ [])
