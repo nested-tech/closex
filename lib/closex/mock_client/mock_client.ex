@@ -7,18 +7,7 @@ defmodule Closex.MockClient do
   It behaves like the standard client so you can drop it into your code via
   configuration in your testing environment.
 
-  First you ned to set the default client you want to use, either HTTPClient
-  or CachingClient.
-
-  ```
-  $ cat your_app/config/config.exs
-
-  config :yourapp,
-    closeio_client: Closex.HTTPClient,
-    ...other configuration...
-  ```
-
-  Then in your tests you can set the MockClient:
+  In test mode you can set the MockClient:
 
   ```
   $ cat your_app/config/test.exs
@@ -28,25 +17,22 @@ defmodule Closex.MockClient do
     ...other configuration...
   ```
 
-  Next, use it in your code:
-
-  ```
-  $ cat your_app/lib/module_which_uses_closeio.ex
-
-  defmodule YourApp.ModuleWhichUsesCloseIO do
-    
-    @closeio_client Application.fetch_env!(:your_app, :closeio_client)
-
-    def do_things_with_a_close_io_lead(id) do
-      @closeio_client.get_lead(id)
-      # do things
-    end
-  end
-  ```
-
-  In test env, the client will return the test values for each method.
+  The mock client will return the test values for each method.
 
   For more detail on the test objects see the `test/fixtures/*.json` files.
+
+  However, you can override the response of the mock client with json more specific to your domain:
+
+  ```
+  $ cat your_app/config/test.exs
+
+  config :yourapp,
+    closeio_client: Closex.MockClient,
+    ...other configuration...
+
+  config :closex,
+    mock_client_fixtures_dir: Path.join([File.cwd!, "path", "to", "your", "fixtures"])
+  ```
 
   If you'd like to emulate not finding an object, pass in the `Closex.MockClient.get_not_found_id` value.
   """
@@ -250,7 +236,7 @@ defmodule Closex.MockClient do
   def send_email(payload, opts \\ []), do: Closex.HTTPClient.send_email(payload, opts)
   def find_leads(search_term, opts \\ []), do: Closex.HTTPClient.find_leads(search_term, opts)
 
-  @fixtures_path Path.join([File.cwd!, "lib", "closex", "mock_client", "fixtures"])
+  @fixtures_path Application.get_env(:closex, :mock_client_fixtures_dir, Path.join([File.cwd!, "lib", "closex", "mock_client", "fixtures"]))
   defp load(filename) do
     [@fixtures_path, filename]
     |> Path.join
