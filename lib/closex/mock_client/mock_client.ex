@@ -28,29 +28,20 @@ defmodule Closex.MockClient do
   """
 
   @not_found_id "not_found"
-  def not_found_id do
-    @not_found_id
-  end
+  def not_found_id, do: @not_found_id
 
   @lead_id "lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O"
-  def lead_id do
-    @lead_id
-  end
+  def lead_id, do: @lead_id
 
   @opportunity_id "oppo_8eB77gAdf8FMy6GsNHEy84f7uoeEWv55slvUjKQZpJt"
-  def opportunity_id do
-    @opportunity_id
-  end
+  def opportunity_id, do: @opportunity_id
 
   @lead_custom_field_id "lcf_v6S011I6MqcbVvB2FA5Nk8dr5MkL8sWuCiG8cUleO9c"
-  def lead_custom_field_id do
-    @lead_custom_field_id
-  end
+  def lead_custom_field_id, do: @lead_custom_field_id
 
   @organization_id "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen"
-  def organization_id do
-    @organization_id
-  end
+  def organization_id, do: @organization_id
+
 
   @doc """
   Gets a lead from CloseIO.
