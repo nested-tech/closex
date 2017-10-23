@@ -217,9 +217,9 @@ defmodule Closex.MockClient do
   def send_email(payload, opts \\ []), do: Closex.HTTPClient.send_email(payload, opts)
   def find_leads(search_term, opts \\ []), do: Closex.HTTPClient.find_leads(search_term, opts)
 
-  @fixtures_path Application.get_env(:closex, :mock_client_fixtures_dir, Path.join([File.cwd!, "lib", "closex", "mock_client", "fixtures"]))
   defp load(filename) do
-    [@fixtures_path, filename]
+    fixtures_path = Application.get_env(:closex, :mock_client_fixtures_dir, Path.join([File.cwd!, "lib", "closex", "mock_client", "fixtures"]))
+    [fixtures_path, filename]
     |> Path.join
     |> File.read!
     |> Poison.decode!
