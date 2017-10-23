@@ -73,7 +73,7 @@ You may also want to set the default client you want to use in your applicaton, 
 or CachingClient, via your config:
 
 ```
-$ cat your_app/config/config.exs
+# your_app/config/config.exs
 
 config :yourapp,
   closeio_client: Closex.HTTPClient,
@@ -83,7 +83,7 @@ config :yourapp,
 Next, use it in your code:
 
 ```
-$ cat your_app/lib/module_which_uses_closeio.ex
+# your_app/lib/module_which_uses_closeio.ex
 
 defmodule YourApp.ModuleWhichUsesCloseIO do
   
@@ -98,7 +98,18 @@ end
 
 ## Mock Client
 
+We have provided a mock client for testing purposes in your application.
+
 Using the above configuration will allow you to override and use the `Closex.MockClient` in test mode.
+
+```
+# your_app/config/test.exs
+
+config :yourapp,
+  closeio_client: Closex.MockClient,
+  ...other configuration...
+```
+
 
 For more details on the mock client please see [the docs](https://hexdocs.pm/closex).
 
@@ -109,10 +120,6 @@ Options will be passed through to [HTTPoison](https://github.com/edgurgel/httpoi
 ```elixir
 Closex.HTTPClient.get_lead("my_lead_id", timeout: 500, recv_timeout: 1_000)
 ```
-
-## Mock Client
-
-We have provided a mock client for testing purposes in your application.
 
 ## Contributing
 
