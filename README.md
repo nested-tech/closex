@@ -69,6 +69,50 @@ Closex.HTTPClient.update_lead("my_lead_id", %{status_id: "new_status_id"})
 
 See [the docs](https://hexdocs.pm/closex) for more examples.
 
+You may also want to set the default client you want to use in your applicaton, either HTTPClient
+or CachingClient, via your config:
+
+```
+# your_app/config/config.exs
+
+config :yourapp,
+  closeio_client: Closex.HTTPClient,
+  ...other configuration...
+```
+
+Next, use it in your code:
+
+```
+# your_app/lib/module_which_uses_closeio.ex
+
+defmodule YourApp.ModuleWhichUsesCloseIO do
+  
+  @closeio_client Application.fetch_env!(:your_app, :closeio_client)
+
+  def do_things_with_a_close_io_lead(id) do
+    @closeio_client.get_lead(id)
+    # do things
+  end
+end
+```
+
+## Mock Client
+
+We have provided a mock client for testing purposes in your application.
+
+Using the above configuration will allow you to override and use the `Closex.MockClient` in test mode.
+
+```
+# your_app/config/test.exs
+
+config :yourapp,
+  closeio_client: Closex.MockClient,
+  ...other configuration...
+```
+
+
+For more details on the mock client please see [the docs](https://hexdocs.pm/closex).
+
 ## Options
 
 Options will be passed through to [HTTPoison](https://github.com/edgurgel/httpoison#options). For example, to set a shorter timeout:
