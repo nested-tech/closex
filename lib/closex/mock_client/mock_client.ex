@@ -206,7 +206,7 @@ defmodule Closex.MockClient do
     {:ok, users}
   end
 
-  # TODO: implement these mocks
+  # TODO: Mock functions which pass through to default client
   def create_lead(payload, opts \\ []), do: Closex.HTTPClient.create_lead(payload, opts)
 
   def update_lead(lead_id, payload, opts \\ [])
