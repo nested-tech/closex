@@ -187,8 +187,11 @@ defmodule Closex.MockClient do
     {:ok, users}
   end
 
-  # TODO: Mock functions which pass through to default client
-  def create_lead(payload, opts \\ []), do: Closex.HTTPClient.create_lead(payload, opts)
+  def create_lead(payload, opts \\ []) do
+    lead = load("create_lead.json")
+    send self(), {:closex_mock_client, :create_lead, [payload, opts]}
+    {:ok, lead}
+  end
 
   def update_lead(lead_id, payload, opts \\ [])
   def update_lead(lead_id = @lead_id, payload, opts) do
@@ -201,7 +204,11 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   end
 
-  def create_opportunity(payload, opts \\ []), do: Closex.HTTPClient.create_opportunity(payload, opts)
+  def create_opportunity(payload, opts \\ []) do
+    opportunity = load("create_opportunity.json")
+    send self(), {:closex_mock_client, :create_opportunity, [payload, opts]}
+    {:ok, opportunity}
+  end
 
   def update_opportunity(_opportunity_id, _payload, _opts \\ [])
   def update_opportunity(opportunity_id = @opportunity_id, payload, opts) do
