@@ -221,8 +221,17 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   end
 
-  def send_email(payload, opts \\ []), do: Closex.HTTPClient.send_email(payload, opts)
-  def find_leads(search_term, opts \\ []), do: Closex.HTTPClient.find_leads(search_term, opts)
+  def send_email(payload, opts \\ []) do
+    email = load("send_email.json")
+    send self(), {:closex_mock_client, :send_email, [payload, opts]}
+    {:ok, email}
+  end
+
+  def find_leads(search_term, opts \\ []) do
+    leads = load("find_leads.json")
+    send self(), {:closex_mock_client, :find_leads, [search_term, opts]}
+    {:ok, leads}
+  end
 
   defp load(filename) do
     case Application.fetch_env(:closex, :mock_client_fixtures_dir) do
