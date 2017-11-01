@@ -197,6 +197,8 @@ defmodule Closex.MockClient do
   def update_lead(lead_id = @lead_id, payload, opts) do
     lead = load("lead.json")
     |> Map.merge(payload)
+
+    lead = parse_dates_to_strings(lead)
     send self(), {:closex_mock_client, :update_lead, [lead_id, payload, opts]}
     {:ok, lead}
   end
@@ -250,7 +252,20 @@ defmodule Closex.MockClient do
     end
   end
 
-  def load_default(filename) do
+  defp parse_dates_to_strings(lead) do
+    Enum.into(lead, %{}, fn {key, value} ->
+      case { key, value } do
+        { key, %Date{} } ->
+          { key, Date.to_string(value) }
+        { key, %DateTime{} } ->
+          { key, DateTime.to_string(value) }
+        { _, _ } ->
+          {key, value}
+      end
+    end)
+  end
+
+  defp load_default(filename) do
     Path.join([__DIR__, "fixtures", filename])
     |> File.read!
     |> Poison.decode!
