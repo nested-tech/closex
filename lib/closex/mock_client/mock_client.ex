@@ -231,6 +231,7 @@ defmodule Closex.MockClient do
   Returns `{:ok, lead}`.
 
   You can hand in any lead id you like and it will return an example lead with that id, with your updates merged in.
+  Any dates you hand in to be merged will be parsed to strings when they are returned.
 
   We have provided an example id to use when the id doesn't matter to you.
 
