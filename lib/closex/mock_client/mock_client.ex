@@ -42,11 +42,17 @@ defmodule Closex.MockClient do
   @organization_id "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen"
   def organization_id, do: @organization_id
 
+  @search_term "foo"
+  def search_term, do: @search_term
 
   @doc """
   Gets a lead from CloseIO.
 
   Returns `{:ok, lead}`.
+
+  You can hand in any lead id you like and it will return an example lead with that id.
+
+  We have provided an example id to use when the id doesn't matter to you.
 
   ## Examples
 
@@ -73,6 +79,10 @@ defmodule Closex.MockClient do
 
   Returns `{:ok, opportunity}`.
 
+  You can hand in any opportunity id you like and it will return an example opportunity with that id.
+
+  We have provided an example id to use when the id doesn't matter to you.
+
   ## Examples
 
     > Closex.MockClient.get_opportunity(Closex.MockClient.opportunity_id())
@@ -98,6 +108,10 @@ defmodule Closex.MockClient do
 
   Returns `{:ok, lead_custom_field}`.
 
+  You can hand in any custom field id you like and it will return an example custom field with that id.
+
+  We have provided an example id to use when the id doesn't matter to you.
+
   ## Examples
 
     > Closex.MockClient.get_lead_custom_field(Closex.MockClient.lead_custom_field_id())
@@ -122,6 +136,10 @@ defmodule Closex.MockClient do
   Gets an organization from CloseIO.
 
   Returns `{:ok, organization}`.
+
+  You can hand in any organization id you like and it will return an example organization with that id.
+
+  We have provided an example id to use when the id doesn't matter to you.
 
   ## Examples
 
@@ -191,12 +209,42 @@ defmodule Closex.MockClient do
     {:ok, users}
   end
 
+  @doc """
+  Creates a lead in CloseIO.
+
+  Returns `{:ok, lead}`
+
+  ## Examples
+  
+    > Closex.MockClient.create_lead(%{})
+    ...contents of test/fixtures/create_lead.json...
+  """
   def create_lead(payload, opts \\ []) do
     lead = load("create_lead.json")
     send self(), {:closex_mock_client, :create_lead, [payload, opts]}
     {:ok, lead}
   end
 
+  @doc """
+  Update a lead in CloseIO.
+
+  Returns `{:ok, lead}`.
+
+  You can hand in any lead id you like and it will return an example lead with that id, with your updates merged in.
+
+  We have provided an example id to use when the id doesn't matter to you.
+
+  ## Examples
+
+    > Closex.MockClient.update_lead(Closex.MockClient.lead_id(), %{})
+    ...contents of test/fixtures/organization.json...
+
+    iex> Closex.MockClient.update_lead(Closex.MockClient.not_found_id(), %{})
+    {:error, :mock_not_found}
+
+    iex> Closex.MockClient.update_lead(Closex.MockClient.not_found_id(), %{"foo" => "bar"})
+    {:error, :mock_not_found}
+  """
   def update_lead(lead_id, payload, opts \\ [])
   def update_lead(@not_found_id, _payload, _opts) do
     {:error, :mock_not_found}
@@ -211,12 +259,42 @@ defmodule Closex.MockClient do
     {:ok, lead}
   end
 
+  @doc """
+  Creates an opportunity in CloseIO.
+
+  Returns `{:ok, opportunity}`
+
+  ## Examples
+  
+    > Closex.MockClient.create_opportunity(%{})
+    ...contents of test/fixtures/create_opportunity.json...
+  """
   def create_opportunity(payload, opts \\ []) do
     opportunity = load("create_opportunity.json")
     send self(), {:closex_mock_client, :create_opportunity, [payload, opts]}
     {:ok, opportunity}
   end
 
+  @doc """
+  Update an Opportunity in CloseIO.
+
+  Returns `{:ok, opportunity}`.
+
+  You can hand in any opportunity id you like and it will return an example opportunity with that id, with your updates merged in.
+
+  We have provided an example id to use when the id doesn't matter to you.
+
+  ## Examples
+
+    > Closex.MockClient.update_opportunity(Closex.MockClient.opportunity_id(), %{})
+    ...contents of test/fixtures/organization.json...
+
+    iex> Closex.MockClient.update_opportunity(Closex.MockClient.not_found_id(), %{})
+    {:error, :mock_not_found}
+
+    iex> Closex.MockClient.update_opportunity(Closex.MockClient.not_found_id(), %{"foo" => "bar"})
+    {:error, :mock_not_found}
+  """
   def update_opportunity(_opportunity_id, _payload, _opts \\ [])
   def update_opportunity(@not_found_id, _payload, _opts) do
     {:error, :mock_not_found}
@@ -229,6 +307,16 @@ defmodule Closex.MockClient do
     {:ok, opportunity}
   end
 
+  @doc """
+  Sends an email CloseIO.
+
+  Returns `{:ok, email}`
+
+  ## Examples
+  
+    > Closex.MockClient.send_email(%{})
+    ...contents of test/fixtures/send_email.json...
+  """
   def send_email(payload, opts \\ []) do
     email = load("send_email.json")
             |> Map.merge(payload)
@@ -236,6 +324,26 @@ defmodule Closex.MockClient do
     {:ok, email}
   end
 
+  @doc """
+  Finds a lead in CloseIO.
+
+  Returns `{:ok, leads}`.
+
+  You can hand in any search term you like and it will return an example search which finds one example lead.
+
+  You can also search for something you are not expecting to find with our not_found_id. This will provide the empty
+  result set in find_no_leads.json.
+
+  We have provided an example search term to use when the search term doesn't matter to you.
+
+  ## Examples
+
+    > Closex.MockClient.update_opportunity(Closex.MockClient.search_term())
+    ...contents of test/fixtures/find_leads.json...
+
+    > Closex.MockClient.update_opportunity(Closex.MockClient.not_found_id())
+    ...contents of test/fixtures/find_no_leads.json...
+  """
   def find_leads(search_term, opts \\ [])
   def find_leads(search_term = @not_found_id, opts) do
     leads = load("find_no_leads.json")
