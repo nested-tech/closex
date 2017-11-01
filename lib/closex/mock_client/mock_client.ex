@@ -231,11 +231,18 @@ defmodule Closex.MockClient do
 
   def send_email(payload, opts \\ []) do
     email = load("send_email.json")
+            |> Map.merge(payload)
     send self(), {:closex_mock_client, :send_email, [payload, opts]}
     {:ok, email}
   end
 
-  def find_leads(search_term, opts \\ []) do
+  def find_leads(search_term, opts \\ [])
+  def find_leads(search_term = @not_found_id, opts) do
+    leads = load("find_no_leads.json")
+    send self(), {:closex_mock_client, :find_leads, [search_term, opts]}
+    {:ok, leads}
+  end
+  def find_leads(search_term, opts) do
     leads = load("find_leads.json")
     send self(), {:closex_mock_client, :find_leads, [search_term, opts]}
     {:ok, leads}
