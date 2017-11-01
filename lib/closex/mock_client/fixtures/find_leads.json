@@ -1,0 +1,98 @@
+{
+    "has_more": false,
+    "total_results": 1,
+    "data": [
+        {
+            "status_id": "stat_1ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+            "status_label": "Potential",
+            "tasks": [],
+            "display_name": "Wayne Enterprises (Sample Lead)",
+            "addresses": [],
+            "contacts": [
+                {
+                    "name": "Bruce Wayne",
+                    "title": "The Dark Knight",
+                    "date_updated": "2013-02-06T20:53:01.954000+00:00",
+                    "phones": [
+                        {
+                            "phone": "+16503334444",
+                            "phone_formatted": "+1 650-333-4444",
+                            "type": "office"
+                        }
+                    ],
+                    "created_by": null,
+                    "id": "cont_o0kP3Nqyq0wxr5DLWIEm8mVr6ZpI0AhonKLDG0V5Qjh",
+                    "organization_id": "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen",
+                    "date_created": "2013-02-01T00:54:51.331000+00:00",
+                    "emails": [
+                        {
+                            "type": "office",
+                            "email_lower": "thedarkknight@close.io",
+                            "email": "thedarkknight@close.io"
+                        }
+                    ],
+                    "updated_by": "user_04EJPREurd0b3KDozVFqXSRbt2uBjw3QfeYa7ZaGTwI"
+                }
+            ],
+            "custom.lcf_ORxgoOQ5YH1p7lDQzFJ88b4z0j7PLLTRaG66m8bmcKv": "Website contact form",
+            "date_updated": "2013-02-06T20:53:01.977000+00:00",
+            "description": "",
+            "html_url": "https://app.close.io/lead/lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O/",
+            "created_by": null,
+            "organization_id": "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen",
+            "url": null,
+            "opportunities": [
+                {
+                    "id": "oppo_8eB77gAdf8FMy6GsNHEy84f7uoeEWv55slvUjKQZpJt",
+                    "organization_id": "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen",
+                    "lead_id": "lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O",
+                    "lead_name": "Wayne Enterprises (Sample Lead)",
+                    "status_id": "stat_4ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+                    "status_label": "Active",
+                    "status_type": "active",
+                    "value": 50000,
+                    "value_period": "one_time",
+                    "value_formatted": "$500",
+                    "value_currency": "USD",
+                    "date_won": null,
+                    "confidence": 75,
+                    "note": "Bruce needs new software for the Bat Cave.",
+                    "user_id": "user_scOgjLAQD6aBSJYBVhIeNr6FJDp8iDTug8Mv6VqYoFn",
+                    "user_name": "P F",
+                    "contact_id": null,
+                    "created_by": null,
+                    "updated_by": null,
+                    "date_created": "2013-02-01T00:54:51.337000+00:00",
+                    "date_updated": "2013-02-01T00:54:51.337000+00:00"
+                },
+                {
+                    "id": "oppo_klajsdflf8FMy6GsNHEy84f7uoeEWv55slvUjKQZpJt",
+                    "organization_id": "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen",
+                    "lead_id": "lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O",
+                    "lead_name": "Wayne Enterprises (Sample Lead)",
+                    "status_id": "stat_4ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+                    "status_label": "Active",
+                    "status_type": "active",
+                    "value": 5000,
+                    "value_period": "monthly",
+                    "value_formatted": "$50 monthly",
+                    "value_currency": "USD",
+                    "date_won": null,
+                    "confidence": 75,
+                    "note": "Bat Cave monthly maintenance cost",
+                    "user_id": "user_scOgjLAQD6aBSJYBVhIeNr6FJDp8iDTug8Mv6VqYoFn",
+                    "user_name": "P F",
+                    "contact_id": null,
+                    "created_by": null,
+                    "updated_by": null,
+                    "date_created": "2013-02-01T00:54:51.337000+00:00",
+                    "date_updated": "2013-02-01T00:54:51.337000+00:00"
+                }
+            ],
+            "updated_by": "user_04EJPREurd0b3KDozVFqXSRbt2uBjw3QfeYa7ZaGTwI",
+            "date_created": "2013-02-01T00:54:51.333000+00:00",
+            "id": "lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O",
+            "name": "Wayne Enterprises (Sample Lead)"
+        }
+    ]
+}
