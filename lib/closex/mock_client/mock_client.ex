@@ -57,8 +57,9 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_lead(id, opts \\ [])
-  def get_lead(id = @lead_id, opts) do
+  def get_lead(id, opts) do
     lead = load("lead.json")
+           |> Map.merge({"id" => id})
     send self(), {:closex_mock_client, :get_lead, [id, opts]}
     {:ok, lead}
   end
@@ -81,8 +82,9 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_opportunity(id, opts \\ [])
-  def get_opportunity(id = @opportunity_id, opts) do
+  def get_opportunity(id, opts) do
     opportunity = load("opportunity.json")
+                  |> Map.merge({"id" => id})
     send self(), {:closex_mock_client, :get_opportunity, [id, opts]}
     {:ok, opportunity}
   end
@@ -105,8 +107,9 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_lead_custom_field(id, opts \\ [])
-  def get_lead_custom_field(id = @lead_custom_field_id, opts) do
+  def get_lead_custom_field(id, opts) do
     lead_custom_field = load("lead_custom_field.json")
+                        |> Map.merge({"id" => id})
     send self(), {:closex_mock_client, :get_lead_custom_field, [id, opts]}
     {:ok, lead_custom_field}
   end
@@ -129,8 +132,9 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_organization(id, opts \\ [])
-  def get_organization(id = @organization_id, opts) do
+  def get_organization(id, opts) do
     organization = load("organization.json")
+                   |> Map.merge({"id" => id})
     send self(), {:closex_mock_client, :get_organization, [id, opts]}
     {:ok, organization}
   end
@@ -194,9 +198,10 @@ defmodule Closex.MockClient do
   end
 
   def update_lead(lead_id, payload, opts \\ [])
-  def update_lead(lead_id = @lead_id, payload, opts) do
+  def update_lead(lead_id, payload, opts) do
     lead = load("lead.json")
     |> Map.merge(payload)
+    |> Map.merge({"id" => lead_id})
 
     lead = parse_dates_to_strings(lead)
     send self(), {:closex_mock_client, :update_lead, [lead_id, payload, opts]}
@@ -213,9 +218,10 @@ defmodule Closex.MockClient do
   end
 
   def update_opportunity(_opportunity_id, _payload, _opts \\ [])
-  def update_opportunity(opportunity_id = @opportunity_id, payload, opts) do
+  def update_opportunity(opportunity_id, payload, opts) do
     opportunity = load("opportunity.json")
-    |> Map.merge(payload)
+                  |> Map.merge(payload)
+                  |> Map.merge({"id" => opportunity_id})
     send self(), {:closex_mock_client, :update_opportunity, [opportunity_id, payload, opts]}
     {:ok, opportunity}
   end
