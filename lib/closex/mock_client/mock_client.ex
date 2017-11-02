@@ -63,14 +63,18 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_lead(id, opts \\ [])
+
   def get_lead(id = @not_found_id, opts) do
-    send self(), {:closex_mock_client, :get_lead, [id, opts]}
+    send(self(), {:closex_mock_client, :get_lead, [id, opts]})
     {:error, :mock_not_found}
   end
+
   def get_lead(id, opts) do
-    lead = load("lead.json")
-           |> Map.merge(%{"id" => id})
-    send self(), {:closex_mock_client, :get_lead, [id, opts]}
+    lead =
+      load("lead.json")
+      |> Map.merge(%{"id" => id})
+
+    send(self(), {:closex_mock_client, :get_lead, [id, opts]})
     {:ok, lead}
   end
 
@@ -92,14 +96,18 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_opportunity(id, opts \\ [])
+
   def get_opportunity(id = @not_found_id, opts) do
-    send self(), {:closex_mock_client, :get_opportunity, [id, opts]}
+    send(self(), {:closex_mock_client, :get_opportunity, [id, opts]})
     {:error, :mock_not_found}
   end
+
   def get_opportunity(id, opts) do
-    opportunity = load("opportunity.json")
-                  |> Map.merge(%{"id" => id})
-    send self(), {:closex_mock_client, :get_opportunity, [id, opts]}
+    opportunity =
+      load("opportunity.json")
+      |> Map.merge(%{"id" => id})
+
+    send(self(), {:closex_mock_client, :get_opportunity, [id, opts]})
     {:ok, opportunity}
   end
 
@@ -121,14 +129,18 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_lead_custom_field(id, opts \\ [])
+
   def get_lead_custom_field(id = @not_found_id, opts) do
-    send self(), {:closex_mock_client, :get_lead_custom_field, [id, opts]}
+    send(self(), {:closex_mock_client, :get_lead_custom_field, [id, opts]})
     {:error, :mock_not_found}
   end
+
   def get_lead_custom_field(id, opts) do
-    lead_custom_field = load("lead_custom_field.json")
-                        |> Map.merge(%{"id" => id})
-    send self(), {:closex_mock_client, :get_lead_custom_field, [id, opts]}
+    lead_custom_field =
+      load("lead_custom_field.json")
+      |> Map.merge(%{"id" => id})
+
+    send(self(), {:closex_mock_client, :get_lead_custom_field, [id, opts]})
     {:ok, lead_custom_field}
   end
 
@@ -150,14 +162,18 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_organization(id, opts \\ [])
+
   def get_organization(id = @not_found_id, opts) do
-    send self(), {:closex_mock_client, :get_organization, [id, opts]}
+    send(self(), {:closex_mock_client, :get_organization, [id, opts]})
     {:error, :mock_not_found}
   end
+
   def get_organization(id, opts) do
-    organization = load("organization.json")
-                   |> Map.merge(%{"id" => id})
-    send self(), {:closex_mock_client, :get_organization, [id, opts]}
+    organization =
+      load("organization.json")
+      |> Map.merge(%{"id" => id})
+
+    send(self(), {:closex_mock_client, :get_organization, [id, opts]})
     {:ok, organization}
   end
 
@@ -173,7 +189,7 @@ defmodule Closex.MockClient do
   """
   def get_lead_statuses(opts \\ []) do
     lead_statuses = load("lead_statuses.json")
-    send self(), {:closex_mock_client, :get_lead_statuses, [opts]}
+    send(self(), {:closex_mock_client, :get_lead_statuses, [opts]})
     {:ok, lead_statuses}
   end
 
@@ -189,7 +205,7 @@ defmodule Closex.MockClient do
   """
   def get_opportunity_statuses(opts \\ []) do
     opportunity_statuses = load("opportunity_statuses.json")
-    send self(), {:closex_mock_client, :get_opportunity_statuses, [opts]}
+    send(self(), {:closex_mock_client, :get_opportunity_statuses, [opts]})
     {:ok, opportunity_statuses}
   end
 
@@ -205,7 +221,7 @@ defmodule Closex.MockClient do
   """
   def get_users(opts \\ []) do
     users = load("users.json")
-    send self(), {:closex_mock_client, :get_users, [opts]}
+    send(self(), {:closex_mock_client, :get_users, [opts]})
     {:ok, users}
   end
 
@@ -215,13 +231,13 @@ defmodule Closex.MockClient do
   Returns `{:ok, lead}`
 
   ## Examples
-  
+
     > Closex.MockClient.create_lead(%{})
     ...contents of test/fixtures/create_lead.json...
   """
   def create_lead(payload, opts \\ []) do
     lead = load("create_lead.json")
-    send self(), {:closex_mock_client, :create_lead, [payload, opts]}
+    send(self(), {:closex_mock_client, :create_lead, [payload, opts]})
     {:ok, lead}
   end
 
@@ -247,16 +263,19 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def update_lead(lead_id, payload, opts \\ [])
+
   def update_lead(@not_found_id, _payload, _opts) do
     {:error, :mock_not_found}
   end
+
   def update_lead(lead_id, payload, opts) do
-    lead = load("lead.json")
-    |> Map.merge(payload)
-    |> Map.merge(%{"id" => lead_id})
+    lead =
+      load("lead.json")
+      |> Map.merge(payload)
+      |> Map.merge(%{"id" => lead_id})
 
     lead = parse_dates_to_strings(lead)
-    send self(), {:closex_mock_client, :update_lead, [lead_id, payload, opts]}
+    send(self(), {:closex_mock_client, :update_lead, [lead_id, payload, opts]})
     {:ok, lead}
   end
 
@@ -266,13 +285,13 @@ defmodule Closex.MockClient do
   Returns `{:ok, opportunity}`
 
   ## Examples
-  
+
     > Closex.MockClient.create_opportunity(%{})
     ...contents of test/fixtures/create_opportunity.json...
   """
   def create_opportunity(payload, opts \\ []) do
     opportunity = load("create_opportunity.json")
-    send self(), {:closex_mock_client, :create_opportunity, [payload, opts]}
+    send(self(), {:closex_mock_client, :create_opportunity, [payload, opts]})
     {:ok, opportunity}
   end
 
@@ -297,14 +316,18 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def update_opportunity(_opportunity_id, _payload, _opts \\ [])
+
   def update_opportunity(@not_found_id, _payload, _opts) do
     {:error, :mock_not_found}
   end
+
   def update_opportunity(opportunity_id, payload, opts) do
-    opportunity = load("opportunity.json")
-                  |> Map.merge(payload)
-                  |> Map.merge(%{"id" => opportunity_id})
-    send self(), {:closex_mock_client, :update_opportunity, [opportunity_id, payload, opts]}
+    opportunity =
+      load("opportunity.json")
+      |> Map.merge(payload)
+      |> Map.merge(%{"id" => opportunity_id})
+
+    send(self(), {:closex_mock_client, :update_opportunity, [opportunity_id, payload, opts]})
     {:ok, opportunity}
   end
 
@@ -314,14 +337,16 @@ defmodule Closex.MockClient do
   Returns `{:ok, email}`
 
   ## Examples
-  
+
     > Closex.MockClient.send_email(%{})
     ...contents of test/fixtures/send_email.json...
   """
   def send_email(payload, opts \\ []) do
-    email = load("send_email.json")
-            |> Map.merge(payload)
-    send self(), {:closex_mock_client, :send_email, [payload, opts]}
+    email =
+      load("send_email.json")
+      |> Map.merge(payload)
+
+    send(self(), {:closex_mock_client, :send_email, [payload, opts]})
     {:ok, email}
   end
 
@@ -346,29 +371,35 @@ defmodule Closex.MockClient do
     ...contents of test/fixtures/find_no_leads.json...
   """
   def find_leads(search_term, opts \\ [])
+
   def find_leads(search_term = @not_found_id, opts) do
     leads = load("find_no_leads.json")
-    send self(), {:closex_mock_client, :find_leads, [search_term, opts]}
+    send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
     {:ok, leads}
   end
+
   def find_leads(search_term, opts) do
     leads = load("find_leads.json")
-    send self(), {:closex_mock_client, :find_leads, [search_term, opts]}
+    send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
     {:ok, leads}
   end
 
   defp load(filename) do
     case Application.fetch_env(:closex, :mock_client_fixtures_dir) do
       {:ok, fixtures_path} ->
-        file = [fixtures_path, filename]
-               |> Path.join
-               |> File.read
+        file =
+          [fixtures_path, filename]
+          |> Path.join()
+          |> File.read()
+
         case file do
           {:ok, binary} ->
             Poison.decode!(binary)
-          {:error, _ } ->
+
+          {:error, _} ->
             load_default(filename)
         end
+
       :error ->
         load_default(filename)
     end
@@ -376,12 +407,14 @@ defmodule Closex.MockClient do
 
   defp parse_dates_to_strings(lead) do
     Enum.into(lead, %{}, fn {key, value} ->
-      case { key, value } do
-        { key, %Date{} } ->
-          { key, Date.to_string(value) }
-        { key, %DateTime{} } ->
-          { key, DateTime.to_string(value) }
-        { _, _ } ->
+      case {key, value} do
+        {key, %Date{}} ->
+          {key, Date.to_string(value)}
+
+        {key, %DateTime{}} ->
+          {key, DateTime.to_string(value)}
+
+        {_, _} ->
           {key, value}
       end
     end)
@@ -389,7 +422,7 @@ defmodule Closex.MockClient do
 
   defp load_default(filename) do
     Path.join([__DIR__, "fixtures", filename])
-    |> File.read!
-    |> Poison.decode!
+    |> File.read!()
+    |> Poison.decode!()
   end
 end
