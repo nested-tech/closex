@@ -72,7 +72,7 @@ defmodule Closex.MockClient do
   def get_lead(id, opts) do
     lead =
       load("lead.json")
-      |> Map.merge(%{"id" => id})
+      |> Map.put("id", id)
 
     send(self(), {:closex_mock_client, :get_lead, [id, opts]})
     {:ok, lead}
@@ -105,7 +105,7 @@ defmodule Closex.MockClient do
   def get_opportunity(id, opts) do
     opportunity =
       load("opportunity.json")
-      |> Map.merge(%{"id" => id})
+      |> Map.put("id", id)
 
     send(self(), {:closex_mock_client, :get_opportunity, [id, opts]})
     {:ok, opportunity}
@@ -138,7 +138,7 @@ defmodule Closex.MockClient do
   def get_lead_custom_field(id, opts) do
     lead_custom_field =
       load("lead_custom_field.json")
-      |> Map.merge(%{"id" => id})
+      |> Map.put("id", id)
 
     send(self(), {:closex_mock_client, :get_lead_custom_field, [id, opts]})
     {:ok, lead_custom_field}
@@ -171,7 +171,7 @@ defmodule Closex.MockClient do
   def get_organization(id, opts) do
     organization =
       load("organization.json")
-      |> Map.merge(%{"id" => id})
+      |> Map.put("id", id)
 
     send(self(), {:closex_mock_client, :get_organization, [id, opts]})
     {:ok, organization}
@@ -272,7 +272,7 @@ defmodule Closex.MockClient do
     lead =
       load("lead.json")
       |> Map.merge(payload)
-      |> Map.merge(%{"id" => lead_id})
+      |> Map.put("id", lead_id)
 
     lead = parse_dates_to_strings(lead)
     send(self(), {:closex_mock_client, :update_lead, [lead_id, payload, opts]})
@@ -325,7 +325,7 @@ defmodule Closex.MockClient do
     opportunity =
       load("opportunity.json")
       |> Map.merge(payload)
-      |> Map.merge(%{"id" => opportunity_id})
+      |> Map.put("id", opportunity_id)
 
     send(self(), {:closex_mock_client, :update_opportunity, [opportunity_id, payload, opts]})
     {:ok, opportunity}
