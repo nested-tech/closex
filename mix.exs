@@ -4,7 +4,7 @@ defmodule Closex.Mixfile do
   def project do
     [
       app: :closex,
-      version: "0.5.4",
+      version: "0.5.5",
       build_path: "_build",
       config_path: "config/config.exs",
       deps_path: "deps",
@@ -46,7 +46,7 @@ defmodule Closex.Mixfile do
   defp package() do
     [
       files: ["lib", "mix.exs", "README.md"],
-      maintainers: ["Sam Davies", "Darren Oakley"],
+      maintainers: ["Sam Davies", "Darren Oakley", "Morgan Sadr-Hashemi"],
       licenses: ["MIT"],
       source_url: "https://github.com/nested-tech/closex",
       homepage_url: "https://github.com/nested-tech/closex",

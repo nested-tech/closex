@@ -1,0 +1,23 @@
+{
+    "status_id": "stat_4ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+    "status_label": "Active",
+    "status_type": "active",
+    "date_won": null,
+    "confidence": 90,
+    "user_id": "user_MvDoAZA889UMrgsZbnXmHkJSomSi7qk2Iwc4JnGHTbo",
+    "contact_id": null,
+    "updated_by": "user_MvDoAZA889UMrgsZbnXmHkJSomSi7qk2Iwc4JnGHTbo",
+    "date_updated": "2013-02-20T10:11:50.520000+00:00",
+    "created_by": "user_MvDoAZA889UMrgsZbnXmHkJSomSi7qk2Iwc4JnGHTbo",
+    "lead_id": "lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O",
+    "note": "i hope this deal closes...",
+    "value": 500,
+    "value_period": "monthly",
+    "value_formatted": "$50 monthly",
+    "value_currency": "USD",
+    "date_created": "2013-02-20T10:11:50.520000+00:00",
+    "organization_id": "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen",
+    "lead_name": "Wayne Enterprises (Sample Lead)",
+    "user_name": "Anthony Nemitz",
+    "id": "oppo_bJoqD4QX21AfA2fAGX5HmPQ1EgGoWBannvLj4khIfPH"
+}

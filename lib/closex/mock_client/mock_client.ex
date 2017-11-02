@@ -42,11 +42,17 @@ defmodule Closex.MockClient do
   @organization_id "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen"
   def organization_id, do: @organization_id
 
+  @search_term "foo"
+  def search_term, do: @search_term
 
   @doc """
   Gets a lead from CloseIO.
 
   Returns `{:ok, lead}`.
+
+  You can hand in any lead id you like and it will return an example lead with that id.
+
+  We have provided an example id to use when the id doesn't matter to you.
 
   ## Examples
 
@@ -57,20 +63,29 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_lead(id, opts \\ [])
-  def get_lead(id = @lead_id, opts) do
-    lead = load("lead.json")
-    send self(), {:closex_mock_client, :get_lead, [id, opts]}
-    {:ok, lead}
-  end
+
   def get_lead(id = @not_found_id, opts) do
-    send self(), {:closex_mock_client, :get_lead, [id, opts]}
+    send(self(), {:closex_mock_client, :get_lead, [id, opts]})
     {:error, :mock_not_found}
+  end
+
+  def get_lead(id, opts) do
+    lead =
+      load("lead.json")
+      |> Map.put("id", id)
+
+    send(self(), {:closex_mock_client, :get_lead, [id, opts]})
+    {:ok, lead}
   end
 
   @doc """
   Gets an opportunity from CloseIO.
 
   Returns `{:ok, opportunity}`.
+
+  You can hand in any opportunity id you like and it will return an example opportunity with that id.
+
+  We have provided an example id to use when the id doesn't matter to you.
 
   ## Examples
 
@@ -81,20 +96,29 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_opportunity(id, opts \\ [])
-  def get_opportunity(id = @opportunity_id, opts) do
-    opportunity = load("opportunity.json")
-    send self(), {:closex_mock_client, :get_opportunity, [id, opts]}
-    {:ok, opportunity}
-  end
+
   def get_opportunity(id = @not_found_id, opts) do
-    send self(), {:closex_mock_client, :get_opportunity, [id, opts]}
+    send(self(), {:closex_mock_client, :get_opportunity, [id, opts]})
     {:error, :mock_not_found}
+  end
+
+  def get_opportunity(id, opts) do
+    opportunity =
+      load("opportunity.json")
+      |> Map.put("id", id)
+
+    send(self(), {:closex_mock_client, :get_opportunity, [id, opts]})
+    {:ok, opportunity}
   end
 
   @doc """
   Gets a lead custom field from CloseIO.
 
   Returns `{:ok, lead_custom_field}`.
+
+  You can hand in any custom field id you like and it will return an example custom field with that id.
+
+  We have provided an example id to use when the id doesn't matter to you.
 
   ## Examples
 
@@ -105,20 +129,29 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_lead_custom_field(id, opts \\ [])
-  def get_lead_custom_field(id = @lead_custom_field_id, opts) do
-    lead_custom_field = load("lead_custom_field.json")
-    send self(), {:closex_mock_client, :get_lead_custom_field, [id, opts]}
-    {:ok, lead_custom_field}
-  end
+
   def get_lead_custom_field(id = @not_found_id, opts) do
-    send self(), {:closex_mock_client, :get_lead_custom_field, [id, opts]}
+    send(self(), {:closex_mock_client, :get_lead_custom_field, [id, opts]})
     {:error, :mock_not_found}
+  end
+
+  def get_lead_custom_field(id, opts) do
+    lead_custom_field =
+      load("lead_custom_field.json")
+      |> Map.put("id", id)
+
+    send(self(), {:closex_mock_client, :get_lead_custom_field, [id, opts]})
+    {:ok, lead_custom_field}
   end
 
   @doc """
   Gets an organization from CloseIO.
 
   Returns `{:ok, organization}`.
+
+  You can hand in any organization id you like and it will return an example organization with that id.
+
+  We have provided an example id to use when the id doesn't matter to you.
 
   ## Examples
 
@@ -129,14 +162,19 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_organization(id, opts \\ [])
-  def get_organization(id = @organization_id, opts) do
-    organization = load("organization.json")
-    send self(), {:closex_mock_client, :get_organization, [id, opts]}
-    {:ok, organization}
-  end
+
   def get_organization(id = @not_found_id, opts) do
-    send self(), {:closex_mock_client, :get_organization, [id, opts]}
+    send(self(), {:closex_mock_client, :get_organization, [id, opts]})
     {:error, :mock_not_found}
+  end
+
+  def get_organization(id, opts) do
+    organization =
+      load("organization.json")
+      |> Map.put("id", id)
+
+    send(self(), {:closex_mock_client, :get_organization, [id, opts]})
+    {:ok, organization}
   end
 
   @doc """
@@ -151,7 +189,7 @@ defmodule Closex.MockClient do
   """
   def get_lead_statuses(opts \\ []) do
     lead_statuses = load("lead_statuses.json")
-    send self(), {:closex_mock_client, :get_lead_statuses, [opts]}
+    send(self(), {:closex_mock_client, :get_lead_statuses, [opts]})
     {:ok, lead_statuses}
   end
 
@@ -167,7 +205,7 @@ defmodule Closex.MockClient do
   """
   def get_opportunity_statuses(opts \\ []) do
     opportunity_statuses = load("opportunity_statuses.json")
-    send self(), {:closex_mock_client, :get_opportunity_statuses, [opts]}
+    send(self(), {:closex_mock_client, :get_opportunity_statuses, [opts]})
     {:ok, opportunity_statuses}
   end
 
@@ -183,45 +221,208 @@ defmodule Closex.MockClient do
   """
   def get_users(opts \\ []) do
     users = load("users.json")
-    send self(), {:closex_mock_client, :get_users, [opts]}
+    send(self(), {:closex_mock_client, :get_users, [opts]})
     {:ok, users}
   end
 
-  # TODO: Mock functions which pass through to default client
-  def create_lead(payload, opts \\ []), do: Closex.HTTPClient.create_lead(payload, opts)
+  @doc """
+  Creates a lead in CloseIO.
 
-  def update_lead(lead_id, payload, opts \\ [])
-  def update_lead(lead_id = @lead_id, payload, opts) do
-    lead = load("lead.json")
-    |> Map.merge(payload)
-    send self(), {:closex_mock_client, :update_lead, [lead_id, payload, opts]}
+  Returns `{:ok, lead}`
+
+  ## Examples
+
+    > Closex.MockClient.create_lead(%{})
+    ...contents of test/fixtures/create_lead.json...
+  """
+  def create_lead(payload, opts \\ []) do
+    lead = load("create_lead.json")
+    send(self(), {:closex_mock_client, :create_lead, [payload, opts]})
     {:ok, lead}
   end
+
+  @doc """
+  Update a lead in CloseIO.
+
+  Returns `{:ok, lead}`.
+
+  You can hand in any lead id you like and it will return an example lead with that id, with your updates merged in.
+  Any dates you hand in to be merged will be parsed to strings when they are returned.
+
+  We have provided an example id to use when the id doesn't matter to you.
+
+  ## Examples
+
+    > Closex.MockClient.update_lead(Closex.MockClient.lead_id(), %{})
+    ...contents of test/fixtures/organization.json...
+
+    iex> Closex.MockClient.update_lead(Closex.MockClient.not_found_id(), %{})
+    {:error, :mock_not_found}
+
+    iex> Closex.MockClient.update_lead(Closex.MockClient.not_found_id(), %{"foo" => "bar"})
+    {:error, :mock_not_found}
+  """
+  def update_lead(lead_id, payload, opts \\ [])
+
   def update_lead(@not_found_id, _payload, _opts) do
     {:error, :mock_not_found}
   end
 
-  def create_opportunity(payload, opts \\ []), do: Closex.HTTPClient.create_opportunity(payload, opts)
+  def update_lead(lead_id, payload, opts) do
+    lead =
+      load("lead.json")
+      |> Map.merge(payload)
+      |> Map.put("id", lead_id)
 
-  def update_opportunity(_opportunity_id, _payload, _opts \\ [])
-  def update_opportunity(opportunity_id = @opportunity_id, payload, opts) do
-    opportunity = load("opportunity.json")
-    |> Map.merge(payload)
-    send self(), {:closex_mock_client, :update_opportunity, [opportunity_id, payload, opts]}
+    lead = parse_dates_to_strings(lead)
+    send(self(), {:closex_mock_client, :update_lead, [lead_id, payload, opts]})
+    {:ok, lead}
+  end
+
+  @doc """
+  Creates an opportunity in CloseIO.
+
+  Returns `{:ok, opportunity}`
+
+  ## Examples
+
+    > Closex.MockClient.create_opportunity(%{})
+    ...contents of test/fixtures/create_opportunity.json...
+  """
+  def create_opportunity(payload, opts \\ []) do
+    opportunity = load("create_opportunity.json")
+    send(self(), {:closex_mock_client, :create_opportunity, [payload, opts]})
     {:ok, opportunity}
   end
+
+  @doc """
+  Update an Opportunity in CloseIO.
+
+  Returns `{:ok, opportunity}`.
+
+  You can hand in any opportunity id you like and it will return an example opportunity with that id, with your updates merged in.
+
+  We have provided an example id to use when the id doesn't matter to you.
+
+  ## Examples
+
+    > Closex.MockClient.update_opportunity(Closex.MockClient.opportunity_id(), %{})
+    ...contents of test/fixtures/organization.json...
+
+    iex> Closex.MockClient.update_opportunity(Closex.MockClient.not_found_id(), %{})
+    {:error, :mock_not_found}
+
+    iex> Closex.MockClient.update_opportunity(Closex.MockClient.not_found_id(), %{"foo" => "bar"})
+    {:error, :mock_not_found}
+  """
+  def update_opportunity(_opportunity_id, _payload, _opts \\ [])
+
   def update_opportunity(@not_found_id, _payload, _opts) do
     {:error, :mock_not_found}
   end
 
-  def send_email(payload, opts \\ []), do: Closex.HTTPClient.send_email(payload, opts)
-  def find_leads(search_term, opts \\ []), do: Closex.HTTPClient.find_leads(search_term, opts)
+  def update_opportunity(opportunity_id, payload, opts) do
+    opportunity =
+      load("opportunity.json")
+      |> Map.merge(payload)
+      |> Map.put("id", opportunity_id)
+
+    send(self(), {:closex_mock_client, :update_opportunity, [opportunity_id, payload, opts]})
+    {:ok, opportunity}
+  end
+
+  @doc """
+  Sends an email CloseIO.
+
+  Returns `{:ok, email}`
+
+  ## Examples
+
+    > Closex.MockClient.send_email(%{})
+    ...contents of test/fixtures/send_email.json...
+  """
+  def send_email(payload, opts \\ []) do
+    email =
+      load("send_email.json")
+      |> Map.merge(payload)
+
+    send(self(), {:closex_mock_client, :send_email, [payload, opts]})
+    {:ok, email}
+  end
+
+  @doc """
+  Finds a lead in CloseIO.
+
+  Returns `{:ok, leads}`.
+
+  You can hand in any search term you like and it will return an example search which finds one example lead.
+
+  You can also search for something you are not expecting to find with our not_found_id. This will provide the empty
+  result set in find_no_leads.json.
+
+  We have provided an example search term to use when the search term doesn't matter to you.
+
+  ## Examples
+
+    > Closex.MockClient.update_opportunity(Closex.MockClient.search_term())
+    ...contents of test/fixtures/find_leads.json...
+
+    > Closex.MockClient.update_opportunity(Closex.MockClient.not_found_id())
+    ...contents of test/fixtures/find_no_leads.json...
+  """
+  def find_leads(search_term, opts \\ [])
+
+  def find_leads(search_term = @not_found_id, opts) do
+    leads = load("find_no_leads.json")
+    send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
+    {:ok, leads}
+  end
+
+  def find_leads(search_term, opts) do
+    leads = load("find_leads.json")
+    send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
+    {:ok, leads}
+  end
 
   defp load(filename) do
-    fixtures_path = Application.get_env(:closex, :mock_client_fixtures_dir, Path.join([File.cwd!, "lib", "closex", "mock_client", "fixtures"]))
-    [fixtures_path, filename]
-    |> Path.join
-    |> File.read!
-    |> Poison.decode!
+    case Application.fetch_env(:closex, :mock_client_fixtures_dir) do
+      {:ok, fixtures_path} ->
+        file =
+          [fixtures_path, filename]
+          |> Path.join()
+          |> File.read()
+
+        case file do
+          {:ok, binary} ->
+            Poison.decode!(binary)
+
+          {:error, _} ->
+            load_default(filename)
+        end
+
+      :error ->
+        load_default(filename)
+    end
+  end
+
+  defp parse_dates_to_strings(lead) do
+    Enum.into(lead, %{}, fn {key, value} ->
+      case {key, value} do
+        {key, %Date{}} ->
+          {key, Date.to_string(value)}
+
+        {key, %DateTime{}} ->
+          {key, DateTime.to_string(value)}
+
+        {_, _} ->
+          {key, value}
+      end
+    end)
+  end
+
+  defp load_default(filename) do
+    Path.join([__DIR__, "fixtures", filename])
+    |> File.read!()
+    |> Poison.decode!()
   end
 end
