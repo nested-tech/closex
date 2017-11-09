@@ -46,7 +46,7 @@ defmodule Closex.Mixfile do
   defp package() do
     [
       files: ["lib", "mix.exs", "README.md"],
-      maintainers: ["Sam Davies", "Darren Oakley", "Morgan Sadr-Hashemi"],
+      maintainers: ["Sam Davies", "Darren Oakley", "Morgan Sadr-Hashemi", "Adam Lancaster", "Ed Saunders"],
       licenses: ["MIT"],
       source_url: "https://github.com/nested-tech/closex",
       homepage_url: "https://github.com/nested-tech/closex",
