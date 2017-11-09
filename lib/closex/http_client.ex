@@ -16,8 +16,15 @@ defmodule Closex.HTTPClient do
 
   @doc "List or search for leads: https://developer.close.io/#leads-list-or-search-for-leads"
   def find_leads(search_term, opts \\ []) do
-    opts = opts
-    |> Keyword.put(:params, %{query: search_term})
+    search_params = %{query: search_term}
+    opts =
+      case Keyword.get(opts, :params) do
+        params when is_map(params) ->
+          all_params = Map.merge(params, search_params)
+          Keyword.put(opts, :params, all_params)
+        nil ->
+          Keyword.put(opts, :params, search_params)
+      end
     get("/lead/", [], opts) |> handle_response
   end
 
