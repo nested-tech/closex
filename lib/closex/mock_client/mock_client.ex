@@ -30,6 +30,9 @@ defmodule Closex.MockClient do
   @not_found_id "not_found"
   def not_found_id, do: @not_found_id
 
+  @not_found_query "Jasdeep singh ptjasdeepsingh@gmail.com"
+  def not_found_query, do: @not_found_query
+
   @lead_id "lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O"
   def lead_id, do: @lead_id
 
@@ -41,9 +44,6 @@ defmodule Closex.MockClient do
 
   @organization_id "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen"
   def organization_id, do: @organization_id
-
-  @search_term "foo"
-  def search_term, do: @search_term
 
   @doc """
   Gets a lead from CloseIO.
@@ -372,7 +372,7 @@ defmodule Closex.MockClient do
   """
   def find_leads(search_term, opts \\ [])
 
-  def find_leads(search_term = @not_found_id, opts) do
+  def find_leads(search_term = @not_found_query, opts) do
     leads = load("find_no_leads.json")
     send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
     {:ok, leads}
