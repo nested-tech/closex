@@ -63,12 +63,10 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_lead(id, opts \\ [])
-
   def get_lead(id = @not_found_id, opts) do
     send(self(), {:closex_mock_client, :get_lead, [id, opts]})
     {:error, :mock_not_found}
   end
-
   def get_lead(id, opts) do
     lead =
       load("lead.json")
