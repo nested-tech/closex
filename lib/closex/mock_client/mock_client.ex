@@ -370,11 +370,14 @@ defmodule Closex.MockClient do
 
   ## Examples
 
-    > Closex.MockClient.update_opportunity(Closex.MockClient.search_term())
+    > Closex.MockClient.find_leads("foo")
     ...contents of test/fixtures/find_leads.json...
 
-    > Closex.MockClient.update_opportunity(Closex.MockClient.not_found_id())
-    ...contents of test/fixtures/find_no_leads.json...
+    iex> Closex.MockClient.find_leads(Closex.MockClient.not_found_query())
+    {:ok, %{"data" => [], "has_more" => false, "total_results" => 0}}
+
+    > Closex.MockClient.find_leads(Closex.MockClient.multiple_results_query())
+    ...contents of test/fixtures/find_multiple_leads.json...
   """
   def find_leads(search_term, opts \\ [])
   def find_leads(search_term = @not_found_query, opts) do

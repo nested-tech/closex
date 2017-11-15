@@ -40,4 +40,10 @@ defmodule Closex.MockClientTest do
       assert ^result = contacts
     end
   end
+
+  describe "find_leads/2" do
+    test "it finds multiple results if you give it the multiple results query" do
+      {:ok, %{"data" => _, "has_more" => false, "total_results" => 2}} = find_leads(Closex.MockClient.multiple_results_query())
+    end
+  end
 end
