@@ -33,6 +33,9 @@ defmodule Closex.MockClient do
   @not_found_query "Jasdeep singh ptjasdeepsingh@gmail.com"
   def not_found_query, do: @not_found_query
 
+  @multiple_results_query "Fred Flintstone fred.flintstone@gmail.com"
+  def multiple_results_query, do: @multiple_results_query
+
   @lead_id "lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O"
   def lead_id, do: @lead_id
 
@@ -367,22 +370,28 @@ defmodule Closex.MockClient do
 
   ## Examples
 
-    > Closex.MockClient.update_opportunity(Closex.MockClient.search_term())
-    ...contents of test/fixtures/find_leads.json...
+    > Closex.MockClient.find_leads("foo")
+    ...contents of test/fixtures/find_one_lead.json...
 
-    > Closex.MockClient.update_opportunity(Closex.MockClient.not_found_id())
-    ...contents of test/fixtures/find_no_leads.json...
+    iex> Closex.MockClient.find_leads(Closex.MockClient.not_found_query())
+    {:ok, %{"data" => [], "has_more" => false, "total_results" => 0}}
+
+    > Closex.MockClient.find_leads(Closex.MockClient.multiple_results_query())
+    ...contents of test/fixtures/find_multiple_leads.json...
   """
   def find_leads(search_term, opts \\ [])
-
   def find_leads(search_term = @not_found_query, opts) do
     leads = load("find_no_leads.json")
     send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
     {:ok, leads}
   end
-
+  def find_leads(search_term = @multiple_results_query, opts) do
+    leads = load("find_multiple_leads.json")
+    send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
+    {:ok, leads}
+  end
   def find_leads(search_term, opts) do
-    leads = load("find_leads.json")
+    leads = load("find_one_lead.json")
     send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
     {:ok, leads}
   end
