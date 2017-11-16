@@ -371,7 +371,7 @@ defmodule Closex.MockClient do
   ## Examples
 
     > Closex.MockClient.find_leads("foo")
-    ...contents of test/fixtures/find_leads.json...
+    ...contents of test/fixtures/find_one_lead.json...
 
     iex> Closex.MockClient.find_leads(Closex.MockClient.not_found_query())
     {:ok, %{"data" => [], "has_more" => false, "total_results" => 0}}
@@ -391,7 +391,7 @@ defmodule Closex.MockClient do
     {:ok, leads}
   end
   def find_leads(search_term, opts) do
-    leads = load("find_leads.json")
+    leads = load("find_one_lead.json")
     send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
     {:ok, leads}
   end
