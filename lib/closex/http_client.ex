@@ -16,8 +16,7 @@ defmodule Closex.HTTPClient do
   def find_leads(search_term, opts \\ []) do
     opts = merge_search_term_into_opts(search_term, opts)
 
-    # HACK: Pass empty object as body to workaround bug in HTTPoison, see: https://github.com/edgurgel/httpoison/issues/285
-    request(:get, "/lead/", %{}, [{"Content-Type", "application/json"}], opts)
+    get("/lead/", [], opts)
     |> handle_response
   end
 
@@ -25,8 +24,7 @@ defmodule Closex.HTTPClient do
   def find_opportunities(search_term, opts \\ []) do
     opts = merge_search_term_into_opts(search_term, opts)
 
-    # HACK: Pass empty object as body to workaround bug in HTTPoison, see: https://github.com/edgurgel/httpoison/issues/285
-    request(:get, "/opportunity/", %{}, [{"Content-Type", "application/json"}], opts)
+    get("/opportunity/", [], opts)
     |> handle_response
   end
 
@@ -87,7 +85,7 @@ defmodule Closex.HTTPClient do
 
   @doc "Create an email activity: https://developer.close.io/#activities-create-an-email-activity"
   def send_email(payload, opts \\ []) do
-    post("/activity/email/", payload, [{"Content-Type", "application/json"}], opts)
+    post_json("/activity/email/", payload, [{"Content-Type", "application/json"}], opts)
     |> handle_response
   end
 
@@ -96,7 +94,7 @@ defmodule Closex.HTTPClient do
   # TODO: at some point we'll need to build a generic pagination/fetch more routine when we hit 50+ users
   @doc "List all users in your organization: https://developer.close.io/#users-list-all-the-users-who-are-members-of-the-same-organizations-as-you-are"
   def get_users(opts \\ []) do
-    request(:get, "/user/", %{}, [{"Content-Type", "application/json"}], opts) |> handle_response
+    get("/user/", [{"Content-Type", "application/json"}], opts) |> handle_response
   end
 
   # Private stuff...
@@ -115,18 +113,17 @@ defmodule Closex.HTTPClient do
   end
 
   defp fetch_object(obj_type, obj_id, opts) do
-    # HACK: Workaround bug in HTTPoison, see: https://github.com/edgurgel/httpoison/issues/285
-    request(:get, "/#{obj_type}/#{obj_id}/", %{}, [{"Content-Type", "application/json"}], opts)
+    get("/#{obj_type}/#{obj_id}/", [], opts)
     |> handle_response
   end
 
   defp update_object(object_type, object_id, payload, opts) do
-    put("/#{object_type}/#{object_id}/", payload, [{"Content-Type", "application/json"}], opts)
+    put_json("/#{object_type}/#{object_id}/", payload, [{"Content-Type", "application/json"}], opts)
     |> handle_response
   end
 
   defp create_object(object_type, payload, opts) do
-    post("/#{object_type}/", payload, [{"Content-Type", "application/json"}], opts)
+    post_json("/#{object_type}/", payload, [{"Content-Type", "application/json"}], opts)
     |> handle_response
   end
 
@@ -145,8 +142,12 @@ defmodule Closex.HTTPClient do
     Keyword.merge(default_opts, options)
   end
 
-  defp process_request_body(body) do
-    Poison.encode!(body)
+  defp put_json(path, payload, headers, opts) do
+    put(path, Poison.encode!(payload), headers, opts)
+  end
+
+  defp post_json(path, payload, headers, opts) do
+    post(path, Poison.encode!(payload), headers, opts)
   end
 
   # Attempt to parse the body into JSON but in case that fails, pass the
