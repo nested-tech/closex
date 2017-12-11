@@ -306,6 +306,32 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
+  describe "find_opportunities/1" do
+    test "if some opportunities are found, it returns a list of opportunities" do
+      search_term = ~s(opportunity_status:"S01: Received Offer Request")
+
+      use_cassette "find_opportunities" do
+        {:ok, result} = find_opportunities(search_term)
+        assert %{"data" => opportunities, "total_results" => 48} = result
+        assert is_list(opportunities)
+        assert Enum.count(opportunities) == 48
+        opportunity = hd(opportunities)
+        assert opportunity["status_label"] == "S01: Received Offer Request"
+      end
+    end
+    test "if no opportunities are found, it returns an empty list" do
+      search_term = "FOO"
+      use_cassette "find_opportunities_empty" do
+        {:ok, result} = find_opportunities(search_term)
+        assert %{"has_more" => false, "total_results" => 0, "data" => opportunities} =
+                 result
+        assert is_list(opportunities)
+        assert opportunities == []
+      end
+    end
+  end
+
   describe "create_opportunity/1" do
     test "creates an opportunity on CloseIO" do
       use_cassette "create_opportunity", match_requests_on: [:request_body] do

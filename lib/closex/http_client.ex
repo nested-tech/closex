@@ -10,22 +10,35 @@ defmodule Closex.HTTPClient do
   @base_url "https://app.close.io/api/v1"
   @behaviour Closex.ClientBehaviour
 
-  # Leads
-
   ## TODO: httpoison opts should move underneath the `:httpoison` key
 
   @doc "List or search for leads: https://developer.close.io/#leads-list-or-search-for-leads"
   def find_leads(search_term, opts \\ []) do
+    opts = merge_search_term_into_opts(search_term, opts)
+
+    # HACK: Workaround bug in HTTPoison, see: https://github.com/edgurgel/httpoison/issues/285
+    request(:get, "/lead/", %{}, [{"Content-Type", "application/json"}], opts)
+    |> handle_response
+  end
+
+  @doc "List or search for opportunities: https://developer.close.io/#opportunities-list-or-filter-opportunities"
+  def find_opportunities(search_term, opts \\ []) do
+    opts = merge_search_term_into_opts(search_term, opts)
+
+    # HACK: Workaround bug in HTTPoison, see: https://github.com/edgurgel/httpoison/issues/285
+    request(:get, "/opportunity/", %{}, [{"Content-Type", "application/json"}], opts)
+    |> handle_response
+  end
+
+  defp merge_search_term_into_opts(search_term, opts) do
     search_params = %{query: search_term}
-    opts =
-      case Keyword.get(opts, :params) do
-        params when is_map(params) ->
-          all_params = Map.merge(params, search_params)
-          Keyword.put(opts, :params, all_params)
-        nil ->
-          Keyword.put(opts, :params, search_params)
-      end
-    get("/lead/", [], opts) |> handle_response
+    case Keyword.get(opts, :params) do
+      params when is_map(params) ->
+        all_params = Map.merge(params, search_params)
+        Keyword.put(opts, :params, all_params)
+      nil ->
+        Keyword.put(opts, :params, search_params)
+    end
   end
 
   @doc "Fetch a single lead: https://developer.close.io/#leads-retrieve-a-single-lead"
@@ -36,8 +49,6 @@ defmodule Closex.HTTPClient do
 
   @doc "Update an existing lead: https://developer.close.io/#leads-update-an-existing-lead"
   def update_lead(lead_id, payload, opts \\ []), do: update_object("lead", lead_id, payload, opts)
-
-  # Opportunity
 
   @doc "Fetch a single opportunity: https://developer.close.io/#opportunities-retrieve-an-opportunity"
   def get_opportunity(opportunity_id, opts \\ []), do: fetch_object("opportunity", opportunity_id, opts)
