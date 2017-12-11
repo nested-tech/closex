@@ -16,7 +16,7 @@ defmodule Closex.HTTPClient do
   def find_leads(search_term, opts \\ []) do
     opts = merge_search_term_into_opts(search_term, opts)
 
-    # HACK: Workaround bug in HTTPoison, see: https://github.com/edgurgel/httpoison/issues/285
+    # HACK: Pass empty object as body to workaround bug in HTTPoison, see: https://github.com/edgurgel/httpoison/issues/285
     request(:get, "/lead/", %{}, [{"Content-Type", "application/json"}], opts)
     |> handle_response
   end
@@ -25,7 +25,7 @@ defmodule Closex.HTTPClient do
   def find_opportunities(search_term, opts \\ []) do
     opts = merge_search_term_into_opts(search_term, opts)
 
-    # HACK: Workaround bug in HTTPoison, see: https://github.com/edgurgel/httpoison/issues/285
+    # HACK: Pass empty object as body to workaround bug in HTTPoison, see: https://github.com/edgurgel/httpoison/issues/285
     request(:get, "/opportunity/", %{}, [{"Content-Type", "application/json"}], opts)
     |> handle_response
   end
