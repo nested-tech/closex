@@ -8,6 +8,7 @@ defmodule Closex.CachingClient do
   @fallback_client Application.get_env(:closex, :fallback_client, Closex.HTTPClient)
 
   defdelegate find_leads(search_term, opts \\ []), to: @fallback_client
+  defdelegate find_opportunities(search_term, opts \\ []), to: @fallback_client
 
   def get_lead(lead_id, opts \\ []) do
     get_cached(lead_id, {:get_lead, [lead_id, opts]})
