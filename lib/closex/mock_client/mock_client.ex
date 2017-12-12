@@ -396,6 +396,46 @@ defmodule Closex.MockClient do
     {:ok, leads}
   end
 
+  @doc """
+  Finds an opportunity in CloseIO.
+
+  Returns `{:ok, opportunities}`.
+
+  You can hand in any search term you like and it will return an example search which finds one example lead.
+
+  You can also search for something you are not expecting to find with our not_found_id. This will provide the empty
+  result set in find_no_opportunities.json.
+
+  We have provided an example search term to use when the search term doesn't matter to you.
+
+  ## Examples
+
+    > Closex.MockClient.find_opportunities("foo")
+    ...contents of test/fixtures/find_one_opportunity.json...
+
+    iex> Closex.MockClient.find_opportunities(Closex.MockClient.not_found_query())
+    {:ok, %{"data" => [], "has_more" => false, "total_results" => 0}}
+
+    > Closex.MockClient.find_opportunities(Closex.MockClient.multiple_results_query())
+    ...contents of test/fixtures/find_multiple_opportunities.json...
+  """
+  def find_opportunities(search_term, opts \\ [])
+  def find_opportunities(search_term = @not_found_query, opts) do
+    opportunities = load("find_no_opportunities.json")
+    send(self(), {:closex_mock_client, :find_opportunities, [search_term, opts]})
+    {:ok, opportunities}
+  end
+  def find_opportunities(search_term = @multiple_results_query, opts) do
+    opportunities = load("find_multiple_opportunities.json")
+    send(self(), {:closex_mock_client, :find_opportunities, [search_term, opts]})
+    {:ok, opportunities}
+  end
+  def find_opportunities(search_term, opts) do
+    opportunities = load("find_one_opportunity.json")
+    send(self(), {:closex_mock_client, :find_opportunities, [search_term, opts]})
+    {:ok, opportunities}
+  end
+
   defp load(filename) do
     case Application.fetch_env(:closex, :mock_client_fixtures_dir) do
       {:ok, fixtures_path} ->
