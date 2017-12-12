@@ -1,0 +1,28 @@
+{
+    "has_more": false,
+    "data": [
+        {
+            "id": "oppo_KXyJj2PT74U1wOPvhBDO37jCC89mmrnoW0DylcDDWrL",
+            "organization_id": "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen",
+            "lead_id": "lead_s6vHFTK1TSRoH6otXOexWDO9jM4xyb1kELHDoU7Fdsp",
+            "lead_name": "Bluth Company (Sample Lead)",
+            "date_won": null,
+            "confidence": 75,
+            "value": 300000,
+            "value_period": "one_time",
+            "value_formatted": "$3,000",
+            "value_currency": "USD",
+            "note": "Gob's ready to buy a $3,000 suit.",
+            "status_id": "stat_4ZdiZqcSIkoGVnNOyxiEY58eTGQmFNG3LPlEVQ4V7Nk",
+            "status_label": "Active",
+            "status_type": "active",
+            "contact_id": null,
+            "user_id": "user_scOgjLAQD6aBSJYBVhIeNr6FJDp8iDTug8Mv6VqYoFn",
+            "user_name": "P F",
+            "created_by": null,
+            "updated_by": null,
+            "date_created": "2013-02-01T00:54:51.321000+00:00",
+            "date_updated": "2013-02-01T00:54:51.321000+00:00"
+        }
+    ]
+}
