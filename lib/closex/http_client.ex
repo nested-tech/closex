@@ -14,29 +14,12 @@ defmodule Closex.HTTPClient do
 
   @doc "List or search for leads: https://developer.close.io/#leads-list-or-search-for-leads"
   def find_leads(search_term, opts \\ []) do
-    opts = merge_search_term_into_opts(search_term, opts)
-
-    get("/lead/", [], opts)
-    |> handle_response
+    find("lead", search_term, opts)
   end
 
   @doc "List or search for opportunities: https://developer.close.io/#opportunities-list-or-filter-opportunities"
   def find_opportunities(search_term, opts \\ []) do
-    opts = merge_search_term_into_opts(search_term, opts)
-
-    get("/opportunity/", [], opts)
-    |> handle_response
-  end
-
-  defp merge_search_term_into_opts(search_term, opts) do
-    search_params = %{query: search_term}
-    case Keyword.get(opts, :params) do
-      params when is_map(params) ->
-        all_params = Map.merge(params, search_params)
-        Keyword.put(opts, :params, all_params)
-      nil ->
-        Keyword.put(opts, :params, search_params)
-    end
+    find("opportunity", search_term, opts)
   end
 
   @doc "Fetch a single lead: https://developer.close.io/#leads-retrieve-a-single-lead"
@@ -94,10 +77,28 @@ defmodule Closex.HTTPClient do
   # TODO: at some point we'll need to build a generic pagination/fetch more routine when we hit 50+ users
   @doc "List all users in your organization: https://developer.close.io/#users-list-all-the-users-who-are-members-of-the-same-organizations-as-you-are"
   def get_users(opts \\ []) do
-    get("/user/", [{"Content-Type", "application/json"}], opts) |> handle_response
+    get("/user/", [], opts) |> handle_response
   end
 
   # Private stuff...
+
+  defp find(resource, search_term, opts \\ []) do
+    opts = merge_search_term_into_opts(search_term, opts)
+
+    get("/#{resource}/", [], opts)
+    |> handle_response
+  end
+
+  defp merge_search_term_into_opts(search_term, opts) do
+    search_params = %{query: search_term}
+    case Keyword.get(opts, :params) do
+      params when is_map(params) ->
+        all_params = Map.merge(params, search_params)
+        Keyword.put(opts, :params, all_params)
+      nil ->
+        Keyword.put(opts, :params, search_params)
+    end
+  end
 
   defp handle_response({:ok, %{status_code: _, body: %{"error" => reason}}}) do
     {:error, reason}
