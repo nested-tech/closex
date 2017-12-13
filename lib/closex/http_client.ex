@@ -74,10 +74,13 @@ defmodule Closex.HTTPClient do
 
   # Users
 
-  # TODO: at some point we'll need to build a generic pagination/fetch more routine when we hit 50+ users
   @doc "List all users in your organization: https://developer.close.io/#users-list-all-the-users-who-are-members-of-the-same-organizations-as-you-are"
-  def get_users(opts \\ []) do
-    get("/user/", [], opts) |> handle_response
+  def get_users(limit \\100) do
+    find_all("user", "", limit)
+  end
+
+  def find_all_opportunities(term, limit \\ 100) do
+    find_all("opportunity", term, limit)
   end
 
   # Private stuff...
@@ -87,6 +90,18 @@ defmodule Closex.HTTPClient do
 
     get("/#{resource}/", [], opts)
     |> handle_response
+  end
+
+  def find_all(resource, search, limit \\ 100, skip \\ 0, results \\ []) do
+    {:ok, response} = find(resource, search, params: %{_limit: limit, _skip: skip})
+
+    accumulated_data = results ++ response["data"]
+
+    if response["has_more"] do
+      find_all(resource, search, limit, skip + limit, accumulated_data)
+    else
+      {:ok, Map.put(response, "data", accumulated_data)}
+    end
   end
 
   defp merge_search_term_into_opts(search_term, opts) do

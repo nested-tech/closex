@@ -4,7 +4,7 @@ use Mix.Config
 
 if Mix.env == :test do
   config :closex,
-    api_key: "FAKE_CLOSEIO_TOKEN",
+    api_key: System.get_env("CLOSEX_CLOSEIO_API_KEY") || "FAKE_CLOSEIO_TOKEN",
     fallback_client: Closex.MockClient
 
   config :logger,
