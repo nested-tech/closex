@@ -95,6 +95,7 @@ defmodule Closex.HTTPClientTest do
         assert lead["name"] == "Luke Skywalker"
       end
     end
+
     test "when close.io is up, but the lead_id passed is invalid, it fails" do
       use_cassette "get_lead_unknown", match_requests_on: [:request_body, :query] do
         {:error, reason} = get_lead(@invalid_lead_id)
@@ -109,6 +110,7 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
   describe "get_opportunity/1" do
     test "when close.io is up and we are passed a valid opportunity_id, it returns the opportunity" do
       use_cassette "get_opportunity", match_requests_on: [:request_body, :query] do
@@ -148,6 +150,7 @@ defmodule Closex.HTTPClientTest do
         assert opportunity["value"] == 20000
       end
     end
+
     test "when close.io is up, but the opportunity_id passed is invalid, it fails" do
       use_cassette "get_opportunity_unknown", match_requests_on: [:request_body, :query] do
         {:error, reason} = get_opportunity(@invalid_opportunity_id)
@@ -156,6 +159,7 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
   describe "get_lead_custom_field/1" do
     test "fetches and returns a lead custom field if it exists" do
       use_cassette "get_lead_custom_field", match_requests_on: [:request_body, :query] do
@@ -174,6 +178,7 @@ defmodule Closex.HTTPClientTest do
                  }
       end
     end
+
     test "returns error if lead custom field does not exist" do
       use_cassette "get_lead_custom_field_unknown", match_requests_on: [:request_body, :query] do
         {:error, reason} = get_lead_custom_field(@invalid_custom_field_id)
@@ -182,6 +187,7 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
   describe "create_lead/1" do
     test "when close.io is up and we are passed a valid lead payload, creates a lead on CloseIO" do
       use_cassette "create_lead", match_requests_on: [:request_body] do
@@ -248,6 +254,7 @@ defmodule Closex.HTTPClientTest do
                  }
       end
     end
+
     test "when close.io is up and we are passed an invalid lead payload, renders error" do
       use_cassette "create_lead_error", match_requests_on: [:request_body] do
         {:error, reason} = create_lead(@invalid_create_lead_params)
@@ -261,6 +268,7 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
   describe "update_lead/2" do
     test "when close.io is up and we are passed a valid lead_id, it updates and returns the lead" do
       use_cassette "update_lead", match_requests_on: [:request_body] do
@@ -273,6 +281,7 @@ defmodule Closex.HTTPClientTest do
         assert lead_after["name"] == "Luke Skywalker"
       end
     end
+
     test "when close.io is up, but the lead_id passed is invalid, it fails" do
       use_cassette "update_lead_unknown" do
         {:error, reason} =
@@ -281,6 +290,7 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
   describe "find_leads/1" do
     test "if some leads are found, it returns a list of leads" do
       search_term = "Minogue OR Princess"
@@ -295,6 +305,7 @@ defmodule Closex.HTTPClientTest do
         assert lead_names == ["Wiley Minogue", "Princess"]
       end
     end
+
     test "if no leads are found, it returns an empty list" do
       search_term = "FOO"
       use_cassette "find_leads_empty", match_requests_on: [:request_body, :query] do
@@ -320,6 +331,7 @@ defmodule Closex.HTTPClientTest do
         assert opportunity["status_label"] == "S01: Received Offer Request"
       end
     end
+
     test "if no opportunities are found, it returns an empty list" do
       search_term = "FOO"
       use_cassette "find_opportunities_empty", match_requests_on: [:request_body, :query] do
@@ -366,6 +378,7 @@ defmodule Closex.HTTPClientTest do
         assert body["id"] == @created_opportunity_id
       end
     end
+
     test "returns error for opportunity without lead" do
       use_cassette "create_opportunity_no_lead",
                    match_requests_on: [:request_body] do
@@ -379,6 +392,7 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
   describe "update_opportunity/2" do
     test "when close.io is up and we are passed a valid opportunity_id, it updates and returns the opportunity" do
       use_cassette "update_opportunity", match_requests_on: [:request_body] do
@@ -392,6 +406,7 @@ defmodule Closex.HTTPClientTest do
         assert opportunity_after["note"] == "my_note"
       end
     end
+
     test "when close.io is up, but the opportunity_id passed is invalid, it fails" do
       use_cassette "update_opportunity_unknown",
                    match_requests_on: [:request_body] do
@@ -402,6 +417,7 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
   describe "send_email/1" do
     test "sends an email" do
       email = %{
@@ -460,6 +476,7 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
   describe "get_lead_statuses/0" do
     test "fetches a list of all close.io lead statuses" do
       use_cassette "get_lead_statuses", match_requests_on: [:request_body, :query] do
@@ -474,6 +491,7 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
   describe "get_opportunity_statuses/0" do
     test "fetches a list of all close.io opportunity statuses" do
       use_cassette "get_opportunity_statuses", match_requests_on: [:request_body, :query] do
@@ -489,6 +507,7 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
   describe "get_users/0" do
     test "fetches a list of close.io users" do
       use_cassette "get_users", match_requests_on: [:request_body, :query] do
@@ -498,12 +517,13 @@ defmodule Closex.HTTPClientTest do
         first_user = List.first(users)
         assert is_map(first_user)
         assert first_user["id"] ==
-                 "user_3kqxgjklC24LVMT2e0DLILoLqErUeMoJeuURfe1HRP8"
-        assert first_user["first_name"] == "Kate"
-        assert first_user["last_name"] == "Collins"
+        "user_3icdBiVetzNHo1WB5RHkFc2jLlzkrFCbsBx6vMwuQY8"
+        assert first_user["first_name"] == "Theo"
+        assert first_user["last_name"] == "Margolius"
       end
     end
   end
+
   describe ".get_organization/1" do
     test "fetches and returns a CloseIO.Organization" do
       use_cassette "closex_get_organization", match_requests_on: [:request_body, :query] do
@@ -519,6 +539,18 @@ defmodule Closex.HTTPClientTest do
 
         assert organization["id"] == @organization_id
         assert organization["name"] == "Nested-- DEV"
+      end
+    end
+  end
+
+  describe "find_all_opportunities/3" do
+    test "returns all opportunities from closeio" do
+      use_cassette "find_all_opportunities", match_requests_on: [:query] do
+        number_of_opportunities_in_closeio_dev_account = 65
+        {:ok, response} = find_all_opportunities("opportunity_status_type:active", 45)
+
+        assert %{"has_more" => false, "data" => _opportunities} = response
+        assert length(response["data"]) == number_of_opportunities_in_closeio_dev_account
       end
     end
   end
