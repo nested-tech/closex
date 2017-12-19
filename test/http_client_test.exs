@@ -64,7 +64,7 @@ defmodule Closex.HTTPClientTest do
 
   describe "get_lead/1" do
     test "when close.io is up and we are passed a valid lead_id, it returns the lead" do
-      use_cassette "get_lead" do
+      use_cassette "get_lead", match_requests_on: [:request_body, :query] do
         {:ok, lead} = get_lead(@valid_lead_id)
         assert Map.keys(lead) ==
                  ["addresses",
@@ -96,14 +96,14 @@ defmodule Closex.HTTPClientTest do
       end
     end
     test "when close.io is up, but the lead_id passed is invalid, it fails" do
-      use_cassette "get_lead_unknown" do
+      use_cassette "get_lead_unknown", match_requests_on: [:request_body, :query] do
         {:error, reason} = get_lead(@invalid_lead_id)
         assert reason == "Empty query: Lead matching query does not exist."
       end
     end
 
     test "with invalid key" do
-      use_cassette "get_lead_invalid_key" do
+      use_cassette "get_lead_invalid_key", match_requests_on: [:request_body, :query] do
         {:error, reason} = get_lead(@valid_lead_id)
         assert reason == "The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required."
       end
@@ -111,7 +111,7 @@ defmodule Closex.HTTPClientTest do
   end
   describe "get_opportunity/1" do
     test "when close.io is up and we are passed a valid opportunity_id, it returns the opportunity" do
-      use_cassette "get_opportunity" do
+      use_cassette "get_opportunity", match_requests_on: [:request_body, :query] do
         {:ok, opportunity} = get_opportunity(@valid_opportunity_id)
         assert Map.keys(opportunity) ==
                  ["confidence",
@@ -149,7 +149,7 @@ defmodule Closex.HTTPClientTest do
       end
     end
     test "when close.io is up, but the opportunity_id passed is invalid, it fails" do
-      use_cassette "get_opportunity_unknown" do
+      use_cassette "get_opportunity_unknown", match_requests_on: [:request_body, :query] do
         {:error, reason} = get_opportunity(@invalid_opportunity_id)
         assert reason ==
                  "Empty query: Opportunity matching query does not exist."
@@ -158,7 +158,7 @@ defmodule Closex.HTTPClientTest do
   end
   describe "get_lead_custom_field/1" do
     test "fetches and returns a lead custom field if it exists" do
-      use_cassette "get_lead_custom_field" do
+      use_cassette "get_lead_custom_field", match_requests_on: [:request_body, :query] do
         {:ok, custom_field} = get_lead_custom_field(@valid_custom_field_id)
         assert custom_field ==
                  %{
@@ -175,7 +175,7 @@ defmodule Closex.HTTPClientTest do
       end
     end
     test "returns error if lead custom field does not exist" do
-      use_cassette "get_lead_custom_field_unknown" do
+      use_cassette "get_lead_custom_field_unknown", match_requests_on: [:request_body, :query] do
         {:error, reason} = get_lead_custom_field(@invalid_custom_field_id)
         assert reason ==
                  "Empty query: LeadCustomField matching query does not exist."
@@ -284,7 +284,7 @@ defmodule Closex.HTTPClientTest do
   describe "find_leads/1" do
     test "if some leads are found, it returns a list of leads" do
       search_term = "Minogue OR Princess"
-      use_cassette "find_leads" do
+      use_cassette "find_leads", match_requests_on: [:request_body, :query] do
         {:ok, result} = find_leads(search_term)
         assert %{"has_more" => false, "total_results" => 2, "data" => leads} =
                  result
@@ -297,7 +297,7 @@ defmodule Closex.HTTPClientTest do
     end
     test "if no leads are found, it returns an empty list" do
       search_term = "FOO"
-      use_cassette "find_leads_empty" do
+      use_cassette "find_leads_empty", match_requests_on: [:request_body, :query] do
         {:ok, result} = find_leads(search_term)
         assert %{"has_more" => false, "total_results" => 0, "data" => leads} =
                  result
@@ -311,7 +311,7 @@ defmodule Closex.HTTPClientTest do
     test "if some opportunities are found, it returns a list of opportunities" do
       search_term = ~s(opportunity_status:"S01: Received Offer Request")
 
-      use_cassette "find_opportunities" do
+      use_cassette "find_opportunities", match_requests_on: [:request_body, :query] do
         {:ok, result} = find_opportunities(search_term)
         assert %{"data" => opportunities, "total_results" => 48} = result
         assert is_list(opportunities)
@@ -322,7 +322,7 @@ defmodule Closex.HTTPClientTest do
     end
     test "if no opportunities are found, it returns an empty list" do
       search_term = "FOO"
-      use_cassette "find_opportunities_empty" do
+      use_cassette "find_opportunities_empty", match_requests_on: [:request_body, :query] do
         {:ok, result} = find_opportunities(search_term)
         assert %{"has_more" => false, "total_results" => 0, "data" => opportunities} =
                  result
@@ -462,7 +462,7 @@ defmodule Closex.HTTPClientTest do
   end
   describe "get_lead_statuses/0" do
     test "fetches a list of all close.io lead statuses" do
-      use_cassette "get_lead_statuses" do
+      use_cassette "get_lead_statuses", match_requests_on: [:request_body, :query] do
         {:ok, response} = get_lead_statuses()
         assert %{"has_more" => false, "data" => statuses} = response
         assert is_list(statuses)
@@ -476,7 +476,7 @@ defmodule Closex.HTTPClientTest do
   end
   describe "get_opportunity_statuses/0" do
     test "fetches a list of all close.io opportunity statuses" do
-      use_cassette "get_opportunity_statuses" do
+      use_cassette "get_opportunity_statuses", match_requests_on: [:request_body, :query] do
         {:ok, response} = get_opportunity_statuses()
         assert %{"has_more" => false, "data" => statuses} = response
         assert is_list(statuses)
@@ -491,7 +491,7 @@ defmodule Closex.HTTPClientTest do
   end
   describe "get_users/0" do
     test "fetches a list of close.io users" do
-      use_cassette "get_users" do
+      use_cassette "get_users", match_requests_on: [:request_body, :query] do
         {:ok, response} = get_users()
         assert %{"has_more" => false, "data" => users} = response
         assert is_list(users)
@@ -506,7 +506,7 @@ defmodule Closex.HTTPClientTest do
   end
   describe ".get_organization/1" do
     test "fetches and returns a CloseIO.Organization" do
-      use_cassette "closex_get_organization" do
+      use_cassette "closex_get_organization", match_requests_on: [:request_body, :query] do
         {:ok, organization} = get_organization(@organization_id)
 
         assert Map.keys(organization) == [
