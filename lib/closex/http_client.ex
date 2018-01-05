@@ -85,7 +85,7 @@ defmodule Closex.HTTPClient do
 
   # Private stuff...
 
-  defp find(resource, search_term, opts \\ []) do
+  defp find(resource, search_term, opts) do
     opts = merge_search_term_into_opts(search_term, opts)
 
     get("/#{resource}/", [], opts)
