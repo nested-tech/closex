@@ -124,8 +124,11 @@ defmodule Closex.HTTPClient do
   defp handle_response({:ok, %{status_code: 200, body: body}}) do
     {:ok, body}
   end
-  defp handle_response({:error, reason}) do
-    {:error, reason}
+  defp handle_response({:ok, response = %{status_code: status_code}}) when status_code >= 500 do
+    {:error, response}
+  end
+  defp handle_response({:error, response}) do
+    {:error, response}
   end
 
   defp fetch_object(obj_type, obj_id, opts) do
@@ -172,6 +175,7 @@ defmodule Closex.HTTPClient do
     case Poison.decode(body) do
       {:ok, body} -> body
       {:error, _} -> body
+      {:error, :invalid, _} -> body
     end
   end
 

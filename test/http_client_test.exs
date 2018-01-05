@@ -109,6 +109,12 @@ defmodule Closex.HTTPClientTest do
         assert reason == "The server could not verify that you are authorized to access the URL requested.  You either supplied the wrong credentials (e.g. a bad password), or your browser doesn't understand how to supply the credentials required."
       end
     end
+
+    test "when server returns 504" do
+      use_cassette "get_lead_504" do
+        assert {:error, %HTTPoison.Response{status_code: 504}} = get_lead(@valid_lead_id)
+      end
+    end
   end
 
   describe "get_opportunity/1" do

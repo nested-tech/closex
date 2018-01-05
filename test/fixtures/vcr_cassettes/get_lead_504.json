@@ -1,0 +1,37 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": {
+        "basic_auth": [
+          "FAKE_CLOSEIO_TOKEN",
+          ""
+        ]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/lead/lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm/"
+    },
+    "response": {
+      "body": "",
+      "headers": {
+        "Content-Type": "application/json",
+        "Date": "Tue, 19 Dec 2017 10:19:11 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "320",
+        "X-Rate-Limit-Remaining": "319",
+        "X-Rate-Limit-Reset": "7.679845",
+        "Content-Length": "3043",
+        "Connection": "keep-alive"
+      },
+      "status_code": 504,
+      "type": "ok"
+    }
+  }
+]
