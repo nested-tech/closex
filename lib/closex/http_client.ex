@@ -172,6 +172,7 @@ defmodule Closex.HTTPClient do
     case Poison.decode(body) do
       {:ok, body} -> body
       {:error, _} -> body
+      {:error, :invalid, _} -> body
     end
   end
 
