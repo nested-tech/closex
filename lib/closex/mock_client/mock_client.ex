@@ -36,6 +36,9 @@ defmodule Closex.MockClient do
   @multiple_results_query "Fred Flintstone fred.flintstone@gmail.com"
   def multiple_results_query, do: @multiple_results_query
 
+  @timeout_query "mock_timeout"
+  def timeout_query, do: @timeout_query
+
   @lead_id "lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O"
   def lead_id, do: @lead_id
 
@@ -389,6 +392,10 @@ defmodule Closex.MockClient do
     leads = load("find_multiple_leads.json")
     send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
     {:ok, leads}
+  end
+  def find_leads(search_term = @timeout_query, opts) do
+    send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
+    {:error, %HTTPoison.Error{id: nil, reason: :timeout}}
   end
   def find_leads(search_term, opts) do
     leads = load("find_one_lead.json")
