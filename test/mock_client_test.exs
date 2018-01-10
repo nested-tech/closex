@@ -45,6 +45,10 @@ defmodule Closex.MockClientTest do
     test "it finds multiple results if you give it the multiple results query" do
       {:ok, %{"data" => _, "has_more" => false, "total_results" => 2}} = find_leads(Closex.MockClient.multiple_results_query())
     end
+
+    test "it returns timeout if you give it the timout query" do
+      assert {:error, %HTTPoison.Error{id: nil, reason: :timeout}} = find_leads(Closex.MockClient.timeout_query())
+    end
   end
 
   describe "find_opportunities/2" do
