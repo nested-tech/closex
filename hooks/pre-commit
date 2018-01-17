@@ -9,4 +9,4 @@
 exec 1>&2
 
 # Check codebase has been formatted with elixir formatter
-mix format --check-formatted
+mix format --check-formatted || exit 1
