@@ -76,8 +76,7 @@ defmodule Closex.MockClient do
   end
 
   def get_lead(id, opts) do
-    lead =
-      load("lead.json")
+    lead = load("lead.json")
       |> Map.put("id", id)
 
     send(self(), {:closex_mock_client, :get_lead, [id, opts]})
