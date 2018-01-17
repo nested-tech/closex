@@ -5,14 +5,14 @@ defmodule Closex.ClientBehaviour do
   TODO: Add more docs
   """
 
-  @type id :: String.t
-  @type opts :: Keyword.t
+  @type id :: String.t()
+  @type opts :: Keyword.t()
   @type success :: {:ok, map}
   @type error :: {:error, any}
   @type result :: success | error
 
-  @callback find_leads(String.t, opts) :: result
-  @callback find_opportunities(String.t, opts) :: result
+  @callback find_leads(String.t(), opts) :: result
+  @callback find_opportunities(String.t(), opts) :: result
   @callback get_lead(id, opts) :: result
   @callback create_lead(map, opts) :: result
   @callback update_lead(id, map, opts) :: result
