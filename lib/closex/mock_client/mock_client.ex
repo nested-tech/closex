@@ -69,10 +69,12 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   """
   def get_lead(id, opts \\ [])
+
   def get_lead(id = @not_found_id, opts) do
     send(self(), {:closex_mock_client, :get_lead, [id, opts]})
     {:error, :mock_not_found}
   end
+
   def get_lead(id, opts) do
     lead =
       load("lead.json")
@@ -244,8 +246,11 @@ defmodule Closex.MockClient do
     %{"contacts" => [lead_contact]} = lead
     %{"contacts" => [payload_contact]} = payload
     contact = Map.merge(lead_contact, payload_contact)
-    merged_lead = Map.merge(lead, payload)
-    |> Map.merge(%{"contacts" => [contact]})
+
+    merged_lead =
+      Map.merge(lead, payload)
+      |> Map.merge(%{"contacts" => [contact]})
+
     send(self(), {:closex_mock_client, :create_lead, [payload, opts]})
     {:ok, merged_lead}
   end
@@ -383,20 +388,24 @@ defmodule Closex.MockClient do
     ...contents of test/fixtures/find_multiple_leads.json...
   """
   def find_leads(search_term, opts \\ [])
+
   def find_leads(search_term = @not_found_query, opts) do
     leads = load("find_no_leads.json")
     send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
     {:ok, leads}
   end
+
   def find_leads(search_term = @multiple_results_query, opts) do
     leads = load("find_multiple_leads.json")
     send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
     {:ok, leads}
   end
+
   def find_leads(search_term = @timeout_query, opts) do
     send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
     {:error, %HTTPoison.Error{id: nil, reason: :timeout}}
   end
+
   def find_leads(search_term, opts) do
     leads = load("find_one_lead.json")
     send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
@@ -427,16 +436,19 @@ defmodule Closex.MockClient do
     ...contents of test/fixtures/find_multiple_opportunities.json...
   """
   def find_opportunities(search_term, opts \\ [])
+
   def find_opportunities(search_term = @not_found_query, opts) do
     opportunities = load("find_no_opportunities.json")
     send(self(), {:closex_mock_client, :find_opportunities, [search_term, opts]})
     {:ok, opportunities}
   end
+
   def find_opportunities(search_term = @multiple_results_query, opts) do
     opportunities = load("find_multiple_opportunities.json")
     send(self(), {:closex_mock_client, :find_opportunities, [search_term, opts]})
     {:ok, opportunities}
   end
+
   def find_opportunities(search_term, opts) do
     opportunities = load("find_one_opportunity.json")
     send(self(), {:closex_mock_client, :find_opportunities, [search_term, opts]})

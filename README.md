@@ -129,6 +129,11 @@ Everyone is encouraged to help improve this project. Here are a few ways you can
 - Fix bugs and submit pull requests
 - Write, clarify, or fix documentation
 - Suggest or add new features
+- Please use the git hooks provided in the hooks directory. Use the following command to set these hooks up.
+
+```
+ln -s ../../hooks/pre-commit.sh .git/hooks/pre-commit
+```
 
 ## License
 

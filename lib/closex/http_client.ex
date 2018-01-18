@@ -32,18 +32,21 @@ defmodule Closex.HTTPClient do
   def update_lead(lead_id, payload, opts \\ []), do: update_object("lead", lead_id, payload, opts)
 
   @doc "Fetch a single opportunity: https://developer.close.io/#opportunities-retrieve-an-opportunity"
-  def get_opportunity(opportunity_id, opts \\ []), do: fetch_object("opportunity", opportunity_id, opts)
+  def get_opportunity(opportunity_id, opts \\ []),
+    do: fetch_object("opportunity", opportunity_id, opts)
 
   @doc "Create an opportunity: https://developer.close.io/#opportunities-create-an-opportunity"
   def create_opportunity(payload, opts \\ []), do: create_object("opportunity", payload, opts)
 
   @doc "Update an opportunity: https://developer.close.io/#opportunities-update-an-opportunity"
-  def update_opportunity(opportunity_id, payload, opts \\ []), do: update_object("opportunity", opportunity_id, payload, opts)
+  def update_opportunity(opportunity_id, payload, opts \\ []),
+    do: update_object("opportunity", opportunity_id, payload, opts)
 
   # Lead Custom Fields
 
   @doc "Fetch a custom fields details: https://developer.close.io/#custom-fields-fetch-custom-fields-details"
-  def get_lead_custom_field(custom_field_id, opts \\ []), do: fetch_object("custom_fields/lead", custom_field_id, opts)
+  def get_lead_custom_field(custom_field_id, opts \\ []),
+    do: fetch_object("custom_fields/lead", custom_field_id, opts)
 
   # Organization
 
@@ -52,7 +55,8 @@ defmodule Closex.HTTPClient do
 
   NOTE: Use American spelling of "organization" since this is how Close.IO refers to it.
   """
-  def get_organization(organization_id, opts \\ []), do: fetch_object("organization", organization_id, opts)
+  def get_organization(organization_id, opts \\ []),
+    do: fetch_object("organization", organization_id, opts)
 
   # Statuses
 
@@ -75,7 +79,7 @@ defmodule Closex.HTTPClient do
   # Users
 
   @doc "List all users in your organization: https://developer.close.io/#users-list-all-the-users-who-are-members-of-the-same-organizations-as-you-are"
-  def get_users(limit \\100) do
+  def get_users(limit \\ 100) do
     find_all("user", "", limit)
   end
 
@@ -106,10 +110,12 @@ defmodule Closex.HTTPClient do
 
   defp merge_search_term_into_opts(search_term, opts) do
     search_params = %{query: search_term}
+
     case Keyword.get(opts, :params) do
       params when is_map(params) ->
         all_params = Map.merge(params, search_params)
         Keyword.put(opts, :params, all_params)
+
       nil ->
         Keyword.put(opts, :params, search_params)
     end
@@ -118,15 +124,25 @@ defmodule Closex.HTTPClient do
   defp handle_response({:ok, %{status_code: _, body: %{"error" => reason}}}) do
     {:error, reason}
   end
-  defp handle_response({:ok, %{status_code: 400, body: reason = %{"errors" => _errors, "field-errors" => _field_errors}}}) do
+
+  defp handle_response(
+         {:ok,
+          %{
+            status_code: 400,
+            body: reason = %{"errors" => _errors, "field-errors" => _field_errors}
+          }}
+       ) do
     {:error, reason}
   end
+
   defp handle_response({:ok, %{status_code: 200, body: body}}) do
     {:ok, body}
   end
+
   defp handle_response({:ok, response = %{status_code: status_code}}) when status_code >= 500 do
     {:error, response}
   end
+
   defp handle_response({:error, response}) do
     {:error, response}
   end
@@ -137,7 +153,12 @@ defmodule Closex.HTTPClient do
   end
 
   defp update_object(object_type, object_id, payload, opts) do
-    put_json("/#{object_type}/#{object_id}/", payload, [{"Content-Type", "application/json"}], opts)
+    put_json(
+      "/#{object_type}/#{object_id}/",
+      payload,
+      [{"Content-Type", "application/json"}],
+      opts
+    )
     |> handle_response
   end
 

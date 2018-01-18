@@ -29,7 +29,8 @@ defmodule Closex.CachingClient do
   defdelegate create_opportunity(payload, opts \\ []), to: @fallback_client
 
   def update_opportunity(opportunity_id, payload, opts \\ []) do
-    with {:ok, updated_opportunity} <- apply(@fallback_client, :update_opportunity, [opportunity_id, payload, opts]) do
+    with {:ok, updated_opportunity} <-
+           apply(@fallback_client, :update_opportunity, [opportunity_id, payload, opts]) do
       set_cached(opportunity_id, {:ok, updated_opportunity})
     end
   end
@@ -61,24 +62,32 @@ defmodule Closex.CachingClient do
   end
 
   defp get_cached(key, {fun, args}) do
-    cache_result = Cachex.get(:closex_cache, key, fallback: fn _key ->
-      case apply(@fallback_client, fun, args) do
-        result = {:ok, _} ->
-          {:commit, result}
-        error = {:error, _} ->
-          {:ignore, error}
-      end
-    end)
+    cache_result =
+      Cachex.get(
+        :closex_cache,
+        key,
+        fallback: fn _key ->
+          case apply(@fallback_client, fun, args) do
+            result = {:ok, _} ->
+              {:commit, result}
+
+            error = {:error, _} ->
+              {:ignore, error}
+          end
+        end
+      )
 
     case cache_result do
       {:loaded, result} ->
-        Closex.log fn -> "[Closex.CachingClient] MISS for key: #{key}" end
+        Closex.log(fn -> "[Closex.CachingClient] MISS for key: #{key}" end)
         result
+
       {:ok, result} ->
-        Closex.log fn -> "[Closex.CachingClient] HIT for key: #{key}" end
+        Closex.log(fn -> "[Closex.CachingClient] HIT for key: #{key}" end)
         result
+
       error ->
-        Closex.log fn -> "[Closex.CachingClient] ERROR for key: #{key}" end
+        Closex.log(fn -> "[Closex.CachingClient] ERROR for key: #{key}" end)
         {:error, error}
     end
   end

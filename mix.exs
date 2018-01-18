@@ -4,19 +4,24 @@ defmodule Closex.Mixfile do
   def project do
     [
       app: :closex,
-      version: "0.5.14",
+      version: "0.6.0",
       build_path: "_build",
       config_path: "config/config.exs",
       deps_path: "deps",
       lockfile: "mix.lock",
-      elixirc_paths: elixirc_paths(Mix.env),
-      elixir: "~> 1.5",
+      elixirc_paths: elixirc_paths(Mix.env()),
+      elixir: "~> 1.6",
       description: description(),
       package: package(),
       deps: deps(),
       test_coverage: [tool: ExCoveralls],
-      preferred_cli_env: ["coveralls": :test, "coveralls.detail": :test, "coveralls.post": :test, "coveralls.html": :test],
-      start_permanent: Mix.env == :prod,
+      preferred_cli_env: [
+        coveralls: :test,
+        "coveralls.detail": :test,
+        "coveralls.post": :test,
+        "coveralls.html": :test
+      ],
+      start_permanent: Mix.env() == :prod
     ]
   end
 
@@ -35,7 +40,7 @@ defmodule Closex.Mixfile do
       {:exvcr, "~> 0.8", only: :test, optional: true},
       {:ex_doc, ">= 0.0.0", only: :dev, optional: true},
       {:excoveralls, "~> 0.4", only: :test, optional: true},
-      {:dialyxir, ">= 0.0.0", runtime: false},
+      {:dialyxir, ">= 0.0.0", runtime: false}
     ]
   end
 
@@ -46,11 +51,21 @@ defmodule Closex.Mixfile do
   defp package() do
     [
       files: ["lib", "mix.exs", "README.md"],
-      maintainers: ["Sam Davies", "Darren Oakley", "Morgan Sadr-Hashemi", "Adam Lancaster", "Ed Saunders"],
+      maintainers: [
+        "Sam Davies",
+        "Darren Oakley",
+        "Morgan Sadr-Hashemi",
+        "Adam Lancaster",
+        "Ed Saunders"
+      ],
       licenses: ["MIT"],
       source_url: "https://github.com/nested-tech/closex",
       homepage_url: "https://github.com/nested-tech/closex",
-      links: %{"Nested" => "https://nested.com", "Close.io" => "https://close.io", "GitHub" => "https://github.com/nested-tech/closex"}
+      links: %{
+        "Nested" => "https://nested.com",
+        "Close.io" => "https://close.io",
+        "GitHub" => "https://github.com/nested-tech/closex"
+      }
     ]
   end
 end
