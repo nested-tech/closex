@@ -10,7 +10,7 @@ defmodule Closex.Mixfile do
       deps_path: "deps",
       lockfile: "mix.lock",
       elixirc_paths: elixirc_paths(Mix.env()),
-      elixir: "~> 1.5",
+      elixir: "~> 1.6",
       description: description(),
       package: package(),
       deps: deps(),
