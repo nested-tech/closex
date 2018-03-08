@@ -67,12 +67,20 @@ defmodule Closex.MockClient do
 
     iex> Closex.MockClient.get_lead(Closex.MockClient.not_found_id())
     {:error, :mock_not_found}
+
+    iex> Closex.MockClient.get_lead(Closex.MockClient.timeout_query())
+    {:error, %HTTPoison.Error{id: nil, reason: :timeout}}
   """
   def get_lead(id, opts \\ [])
 
   def get_lead(id = @not_found_id, opts) do
     send(self(), {:closex_mock_client, :get_lead, [id, opts]})
     {:error, :mock_not_found}
+  end
+
+  def get_lead(id = @timeout_query, opts) do
+    send(self(), {:closex_mock_client, :get_lead, [id, opts]})
+    {:error, %HTTPoison.Error{id: nil, reason: :timeout}}
   end
 
   def get_lead(id, opts) do
