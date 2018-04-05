@@ -373,27 +373,35 @@ defmodule Closex.MockClient do
   end
 
   @doc """
-  Finds a lead in CloseIO.
+  Stubs finding leads in CloseIO.
 
-  Returns `{:ok, leads}`.
-
-  You can hand in any search term you like and it will return an example search which finds one example lead.
-
-  You can also search for something you are not expecting to find with our not_found_id. This will provide the empty
-  result set in find_no_leads.json.
-
-  We have provided an example search term to use when the search term doesn't matter to you.
+  Returns `{:ok, leads}` or `{:error, error}` tuple.
 
   ## Examples
 
-    > Closex.MockClient.find_leads("foo")
-    ...contents of test/fixtures/find_one_lead.json...
+  By default, this returns the contents of the `find_one_lead.json` fixture.
 
-    iex> Closex.MockClient.find_leads(Closex.MockClient.not_found_query())
-    {:ok, %{"data" => [], "has_more" => false, "total_results" => 0}}
+      > Closex.MockClient.find_leads("foo")
+      ...contents of test/fixtures/find_one_lead.json...
 
-    > Closex.MockClient.find_leads(Closex.MockClient.multiple_results_query())
-    ...contents of test/fixtures/find_multiple_leads.json...
+  Specific search results can be returned by storing a response in your
+  `test/fixtures` directly which corresponds to the specific query. It **must**
+  be named `find_leads_<search>.json`, otherwise we will use default. Note, we
+  turn spaces into underscores.
+
+      > Closex.MockClient.find_leads("some lead")
+      ...contents of test/fixtures/find_leads_some_lead.json
+
+  Additional helper queries available are:
+
+      iex> Closex.MockClient.find_leads(Closex.MockClient.not_found_query())
+      {:ok, %{"data" => [], "has_more" => false, "total_results" => 0}}
+
+      > Closex.MockClient.find_leads(Closex.MockClient.multiple_results_query())
+      ...contents of test/fixtures/find_multiple_leads.json...
+
+      iex> Closex.MockClient.find_leads(Closex.MockClient.timeout_query())
+      {:error, %HTTPoison.Error{id: nil, reason: :timeout}}
   """
   def find_leads(search_term, opts \\ [])
 
@@ -415,7 +423,9 @@ defmodule Closex.MockClient do
   end
 
   def find_leads(search_term, opts) do
-    leads = load("find_one_lead.json")
+    custom_filename = "find_lead_#{String.replace(search_term, " ", "_")}.json"
+    leads = load(custom_filename, "find_one_lead.json")
+
     send(self(), {:closex_mock_client, :find_leads, [search_term, opts]})
     {:ok, leads}
   end
@@ -463,7 +473,7 @@ defmodule Closex.MockClient do
     {:ok, opportunities}
   end
 
-  defp load(filename) do
+  defp load(filename, fallback \\ nil) do
     case Application.fetch_env(:closex, :mock_client_fixtures_dir) do
       {:ok, fixtures_path} ->
         file =
@@ -475,8 +485,11 @@ defmodule Closex.MockClient do
           {:ok, binary} ->
             Poison.decode!(binary)
 
-          {:error, _} ->
+          {:error, _} when fallback |> is_nil ->
             load_default(filename)
+
+          {:error, _} ->
+            load(fallback)
         end
 
       :error ->
