@@ -54,6 +54,14 @@ defmodule Closex.MockClientTest do
   end
 
   describe "find_leads/2" do
+    test "it finds a default lead" do
+      {:ok, %{"data" => data}} = find_leads("irrelevant query")
+      assert length(data) == 1
+
+      assert data |> List.first() |> Map.get("id") ==
+               "lead_IIDHIStmFcFQZZP0BRe99V1MCoXWz2PGCm6EDmR9v2O"
+    end
+
     test "it finds multiple results if you give it the multiple results query" do
       {:ok, %{"data" => _, "has_more" => false, "total_results" => 2}} =
         find_leads(Closex.MockClient.multiple_results_query())
@@ -62,6 +70,12 @@ defmodule Closex.MockClientTest do
     test "it returns timeout if you give it the timout query" do
       assert {:error, %HTTPoison.Error{id: nil, reason: :timeout}} =
                find_leads(Closex.MockClient.timeout_query())
+    end
+
+    test "can find custom searches" do
+      {:ok, %{"data" => data}} = find_leads("custom query")
+      assert length(data) == 1
+      assert data |> List.first() |> Map.get("id") == "lead_custom_query_test"
     end
   end
 
