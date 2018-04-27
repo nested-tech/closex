@@ -87,4 +87,11 @@ defmodule Closex.MockClientTest do
       assert length(data) == 3
     end
   end
+
+  describe "update_lead/2" do
+    test "it timesout if called with a timeout lead_id" do
+      assert {:error, %HTTPoison.Error{id: nil, reason: :timeout}} =
+               update_lead(Closex.MockClient.timeout_query(), %{})
+    end
+  end
 end
