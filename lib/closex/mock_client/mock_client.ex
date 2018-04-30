@@ -290,6 +290,11 @@ defmodule Closex.MockClient do
     {:error, :mock_not_found}
   end
 
+  def update_lead(lead_id = @timeout_query, payload, opts) do
+    send(self(), {:closex_mock_client, :update_lead, [lead_id, payload, opts]})
+    {:error, %HTTPoison.Error{id: nil, reason: :timeout}}
+  end
+
   def update_lead(lead_id, payload, opts) do
     lead =
       load("lead.json")
