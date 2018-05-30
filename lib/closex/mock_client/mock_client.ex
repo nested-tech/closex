@@ -66,7 +66,7 @@ defmodule Closex.MockClient do
     ...contents of test/fixtures/lead.json...
 
     iex> Closex.MockClient.get_lead(Closex.MockClient.not_found_id())
-    {:error, :mock_not_found}
+    {:error, "Empty query: Lead matching query does not exist."}
 
     iex> Closex.MockClient.get_lead(Closex.MockClient.timeout_query())
     {:error, %HTTPoison.Error{id: nil, reason: :timeout}}
@@ -75,7 +75,7 @@ defmodule Closex.MockClient do
 
   def get_lead(id = @not_found_id, opts) do
     send(self(), {:closex_mock_client, :get_lead, [id, opts]})
-    {:error, :mock_not_found}
+    {:error, "Empty query: Lead matching query does not exist."}
   end
 
   def get_lead(id = @timeout_query, opts) do
@@ -107,13 +107,13 @@ defmodule Closex.MockClient do
     ...contents of test/fixtures/opportunity.json...
 
     iex> Closex.MockClient.get_opportunity(Closex.MockClient.not_found_id())
-    {:error, :mock_not_found}
+    {:error, "Empty query: Lead matching query does not exist."}
   """
   def get_opportunity(id, opts \\ [])
 
   def get_opportunity(id = @not_found_id, opts) do
     send(self(), {:closex_mock_client, :get_opportunity, [id, opts]})
-    {:error, :mock_not_found}
+    {:error, "Empty query: Lead matching query does not exist."}
   end
 
   def get_opportunity(id, opts) do
@@ -140,13 +140,13 @@ defmodule Closex.MockClient do
     ...contents of test/fixtures/lead_custom_field.json...
 
     iex> Closex.MockClient.get_lead_custom_field(Closex.MockClient.not_found_id())
-    {:error, :mock_not_found}
+    {:error, "Empty query: LeadCustomField matching query does not exist."}
   """
   def get_lead_custom_field(id, opts \\ [])
 
   def get_lead_custom_field(id = @not_found_id, opts) do
     send(self(), {:closex_mock_client, :get_lead_custom_field, [id, opts]})
-    {:error, :mock_not_found}
+    {:error, "Empty query: LeadCustomField matching query does not exist."}
   end
 
   def get_lead_custom_field(id, opts) do
@@ -173,13 +173,13 @@ defmodule Closex.MockClient do
     ...contents of test/fixtures/organization.json...
 
     iex> Closex.MockClient.get_organization(Closex.MockClient.not_found_id())
-    {:error, :mock_not_found}
+    {:error, "Empty query: Organization matching query does not exist."}
   """
   def get_organization(id, opts \\ [])
 
   def get_organization(id = @not_found_id, opts) do
     send(self(), {:closex_mock_client, :get_organization, [id, opts]})
-    {:error, :mock_not_found}
+    {:error, "Empty query: Organization matching query does not exist."}
   end
 
   def get_organization(id, opts) do
@@ -279,15 +279,15 @@ defmodule Closex.MockClient do
     ...contents of test/fixtures/organization.json...
 
     iex> Closex.MockClient.update_lead(Closex.MockClient.not_found_id(), %{})
-    {:error, :mock_not_found}
+    {:error, "Empty query: Lead matching query does not exist."}
 
     iex> Closex.MockClient.update_lead(Closex.MockClient.not_found_id(), %{"foo" => "bar"})
-    {:error, :mock_not_found}
+    {:error, "Empty query: Lead matching query does not exist."}
   """
   def update_lead(lead_id, payload, opts \\ [])
 
   def update_lead(@not_found_id, _payload, _opts) do
-    {:error, :mock_not_found}
+    {:error, "Empty query: Lead matching query does not exist."}
   end
 
   def update_lead(lead_id = @timeout_query, payload, opts) do
@@ -337,15 +337,15 @@ defmodule Closex.MockClient do
     ...contents of test/fixtures/organization.json...
 
     iex> Closex.MockClient.update_opportunity(Closex.MockClient.not_found_id(), %{})
-    {:error, :mock_not_found}
+    {:error, "Empty query: Opportunity matching query does not exist."}
 
     iex> Closex.MockClient.update_opportunity(Closex.MockClient.not_found_id(), %{"foo" => "bar"})
-    {:error, :mock_not_found}
+    {:error, "Empty query: Opportunity matching query does not exist."}
   """
   def update_opportunity(_opportunity_id, _payload, _opts \\ [])
 
   def update_opportunity(@not_found_id, _payload, _opts) do
-    {:error, :mock_not_found}
+    {:error, "Empty query: Opportunity matching query does not exist."}
   end
 
   def update_opportunity(opportunity_id, payload, opts) do
