@@ -24,6 +24,21 @@ defmodule Closex.MockClientTest do
                 "type" => "office"
               }
             ]
+          },
+          %{
+            "emails" => [
+              %{
+                "email" => "some.bloke@example.com",
+                "type" => "office"
+              }
+            ],
+            "name" => "Some Thisreallyismyname Bloke",
+            "phones" => [
+              %{
+                "phone" => "+447777123456",
+                "type" => "office"
+              }
+            ]
           }
         ],
         "name" => "Domingo Hermiston",
@@ -34,9 +49,9 @@ defmodule Closex.MockClientTest do
         "vendor_property_details" => "2 bed flat for sale"
       }
 
-      {:ok, %{"contacts" => [contacts]}} = create_lead(payload)
+      {:ok, %{"contacts" => [primary_contact | _other_contacts]}} = create_lead(payload)
 
-      result = %{
+      expected_result = %{
         "created_by" => "user_MvDoAZA889UMrgsZbnXmHkJSomSi7qk2Iwc4JnGHTbo",
         "date_created" => "2013-02-20T05:30:24.844000+00:00",
         "date_updated" => "2013-02-20T05:30:24.844000+00:00",
@@ -49,7 +64,7 @@ defmodule Closex.MockClientTest do
         "updated_by" => "user_MvDoAZA889UMrgsZbnXmHkJSomSi7qk2Iwc4JnGHTbo"
       }
 
-      assert ^result = contacts
+      assert ^expected_result = primary_contact
     end
   end
 
