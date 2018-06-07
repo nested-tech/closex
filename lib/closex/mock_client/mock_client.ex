@@ -252,12 +252,12 @@ defmodule Closex.MockClient do
   def create_lead(payload, opts \\ []) do
     lead = load("create_lead.json")
     %{"contacts" => [lead_contact]} = lead
-    %{"contacts" => [payload_contact]} = payload
-    contact = Map.merge(lead_contact, payload_contact)
+    %{"contacts" => [primary_payload_contact | other_payload_contacts]} = payload
+    contact = Map.merge(lead_contact, primary_payload_contact)
 
     merged_lead =
       Map.merge(lead, payload)
-      |> Map.merge(%{"contacts" => [contact]})
+      |> Map.merge(%{"contacts" => [contact | other_payload_contacts]})
 
     send(self(), {:closex_mock_client, :create_lead, [payload, opts]})
     {:ok, merged_lead}
