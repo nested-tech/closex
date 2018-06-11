@@ -14,12 +14,12 @@ defmodule Closex.HTTPClient do
 
   @doc "List or search for leads: https://developer.close.io/#leads-list-or-search-for-leads"
   def find_leads(search_term, opts \\ []) do
-    find("lead", search_term, opts)
+    find_respecting_rate_limit("lead", search_term, opts)
   end
 
   @doc "List or search for opportunities: https://developer.close.io/#opportunities-list-or-filter-opportunities"
   def find_opportunities(search_term, opts \\ []) do
-    find("opportunity", search_term, opts)
+    find_respecting_rate_limit("opportunity", search_term, opts)
   end
 
   @doc "Fetch a single lead: https://developer.close.io/#leads-retrieve-a-single-lead"
@@ -89,15 +89,47 @@ defmodule Closex.HTTPClient do
 
   # Private stuff...
 
-  defp find(resource, search_term, opts) do
-    opts = merge_search_term_into_opts(search_term, opts)
-
+  defp find(resource, opts) do
     get("/#{resource}/", [], opts)
     |> handle_response
   end
 
+  # This function will attempt to carry out a `find` operation. If that fails
+  # with a 429 (Too Many Requests), close.io will provide us rate limiting
+  # information. Use this to wait till the end of the reset window and retry.
+  # See https://developer.close.io/#ratelimits for more info
+  #
+  # REVIEW: I've only implemented this on `find` as that's the only place we're
+  # hitting rate limits and it limits the scope of this change (in case of
+  # fubar). Should this be applied more generally?
+  defp find_respecting_rate_limit(resource, search_term, opts) do
+    opts = merge_search_term_into_opts(search_term, opts)
+
+    response = find(resource, opts)
+
+    case response do
+      {:error, %{status_code: 429, body: %{"rate_reset" => rate_reset}}} ->
+        wait_and_retry(resource, opts, rate_reset)
+
+      no_rate_limit ->
+        no_rate_limit
+    end
+  end
+
+  defp wait_and_retry(resource, opts, rate_reset) do
+    {seconds, _remainder} = Integer.parse(rate_reset)
+
+    if Mix.env() != :test, do: Process.sleep(:timer.seconds(seconds + 1))
+
+    # REVIEW: This is purely for tests, is that a smell? Any alternatives?
+    send(self(), {:retry_find, [seconds + 1]})
+
+    find(resource, opts)
+  end
+
   def find_all(resource, search, limit \\ 100, skip \\ 0, results \\ []) do
-    {:ok, response} = find(resource, search, params: %{_limit: limit, _skip: skip})
+    {:ok, response} =
+      find_respecting_rate_limit(resource, search, params: %{_limit: limit, _skip: skip})
 
     accumulated_data = results ++ response["data"]
 
@@ -140,6 +172,10 @@ defmodule Closex.HTTPClient do
   end
 
   defp handle_response({:ok, response = %{status_code: status_code}}) when status_code >= 500 do
+    {:error, response}
+  end
+
+  defp handle_response({:ok, response = %{status_code: 429}}) do
     {:error, response}
   end
 

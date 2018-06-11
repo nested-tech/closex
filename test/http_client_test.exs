@@ -353,6 +353,24 @@ defmodule Closex.HTTPClientTest do
         assert leads == []
       end
     end
+
+    test "obeys rate limits, waiting once" do
+      use_cassette "find_leads_rate_limit" do
+        {:ok, result} = find_leads("Minogue OR Princess")
+
+        assert_received {:retry_find, [1]}
+
+        assert %{"has_more" => false, "total_results" => 2, "data" => leads} = result
+        assert is_list(leads)
+
+        lead_names =
+          for %{"name" => name} <- leads do
+            name
+          end
+
+        assert lead_names == ["Wiley Minogue", "Princess"]
+      end
+    end
   end
 
   describe "find_opportunities/1" do
