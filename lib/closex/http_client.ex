@@ -122,9 +122,6 @@ defmodule Closex.HTTPClient do
 
     @sleep_module.sleep(:timer.seconds(seconds + 1))
 
-    # REVIEW: This is purely for tests, is that a smell? Any alternatives?
-    send(self(), {:retry_find, [seconds + 1]})
-
     find(resource, opts)
   end
 

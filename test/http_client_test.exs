@@ -358,7 +358,7 @@ defmodule Closex.HTTPClientTest do
       use_cassette "find_leads_rate_limit" do
         {:ok, result} = find_leads("Minogue OR Princess")
 
-        assert_received {:retry_find, [1]}
+        assert_received {:sleep_mock, [1000]}
 
         assert %{"has_more" => false, "total_results" => 2, "data" => leads} = result
         assert is_list(leads)

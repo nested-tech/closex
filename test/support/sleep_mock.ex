@@ -5,5 +5,5 @@ defmodule Closex.SleepMock do
   (for example) pass
   """
 
-  def sleep(_arg), do: nil
+  def sleep(zzz), do: send(self(), {:sleep_mock, [zzz]})
 end
