@@ -9,6 +9,7 @@ defmodule Closex.HTTPClient do
 
   @base_url "https://app.close.io/api/v1"
   @behaviour Closex.ClientBehaviour
+  @sleep_module Application.get_env(:closex, :sleep_module, Process)
 
   ## TODO: httpoison opts should move underneath the `:httpoison` key
 
@@ -119,7 +120,7 @@ defmodule Closex.HTTPClient do
   defp wait_and_retry(resource, opts, rate_reset) do
     {seconds, _remainder} = Integer.parse(rate_reset)
 
-    if Mix.env() != :test, do: Process.sleep(:timer.seconds(seconds + 1))
+    @sleep_module.sleep(:timer.seconds(seconds + 1))
 
     # REVIEW: This is purely for tests, is that a smell? Any alternatives?
     send(self(), {:retry_find, [seconds + 1]})
