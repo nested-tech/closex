@@ -10,7 +10,6 @@ defmodule Closex.HTTPClient do
   @base_url "https://app.close.io/api/v1"
   @behaviour Closex.ClientBehaviour
   @sleep_module Application.get_env(:closex, :sleep_module, Process)
-  @rate_limit_retry Application.get_env(:closex, :rate_limit_retry, false)
 
   ## TODO: httpoison opts should move underneath the `:httpoison` key
 
@@ -94,7 +93,7 @@ defmodule Closex.HTTPClient do
   defp find(resource, search_term, opts) do
     opts = merge_search_term_into_opts(search_term, opts)
 
-    if @rate_limit_retry do
+    if rate_limit_retry?(opts) do
       find_respecting_rate_limit(resource, opts)
     else
       make_find_request(resource, opts)
@@ -248,5 +247,13 @@ defmodule Closex.HTTPClient do
       {:system, env} -> System.get_env(env)
       key when is_binary(key) -> key
     end
+  end
+
+  defp rate_limit_retry?(opts) do
+    Keyword.get(
+      opts,
+      :rate_limit_retry,
+      Application.get_env(:closex, :rate_limit_retry, false)
+    )
   end
 end

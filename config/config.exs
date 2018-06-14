@@ -7,7 +7,6 @@ if Mix.env() == :test do
     api_key: System.get_env("CLOSEX_CLOSEIO_API_KEY") || "FAKE_CLOSEIO_TOKEN",
     fallback_client: Closex.MockClient,
     mock_client_fixtures_dir: "test/fixtures",
-    rate_limit_retry: true,
     sleep_module: Closex.SleepMock
 
   config :logger, level: :warn

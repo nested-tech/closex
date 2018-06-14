@@ -126,6 +126,21 @@ Options will be passed through to [HTTPoison](https://github.com/edgurgel/httpoi
 Closex.HTTPClient.get_lead("my_lead_id", timeout: 500, recv_timeout: 1_000)
 ```
 
+### Rate limit retry
+
+When we hit a rate limit on certain requests, there's a beta configuration to get the client to take this into account, wait a second longer than the remaining rate limit window then retry again. This can be enabled for all affected requests (see [Configuration](#configuration)) or on a per-request basis:
+
+```elixir
+Closex.HTTPClient.get_lead("my_lead_id", rate_limit_retry: true)
+```
+
+This is only limited to certain requests as it's being trialled, if useful then we'll roll it out across other requests. The requests are:
+
+* `find_leads`
+* `find_opportunities`
+* `find_all_opportunities`
+* `get_users`
+
 ## Contributing
 
 Everyone is encouraged to help improve this project. Here are a few ways you can help:
