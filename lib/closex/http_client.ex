@@ -10,17 +10,18 @@ defmodule Closex.HTTPClient do
   @base_url "https://app.close.io/api/v1"
   @behaviour Closex.ClientBehaviour
   @sleep_module Application.get_env(:closex, :sleep_module, Process)
+  @rate_limit_retry Application.get_env(:closex, :rate_limit_retry, false)
 
   ## TODO: httpoison opts should move underneath the `:httpoison` key
 
   @doc "List or search for leads: https://developer.close.io/#leads-list-or-search-for-leads"
   def find_leads(search_term, opts \\ []) do
-    find_respecting_rate_limit("lead", search_term, opts)
+    find("lead", search_term, opts)
   end
 
   @doc "List or search for opportunities: https://developer.close.io/#opportunities-list-or-filter-opportunities"
   def find_opportunities(search_term, opts \\ []) do
-    find_respecting_rate_limit("opportunity", search_term, opts)
+    find("opportunity", search_term, opts)
   end
 
   @doc "Fetch a single lead: https://developer.close.io/#leads-retrieve-a-single-lead"
@@ -90,7 +91,17 @@ defmodule Closex.HTTPClient do
 
   # Private stuff...
 
-  defp find(resource, opts) do
+  defp find(resource, search_term, opts) do
+    opts = merge_search_term_into_opts(search_term, opts)
+
+    if @rate_limit_retry do
+      find_respecting_rate_limit(resource, opts)
+    else
+      make_find_request(resource, opts)
+    end
+  end
+
+  defp make_find_request(resource, opts) do
     get("/#{resource}/", [], opts)
     |> handle_response
   end
@@ -100,13 +111,8 @@ defmodule Closex.HTTPClient do
   # information. Use this to wait till the end of the reset window and retry.
   # See https://developer.close.io/#ratelimits for more info
   #
-  # REVIEW: I've only implemented this on `find` as that's the only place we're
-  # hitting rate limits and it limits the scope of this change (in case of
-  # fubar). Should this be applied more generally?
-  defp find_respecting_rate_limit(resource, search_term, opts) do
-    opts = merge_search_term_into_opts(search_term, opts)
-
-    response = find(resource, opts)
+  defp find_respecting_rate_limit(resource, opts) do
+    response = make_find_request(resource, opts)
 
     case response do
       {:error, %{status_code: 429, body: %{"rate_reset" => rate_reset}}} ->
@@ -122,12 +128,11 @@ defmodule Closex.HTTPClient do
 
     @sleep_module.sleep(:timer.seconds(seconds + 1))
 
-    find(resource, opts)
+    make_find_request(resource, opts)
   end
 
   def find_all(resource, search, limit \\ 100, skip \\ 0, results \\ []) do
-    {:ok, response} =
-      find_respecting_rate_limit(resource, search, params: %{_limit: limit, _skip: skip})
+    {:ok, response} = find(resource, search, params: %{_limit: limit, _skip: skip})
 
     accumulated_data = results ++ response["data"]
 
