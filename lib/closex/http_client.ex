@@ -9,6 +9,7 @@ defmodule Closex.HTTPClient do
 
   @base_url "https://app.close.io/api/v1"
   @behaviour Closex.ClientBehaviour
+  @sleep_module Application.get_env(:closex, :sleep_module, Process)
 
   ## TODO: httpoison opts should move underneath the `:httpoison` key
 
@@ -92,8 +93,41 @@ defmodule Closex.HTTPClient do
   defp find(resource, search_term, opts) do
     opts = merge_search_term_into_opts(search_term, opts)
 
+    if rate_limit_retry?(opts) do
+      find_respecting_rate_limit(resource, opts)
+    else
+      make_find_request(resource, opts)
+    end
+  end
+
+  defp make_find_request(resource, opts) do
     get("/#{resource}/", [], opts)
     |> handle_response
+  end
+
+  # This function will attempt to carry out a `find` operation. If that fails
+  # with a 429 (Too Many Requests), close.io will provide us rate limiting
+  # information. Use this to wait till the end of the reset window and retry.
+  # See https://developer.close.io/#ratelimits for more info
+  #
+  defp find_respecting_rate_limit(resource, opts) do
+    response = make_find_request(resource, opts)
+
+    case response do
+      {:error, %{status_code: 429, body: %{"rate_reset" => rate_reset}}} ->
+        wait_and_retry(resource, opts, rate_reset)
+
+      no_rate_limit ->
+        no_rate_limit
+    end
+  end
+
+  defp wait_and_retry(resource, opts, rate_reset) do
+    {seconds, _remainder} = Integer.parse(rate_reset)
+
+    @sleep_module.sleep(:timer.seconds(seconds + 1))
+
+    make_find_request(resource, opts)
   end
 
   def find_all(resource, search, limit \\ 100, skip \\ 0, results \\ []) do
@@ -140,6 +174,10 @@ defmodule Closex.HTTPClient do
   end
 
   defp handle_response({:ok, response = %{status_code: status_code}}) when status_code >= 500 do
+    {:error, response}
+  end
+
+  defp handle_response({:ok, response = %{status_code: 429}}) do
     {:error, response}
   end
 
@@ -209,5 +247,13 @@ defmodule Closex.HTTPClient do
       {:system, env} -> System.get_env(env)
       key when is_binary(key) -> key
     end
+  end
+
+  defp rate_limit_retry?(opts) do
+    Keyword.get(
+      opts,
+      :rate_limit_retry,
+      Application.get_env(:closex, :rate_limit_retry, false)
+    )
   end
 end

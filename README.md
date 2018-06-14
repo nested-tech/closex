@@ -29,10 +29,16 @@ In your config.exs:
 
 ```elixir
 config :closex,
-  api_key: "YOUR_API_KEY"
+  # This should be accessible from your user's account page in close.io
+  api_key: "YOUR_API_KEY",
+
+  # This is a beta feature which will wait and retry `find_lead` and
+  # `find_opportunity` requests *once* if you hit your rate limit. The intention
+  # is that this will be gradually rolled out across other requests as needed.
+  rate_limit_retry: true # Defaults to `false` (don't retry)
 ```
 
-You can also read from an environment variable:
+You can also read the API key from an environment variable, such as:
 
 ```elixir
 config :closex,
@@ -86,7 +92,7 @@ Next, use it in your code:
 # your_app/lib/module_which_uses_closeio.ex
 
 defmodule YourApp.ModuleWhichUsesCloseIO do
-  
+
   @closeio_client Application.fetch_env!(:your_app, :closeio_client)
 
   def do_things_with_a_close_io_lead(id) do
@@ -110,7 +116,6 @@ config :yourapp,
   ...other configuration...
 ```
 
-
 For more details on the mock client please see [the docs](https://hexdocs.pm/closex).
 
 ## Options
@@ -120,6 +125,21 @@ Options will be passed through to [HTTPoison](https://github.com/edgurgel/httpoi
 ```elixir
 Closex.HTTPClient.get_lead("my_lead_id", timeout: 500, recv_timeout: 1_000)
 ```
+
+### Rate limit retry
+
+When we hit a rate limit on certain requests, there's a beta configuration to get the client to take this into account, wait a second longer than the remaining rate limit window then retry again. This can be enabled for all affected requests (see [Configuration](#configuration)) or on a per-request basis:
+
+```elixir
+Closex.HTTPClient.get_lead("my_lead_id", rate_limit_retry: true)
+```
+
+This is only limited to certain requests as it's being trialled, if useful then we'll roll it out across other requests. The requests are:
+
+* `find_leads`
+* `find_opportunities`
+* `find_all_opportunities`
+* `get_users`
 
 ## Contributing
 

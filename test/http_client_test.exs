@@ -353,6 +353,37 @@ defmodule Closex.HTTPClientTest do
         assert leads == []
       end
     end
+
+    test "obeys rate limits, waiting once" do
+      use_cassette "find_leads_rate_limit" do
+        {:ok, result} = find_leads("Minogue OR Princess", rate_limit_retry: true)
+
+        assert_received {:sleep_mock, [1000]}
+
+        assert %{"has_more" => false, "total_results" => 2, "data" => leads} = result
+        assert is_list(leads)
+
+        lead_names =
+          for %{"name" => name} <- leads do
+            name
+          end
+
+        assert lead_names == ["Wiley Minogue", "Princess"]
+      end
+    end
+
+    test "returns rate limit failures if not configured" do
+      use_cassette "find_leads_rate_limit" do
+        {:error, result} = find_leads("Minogue OR Princess", rate_limit_retry: false)
+
+        refute_received {:sleep_mock, [1000]}
+
+        assert %{
+                 status_code: 429,
+                 body: %{"message" => "API call count exceeded for this period"}
+               } = result
+      end
+    end
   end
 
   describe "find_opportunities/1" do
