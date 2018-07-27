@@ -34,7 +34,7 @@ defmodule Closex.Mixfile do
 
   defp deps do
     [
-      {:poison, "~> 3.1.0"},
+      {:poison, "~> 4.0.0"},
       {:httpoison, "~> 0.13.0"},
       {:cachex, "~> 2.1.0"},
       {:exvcr, "~> 0.8", only: :test, optional: true},
