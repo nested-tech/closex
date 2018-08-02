@@ -1,7 +1,7 @@
 [
   {
     "request": {
-      "body": "{\"value_period\":\"monthly\",\"value\":500,\"status_id\":\"stat_vQWQtofUTvlcdgo1R1lsauc5Inez29fxk0SEOKC8qBg\",\"note\":\"i hope this deal closes...\",\"lead_id\":\"lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm\",\"confidence\":90}",
+      "body": "{\"confidence\":90,\"lead_id\":\"lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm\",\"note\":\"i hope this deal closes...\",\"status_id\":\"stat_vQWQtofUTvlcdgo1R1lsauc5Inez29fxk0SEOKC8qBg\",\"value\":500,\"value_period\":\"monthly\"}",
       "headers": {
         "Accept": "application/json",
         "Content-Type": "application/json"

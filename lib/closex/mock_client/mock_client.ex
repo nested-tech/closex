@@ -488,7 +488,7 @@ defmodule Closex.MockClient do
 
         case file do
           {:ok, binary} ->
-            Poison.decode!(binary)
+            Jason.decode!(binary)
 
           {:error, _} when fallback |> is_nil ->
             load_default(filename)
@@ -520,6 +520,6 @@ defmodule Closex.MockClient do
   defp load_default(filename) do
     Path.join([__DIR__, "fixtures", filename])
     |> File.read!()
-    |> Poison.decode!()
+    |> Jason.decode!()
   end
 end

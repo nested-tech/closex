@@ -205,14 +205,14 @@ defmodule Closex.HTTPClient do
     |> handle_response
   end
 
-  defp process_request_headers(headers) do
+  def process_request_headers(headers) do
     case :proplists.get_value("Accept", headers) do
       :undefined -> [{"Accept", "application/json"} | headers]
       _ -> headers
     end
   end
 
-  defp process_request_options(options) do
+  def process_request_options(options) do
     default_opts = [
       hackney: [basic_auth: {api_key(), ""}]
     ]
@@ -221,24 +221,24 @@ defmodule Closex.HTTPClient do
   end
 
   defp put_json(path, payload, headers, opts) do
-    put(path, Poison.encode!(payload), headers, opts)
+    put(path, Jason.encode!(payload), headers, opts)
   end
 
   defp post_json(path, payload, headers, opts) do
-    post(path, Poison.encode!(payload), headers, opts)
+    post(path, Jason.encode!(payload), headers, opts)
   end
 
   # Attempt to parse the body into JSON but in case that fails, pass the
   # original body through untouched
-  defp process_response_body(body) do
-    case Poison.decode(body) do
+  def process_response_body(body) do
+    case Jason.decode(body) do
       {:ok, body} -> body
       {:error, _} -> body
       {:error, :invalid, _} -> body
     end
   end
 
-  defp process_url(path) do
+  def process_url(path) do
     @base_url <> path
   end
 
