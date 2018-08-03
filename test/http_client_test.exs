@@ -4,6 +4,9 @@ defmodule Closex.HTTPClientTest do
 
   setup_all do
     HTTPoison.start()
+  end
+
+  setup do
     ExVCR.Config.cassette_library_dir("test/fixtures/vcr_cassettes")
   end
 
@@ -212,7 +215,7 @@ defmodule Closex.HTTPClientTest do
 
   describe "create_lead/1" do
     test "when close.io is up and we are passed a valid lead payload, creates a lead on CloseIO" do
-      use_cassette "create_lead", match_requests_on: [:request_body] do
+      use_cassette "create_lead" do
         {:ok, lead} = create_lead(@valid_create_lead_params)
 
         assert lead ==
@@ -414,7 +417,7 @@ defmodule Closex.HTTPClientTest do
 
   describe "create_opportunity/1" do
     test "creates an opportunity on CloseIO" do
-      use_cassette "create_opportunity", match_requests_on: [:request_body] do
+      use_cassette "create_opportunity" do
         {:ok, body} = create_opportunity(@valid_opportunity_create_params)
 
         assert Map.keys(body) ==
@@ -497,7 +500,7 @@ defmodule Closex.HTTPClientTest do
         "status" => "outbox"
       }
 
-      use_cassette "send_email", match_requests_on: [:request_body] do
+      use_cassette "send_email" do
         {:ok, body} = send_email(email)
 
         assert Map.keys(body) ==

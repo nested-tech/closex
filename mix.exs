@@ -4,7 +4,7 @@ defmodule Closex.Mixfile do
   def project do
     [
       app: :closex,
-      version: "0.9.0",
+      version: "1.0.0",
       build_path: "_build",
       config_path: "config/config.exs",
       deps_path: "deps",
@@ -34,14 +34,13 @@ defmodule Closex.Mixfile do
 
   defp deps do
     [
-      {:poison, "~> 3.1.0"},
-      {:httpoison, "~> 0.13.0"},
-      {:cachex, "~> 2.1.0"},
-      {:exvcr, "~> 0.8", only: :test, optional: true},
+      {:jason, ">= 1.0.0"},
+      {:httpoison, ">= 0.0.0"},
+      {:exvcr, ">= 0.8.0", only: :test, optional: true},
       {:ex_doc, ">= 0.0.0", only: :dev, optional: true},
-      {:excoveralls, "~> 0.4", only: :test, optional: true},
-      {:dialyxir, ">= 0.0.0", runtime: false},
-      {:mix_test_watch, "~> 0.3", only: :dev, runtime: false}
+      {:excoveralls, ">= 0.4.0", only: :test, optional: true},
+      {:dialyxir, ">= 0.0.0", runtime: false, optional: true},
+      {:mix_test_watch, ">= 0.3.0", only: :dev, runtime: false, optional: true}
     ]
   end
 
