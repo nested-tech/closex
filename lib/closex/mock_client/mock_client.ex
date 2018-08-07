@@ -85,8 +85,13 @@ defmodule Closex.MockClient do
 
   def get_lead(id, opts) do
     lead =
-      load("lead.json")
-      |> Map.put("id", id)
+      if Enum.member?(opts, :path) do
+        load(opts.path)
+        |> Map.put("id", id)
+      else
+        load("lead.json")
+        |> Map.put("id", id)
+      end
 
     send(self(), {:closex_mock_client, :get_lead, [id, opts]})
     {:ok, lead}
