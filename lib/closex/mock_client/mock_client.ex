@@ -83,15 +83,19 @@ defmodule Closex.MockClient do
     {:error, %HTTPoison.Error{id: nil, reason: :timeout}}
   end
 
+  def get_lead(id = @lead_id, opts) do
+    lead =
+      load("lead.json")
+      |> Map.put("id", id)
+
+    send(self(), {:closex_mock_client, :get_lead, [id, opts]})
+    {:ok, lead}
+  end
+
   def get_lead(id, opts) do
     lead =
-      if Enum.member?(opts, :path) do
-        load(opts.path)
-        |> Map.put("id", id)
-      else
-        load("lead.json")
-        |> Map.put("id", id)
-      end
+      load("#{id}.json")
+      |> Map.put("id", id)
 
     send(self(), {:closex_mock_client, :get_lead, [id, opts]})
     {:ok, lead}
