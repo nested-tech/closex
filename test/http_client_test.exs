@@ -593,6 +593,12 @@ defmodule Closex.HTTPClientTest do
         assert first_user["last_name"] == "Margolius"
       end
     end
+
+    test "if close.io times out, it acts as a pass through" do
+      use_cassette "get_users_timeout", match_requests_on: [:request_body, :query] do
+        {:error, %{reason: "fake_timeout"}} = get_users()
+      end
+    end
   end
 
   describe ".get_organization/1" do

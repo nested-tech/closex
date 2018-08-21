@@ -8,7 +8,7 @@
       "method": "get",
       "options": {
         "basic_auth": [
-          "4a20342eb258aefd0a9805b44600fa0b60cc0d1d089e65064e38d41d",
+          "FAKE_CLOSEIO_TOKEN",
           ""
         ]
       },

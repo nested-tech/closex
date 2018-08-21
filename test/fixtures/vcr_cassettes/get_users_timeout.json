@@ -1,0 +1,25 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": {
+        "basic_auth": [
+          "FAKE_CLOSEIO_TOKEN",
+          ""
+        ]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/user/?_limit=100&_skip=0&query="
+    },
+    "response": {
+      "body": "fake_timeout",
+      "headers": [],
+      "status_code": null,
+      "type": "error"
+    }
+  }
+]
