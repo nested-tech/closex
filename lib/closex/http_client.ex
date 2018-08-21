@@ -131,14 +131,18 @@ defmodule Closex.HTTPClient do
   end
 
   def find_all(resource, search, limit \\ 100, skip \\ 0, results \\ []) do
-    {:ok, response} = find(resource, search, params: %{_limit: limit, _skip: skip})
+    case find(resource, search, params: %{_limit: limit, _skip: skip}) do
+      {:ok, response} ->
+        accumulated_data = results ++ response["data"]
 
-    accumulated_data = results ++ response["data"]
+        if response["has_more"] do
+          find_all(resource, search, limit, skip + limit, accumulated_data)
+        else
+          {:ok, Map.put(response, "data", accumulated_data)}
+        end
 
-    if response["has_more"] do
-      find_all(resource, search, limit, skip + limit, accumulated_data)
-    else
-      {:ok, Map.put(response, "data", accumulated_data)}
+      {:error, error} ->
+        {:error, error}
     end
   end
 
