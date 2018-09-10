@@ -8,10 +8,7 @@
       },
       "method": "get",
       "options": {
-        "basic_auth": [
-          "4a20342eb258aefd0a9805b44600fa0b60cc0d1d089e65064e38d41d",
-          ""
-        ]
+        "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
       },
       "request_body": "",
       "url": "https://app.close.io/api/v1/opportunity/?_limit=45&_skip=0&query=opportunity_status_type%3Aactive"
@@ -44,10 +41,7 @@
       },
       "method": "get",
       "options": {
-        "basic_auth": [
-          "4a20342eb258aefd0a9805b44600fa0b60cc0d1d089e65064e38d41d",
-          ""
-        ]
+        "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
       },
       "request_body": "",
       "url": "https://app.close.io/api/v1/opportunity/?_limit=45&_skip=45&query=opportunity_status_type%3Aactive"

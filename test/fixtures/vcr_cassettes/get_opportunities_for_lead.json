@@ -1,0 +1,35 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": {
+        "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/opportunity/?lead_id=lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"total_value_monthly_formatted\": \"\\u00a35\", \"total_value_one_time_formatted\": null, \"total_results\": 1, \"has_more\": false, \"expected_value_one_time\": 0, \"total_value_one_time\": 0, \"total_value_annualized_formatted\": \"\\u00a360\", \"expected_value_monthly\": 450, \"expected_value_annual\": 0, \"total_value_annual\": 0, \"expected_value_annualized_formatted\": \"\\u00a354\", \"total_value_annualized\": 6000, \"expected_value_annual_formatted\": null, \"total_value_monthly\": 500, \"count_by_value_period\": {\"monthly\": 1}, \"total_value_annual_formatted\": null, \"expected_value_annualized\": 5400, \"data\": [{\"date_updated\": \"2018-02-14T12:31:45.728000+00:00\", \"created_by_name\": \"API User (DO NOT DELETE)\", \"value_currency\": \"GBP\", \"contact_id\": null, \"lead_name\": \"Luke Skywalker\", \"contact_name\": null, \"id\": \"oppo_otkBudcuHXq90sC43gex0ddp5XYQjvKndlOGMHjE9Ph\", \"confidence\": 90, \"user_id\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"value_period\": \"monthly\", \"created_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"note\": \"my_note\", \"updated_by_name\": \"API User (DO NOT DELETE)\", \"user_name\": \"API User (DO NOT DELETE)\", \"status_type\": \"active\", \"updated_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"status_id\": \"stat_gc2L6rDDQV9evg1PbdEW0LvgtBrnu1EhMQUgJXZ6Kuy\", \"value_formatted\": \"\\u00a35 monthly\", \"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"integration_links\": [], \"date_won\": null, \"lead_id\": \"lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm\", \"date_lost\": null, \"value\": 500, \"status_label\": \"S01: Received Offer Request\", \"date_created\": \"2017-09-29T11:07:23.962000+00:00\"}], \"expected_value_one_time_formatted\": null, \"expected_value_monthly_formatted\": \"\\u00a34.50\"}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Date": "Mon, 10 Sep 2018 09:05:23 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "320",
+        "X-Rate-Limit-Remaining": "319",
+        "X-Rate-Limit-Reset": "7.164582",
+        "Content-Length": "1722",
+        "Connection": "keep-alive"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

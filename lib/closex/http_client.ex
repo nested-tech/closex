@@ -36,6 +36,12 @@ defmodule Closex.HTTPClient do
   def get_opportunity(opportunity_id, opts \\ []),
     do: fetch_object("opportunity", opportunity_id, opts)
 
+  @doc "Get opportunities: https://developer.close.io/#opportunities"
+  def get_opportunities(opts \\ []) do
+    get("/opportunity/", [], opts)
+    |> handle_response
+  end
+
   @doc "Create an opportunity: https://developer.close.io/#opportunities-create-an-opportunity"
   def create_opportunity(payload, opts \\ []), do: create_object("opportunity", payload, opts)
 

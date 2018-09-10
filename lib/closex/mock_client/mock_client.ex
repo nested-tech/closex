@@ -134,6 +134,10 @@ defmodule Closex.MockClient do
     {:ok, opportunity}
   end
 
+  def get_opportunities(_opts) do
+    {:ok, []}
+  end
+
   @doc """
   Gets a lead custom field from CloseIO.
 
