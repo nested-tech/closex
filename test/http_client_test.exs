@@ -646,4 +646,43 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
+  describe "get_opportunities/1" do
+    test "gets opportunities for a lead" do
+      use_cassette "get_opportunities_for_lead" do
+        {:ok, response} = get_opportunities(params: %{lead_id: @valid_lead_id})
+
+        assert response["data"] |> is_list
+
+        assert hd(response["data"]) |> Map.keys() == [
+                 "confidence",
+                 "contact_id",
+                 "contact_name",
+                 "created_by",
+                 "created_by_name",
+                 "date_created",
+                 "date_lost",
+                 "date_updated",
+                 "date_won",
+                 "id",
+                 "integration_links",
+                 "lead_id",
+                 "lead_name",
+                 "note",
+                 "organization_id",
+                 "status_id",
+                 "status_label",
+                 "status_type",
+                 "updated_by",
+                 "updated_by_name",
+                 "user_id",
+                 "user_name",
+                 "value",
+                 "value_currency",
+                 "value_formatted",
+                 "value_period"
+               ]
+      end
+    end
+  end
 end
