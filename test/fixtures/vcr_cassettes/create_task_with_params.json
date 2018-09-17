@@ -1,0 +1,36 @@
+[
+  {
+    "request": {
+      "body": "{\"assigned_to\":\"user_P7CxiTgnGfZBOar8XeKFiRbzCY4LMiDSvGloZ4bpMw9\",\"date\":\"2018-01-01\",\"is_complete\":true,\"lead_id\":\"lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm\",\"text\":\"Very onerous task for which many calls must be made; many notes, written; and many alpacas, shaved.\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": {
+        "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/task/"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"date_updated\": \"2018-09-17T17:41:56.144000+00:00\", \"text\": \"Very onerous task for which many calls must be made; many notes, written; and many alpacas, shaved.\", \"object_type\": \"taskcompleted\", \"assigned_to_name\": \"Developers Developers Developers Developers\", \"created_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"lead_name\": \"Luke Skywalker\", \"contact_name\": null, \"id\": \"task_PNNyKi9YTlvoRQ3DCmr5TtNsrVmXyoIo6UXpqyfSHa1\", \"object_id\": \"acti_44p5lwoBtNKYUYriaw60kzmHiZa15aynDIuWcN7HjnP\", \"updated_by_name\": \"API User (DO NOT DELETE)\", \"created_by_name\": \"API User (DO NOT DELETE)\", \"is_dateless\": false, \"due_date\": \"2018-01-01\", \"_type\": \"lead\", \"updated_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"contact_id\": null, \"date\": \"2018-01-01\", \"lead_id\": \"lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm\", \"assigned_to\": \"user_P7CxiTgnGfZBOar8XeKFiRbzCY4LMiDSvGloZ4bpMw9\", \"date_created\": \"2018-09-17T17:41:55.989000+00:00\", \"is_complete\": true, \"view\": \"archive\"}",
+      "headers": {
+        "Content-Type": "application/json; charset=UTF-8",
+        "Date": "Mon, 17 Sep 2018 17:41:56 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "320",
+        "X-Rate-Limit-Remaining": "318",
+        "X-Rate-Limit-Reset": "5.041301",
+        "Content-Length": "1064",
+        "Connection": "keep-alive"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
