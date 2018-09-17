@@ -371,6 +371,45 @@ defmodule Closex.MockClient do
     {:ok, opportunity}
   end
 
+  def create_task(lead_id, text, params \\ %{}, opts \\ [])
+
+  def create_task(@not_found_id, text, params, opts) do
+    send(self(), {:closex_mock_client, :create_task, [@not_found_id, text, params, opts]})
+
+    {:error,
+     %{
+       "errors" => [],
+       "field-errors" => %{"lead" => "Object does not exist."}
+     }}
+  end
+
+  def create_task(@timeout_query, text, params, opts) do
+    send(self(), {:closex_mock_client, :create_task, [@timeout_query, text, params, opts]})
+    {:error, %HTTPoison.Error{id: nil, reason: :timeout}}
+  end
+
+  def create_task(lead_id, text, params, opts) do
+    valid_param_keys = [
+      :_type,
+      :lead_id,
+      :assigned_to,
+      :text,
+      :date,
+      :is_complete
+    ]
+
+    final_params =
+      for {k, v} <- params, k in valid_param_keys, do: {Atom.to_string(k), v}, into: %{}
+
+    task =
+      load("task.json")
+      |> Map.merge(%{"lead_id" => lead_id, "text" => text})
+      |> Map.merge(final_params)
+
+    send(self(), {:closex_mock_client, :create_task, [lead_id, text, params, opts]})
+    {:ok, task}
+  end
+
   @doc """
   Sends an email CloseIO.
 
