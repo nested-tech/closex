@@ -152,8 +152,6 @@ defmodule Closex.HTTPClient do
     end
   end
 
-  @spec create_task(binary(), binary(), map(), Keyword.t()) ::
-          {:ok, HTTPoison.Response.t()} | {:error, HTTPoison.Error.t()}
   @doc "Creates a task for the given lead and text. [Optional parameters](https://developer.close.io/#tasks-create-a-task)"
   def create_task(lead_id, text, params \\ %{}, opts \\ []) do
     payload = Map.merge(params, %{lead_id: lead_id, text: text})
