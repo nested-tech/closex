@@ -488,6 +488,96 @@ defmodule Closex.HTTPClientTest do
     end
   end
 
+  describe "create_task/2" do
+    test "creates a task on CloseIO for the correct lead" do
+      use_cassette("create_task", match_requests_on: [:request_body]) do
+        text =
+          "Very onerous task for which many calls must be made; many notes, written; and many alpacas, shaved."
+
+        {:ok, task} =
+          create_task(
+            @valid_lead_id,
+            text
+          )
+
+        assert Map.keys(task) == [
+                 "_type",
+                 "assigned_to",
+                 "assigned_to_name",
+                 "contact_id",
+                 "contact_name",
+                 "created_by",
+                 "created_by_name",
+                 "date",
+                 "date_created",
+                 "date_updated",
+                 "due_date",
+                 "id",
+                 "is_complete",
+                 "is_dateless",
+                 "lead_id",
+                 "lead_name",
+                 "object_id",
+                 "object_type",
+                 "organization_id",
+                 "text",
+                 "updated_by",
+                 "updated_by_name",
+                 "view"
+               ]
+
+        assert task["lead_id"] == @valid_lead_id
+        assert task["is_complete"] == false
+        assert task["text"] == text
+      end
+    end
+
+    test "creates a task with optional parameters" do
+      use_cassette("create_task_with_params", match_requests_on: [:request_body]) do
+        text =
+          "Very onerous task for which many calls must be made; many notes, written; and many alpacas, shaved."
+
+        params = %{
+          date: "2018-01-01",
+          assigned_to: "user_P7CxiTgnGfZBOar8XeKFiRbzCY4LMiDSvGloZ4bpMw9",
+          is_complete: true
+        }
+
+        {:ok, task} =
+          create_task(
+            @valid_lead_id,
+            text,
+            params
+          )
+
+        assert task["lead_id"] == @valid_lead_id
+        assert task["is_complete"] == true
+        assert task["text"] == text
+        assert task["due_date"] == params.date
+        assert task["assigned_to"] == params.assigned_to
+        assert task["assigned_to_name"] == "Developers Developers Developers Developers"
+      end
+    end
+
+    test "returns an error for invalid lead" do
+      use_cassette("create_task_with_invalid_lead", match_requests_on: [:request_body]) do
+        text =
+          "Very onerous task for which many calls must be made; many notes, written; and many alpacas, shaved."
+
+        {:error, response} =
+          create_task(
+            @invalid_lead_id,
+            text
+          )
+
+        assert response == %{
+                 "errors" => [],
+                 "field-errors" => %{"lead" => "Object does not exist."}
+               }
+      end
+    end
+  end
+
   describe "send_email/1" do
     test "sends an email" do
       email = %{

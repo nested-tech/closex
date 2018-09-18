@@ -109,4 +109,68 @@ defmodule Closex.MockClientTest do
                update_lead(Closex.MockClient.timeout_query(), %{})
     end
   end
+
+  describe "create_task/2" do
+    test "it returns a task with the given lead_id and text" do
+      {:ok, task} = create_task(Closex.MockClient.lead_id(), "Texty McTexterson")
+
+      assert_received(
+        {:closex_mock_client, :create_task, [lead_id, "Texty McTexterson", %{}, []]}
+      )
+
+      assert task["text"] == "Texty McTexterson"
+      assert task["lead_id"] == lead_id()
+    end
+
+    test "it returns a task with the given lead_id and text and with correct params merged in" do
+      params = %{
+        assigned_to: "user_id",
+        date: "2018-02-02",
+        not_a_field: "whatevz"
+      }
+
+      {:ok, task} = Closex.MockClient.create_task(lead_id(), "Texty McTexterson", params)
+
+      assert_received(
+        {:closex_mock_client, :create_task, [lead_id, "Texty McTexterson", ^params, []]}
+      )
+
+      assert task["text"] == "Texty McTexterson"
+      assert task["lead_id"] == lead_id()
+      assert task["assigned_to"] == "user_id"
+      assert task["date"] == "2018-02-02"
+
+      refute Map.has_key?(task, :assigned_to)
+      refute Map.has_key?(task, :date)
+      refute Map.has_key?(task, :not_a_field)
+      refute Map.has_key?(task, "not_a_field")
+    end
+
+    test "it returns an error for the invalid lead id" do
+      lead_id = not_found_id()
+
+      {:error, response} = create_task(lead_id, "Texty McTexterson")
+
+      assert_received(
+        {:closex_mock_client, :create_task, [lead_id, "Texty McTexterson", %{}, []]}
+      )
+
+      assert response == %{
+               "errors" => [],
+               "field-errors" => %{"lead" => "Object does not exist."}
+             }
+    end
+
+    test "it returns an timeout error for the timeout lead it" do
+      lead_id = timeout_query()
+
+      {:error, response} = create_task(lead_id, "Texty McTexterson")
+
+      assert_received(
+        {:closex_mock_client, :create_task, [lead_id, "Texty McTexterson", %{}, []]}
+      )
+
+      assert response == %HTTPoison.Error{id: nil, reason: :timeout}
+    end
+  end
 end

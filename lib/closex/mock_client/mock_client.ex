@@ -372,6 +372,68 @@ defmodule Closex.MockClient do
   end
 
   @doc """
+  Stubs creation of a task for the given lead with the given text on Close.IO.
+
+  Returns `{:ok, task} or `{:error, error}` (possible errors are lead not found and HTTP timeout on using `not_found_id` and `timeout_query` respectively as `lead_id`)
+
+  By default, the task returned is the contents of `test/fixtures/task.json` but with the lead id and text provided in the arguments.
+
+  Any optional parameters permitted in the [Close.IO API](https://developer.close.io/#tasks-create-a-task) will be merged into the resulting task and all others will be omitted.
+
+  ## Examples
+
+    > Closex.MockClient.create_task(Closex.MockClient.lead_id(), "I am task", %{})
+    ...contents of test/fixtures/organization.json (with ID lead_id() and text "I am task")...
+
+    > Closex.MockClient.create_task(Closex.MockClient.lead_id(), "I am task", %{assigned_to: "busy user", foo: "bar"})
+    ...contents of test/fixtures/organization.json (with ID lead_id(), text "I am task" and assigned_to "busy_user")...
+
+    iex> Closex.MockClient.create_task(Closex.MockClient.not_found_id(), "I am task", %{assigned_to: "busy user", foo: "bar"})
+    {:error, %{"errors" => [], "field-errors" => %{"lead" => "Object does not exist."}}}
+
+    iex> Closex.MockClient.create_task(Closex.MockClient.timeout_query(), "I am task", %{assigned_to: "busy user", foo: "bar"})
+    {:error, %HTTPoison.Error{id: nil, reason: :timeout}}
+  """
+  def create_task(lead_id, text, params \\ %{}, opts \\ [])
+
+  def create_task(@not_found_id, text, params, opts) do
+    send(self(), {:closex_mock_client, :create_task, [@not_found_id, text, params, opts]})
+
+    {:error,
+     %{
+       "errors" => [],
+       "field-errors" => %{"lead" => "Object does not exist."}
+     }}
+  end
+
+  def create_task(@timeout_query, text, params, opts) do
+    send(self(), {:closex_mock_client, :create_task, [@timeout_query, text, params, opts]})
+    {:error, %HTTPoison.Error{id: nil, reason: :timeout}}
+  end
+
+  def create_task(lead_id, text, params, opts) do
+    valid_param_keys = [
+      :_type,
+      :lead_id,
+      :assigned_to,
+      :text,
+      :date,
+      :is_complete
+    ]
+
+    final_params =
+      for {k, v} <- params, k in valid_param_keys, do: {Atom.to_string(k), v}, into: %{}
+
+    task =
+      load("task.json")
+      |> Map.merge(%{"lead_id" => lead_id, "text" => text})
+      |> Map.merge(final_params)
+
+    send(self(), {:closex_mock_client, :create_task, [lead_id, text, params, opts]})
+    {:ok, task}
+  end
+
+  @doc """
   Sends an email CloseIO.
 
   Returns `{:ok, email}`

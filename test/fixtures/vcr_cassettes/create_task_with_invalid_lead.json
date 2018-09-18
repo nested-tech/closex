@@ -1,0 +1,36 @@
+[
+  {
+    "request": {
+      "body": "{\"lead_id\":\"wibble\",\"text\":\"Very onerous task for which many calls must be made; many notes, written; and many alpacas, shaved.\"}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": {
+        "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/task/"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"errors\": [], \"field-errors\": {\"lead\": \"Object does not exist.\"}}",
+      "headers": {
+        "Content-Type": "application/json; charset=UTF-8",
+        "Date": "Mon, 17 Sep 2018 17:41:53 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "320",
+        "X-Rate-Limit-Remaining": "319",
+        "X-Rate-Limit-Reset": "7.722899",
+        "Content-Length": "66",
+        "Connection": "keep-alive"
+      },
+      "status_code": 400,
+      "type": "ok"
+    }
+  }
+]
