@@ -180,7 +180,7 @@ defmodule Closex.HTTPClient do
          {:ok,
           %{
             status_code: 400,
-            body: reason = %{"errors" => _errors, "field-errors" => _field_errors}
+            body: reason
           }}
        ) do
     {:error, reason}
