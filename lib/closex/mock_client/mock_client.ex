@@ -51,6 +51,9 @@ defmodule Closex.MockClient do
   @organization_id "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen"
   def organization_id, do: @organization_id
 
+  @error_name "error_name"
+  def error_name, do: @error_name
+
   @doc """
   Gets a lead from CloseIO.
 
@@ -262,7 +265,14 @@ defmodule Closex.MockClient do
     > Closex.MockClient.create_lead(%{})
     ...contents of test/fixtures/create_lead.json...
   """
-  def create_lead(payload, opts \\ []) do
+  def create_lead(payload, opts \\ [])
+
+  def create_lead(payload = %{"name" => @error_name}, opts) do
+    send(self(), {:closex_mock_client, :create_lead_error, [payload, opts]})
+    {:error, load("create_lead_error.json")}
+  end
+
+  def create_lead(payload, opts) do
     lead = load("create_lead.json")
     %{"contacts" => [lead_contact]} = lead
     %{"contacts" => [primary_payload_contact | other_payload_contacts]} = payload
