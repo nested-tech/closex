@@ -66,6 +66,39 @@ defmodule Closex.MockClientTest do
 
       assert ^expected_result = primary_contact
     end
+
+    test "it returns an error if you use the error name" do
+      payload = %{
+        "name" => Closex.MockClient.error_name()
+      }
+
+      {:error, error} = create_lead(payload)
+
+      assert error == %{
+               "errors" => [],
+               "field-errors" => %{
+                 "contacts" => %{
+                   "errors" => %{
+                     "0" => %{
+                       "errors" => [],
+                       "field-errors" => %{
+                         "phones" => %{
+                           "errors" => %{
+                             "0" => %{
+                               "errors" => [],
+                               "field-errors" => %{
+                                 "phone" => "Invalid phone number."
+                               }
+                             }
+                           }
+                         }
+                       }
+                     }
+                   }
+                 }
+               }
+             }
+    end
   end
 
   describe "find_leads/2" do

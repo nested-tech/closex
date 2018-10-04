@@ -13,50 +13,61 @@ defmodule Closex.HTTPClient do
 
   ## TODO: httpoison opts should move underneath the `:httpoison` key
 
+  @impl Closex.ClientBehaviour
   @doc "List or search for leads: https://developer.close.io/#leads-list-or-search-for-leads"
   def find_leads(search_term, opts \\ []) do
     find("lead", search_term, opts)
   end
 
+  @impl Closex.ClientBehaviour
   @doc "List or search for opportunities: https://developer.close.io/#opportunities-list-or-filter-opportunities"
   def find_opportunities(search_term, opts \\ []) do
     find("opportunity", search_term, opts)
   end
 
+  @impl Closex.ClientBehaviour
   @doc "Fetch a single lead: https://developer.close.io/#leads-retrieve-a-single-lead"
   def get_lead(lead_id, opts \\ []), do: fetch_object("lead", lead_id, opts)
 
+  @impl Closex.ClientBehaviour
   @doc "Create a new lead: https://developer.close.io/#leads-create-a-new-lead"
   def create_lead(payload, opts \\ []), do: create_object("lead", payload, opts)
 
+  @impl Closex.ClientBehaviour
   @doc "Update an existing lead: https://developer.close.io/#leads-update-an-existing-lead"
   def update_lead(lead_id, payload, opts \\ []), do: update_object("lead", lead_id, payload, opts)
 
+  @impl Closex.ClientBehaviour
   @doc "Fetch a single opportunity: https://developer.close.io/#opportunities-retrieve-an-opportunity"
   def get_opportunity(opportunity_id, opts \\ []),
     do: fetch_object("opportunity", opportunity_id, opts)
 
+  @impl Closex.ClientBehaviour
   @doc "Get opportunities: https://developer.close.io/#opportunities"
   def get_opportunities(opts \\ []) do
     get("/opportunity/", [], opts)
     |> handle_response
   end
 
+  @impl Closex.ClientBehaviour
   @doc "Create an opportunity: https://developer.close.io/#opportunities-create-an-opportunity"
   def create_opportunity(payload, opts \\ []), do: create_object("opportunity", payload, opts)
 
+  @impl Closex.ClientBehaviour
   @doc "Update an opportunity: https://developer.close.io/#opportunities-update-an-opportunity"
   def update_opportunity(opportunity_id, payload, opts \\ []),
     do: update_object("opportunity", opportunity_id, payload, opts)
 
   # Lead Custom Fields
 
+  @impl Closex.ClientBehaviour
   @doc "Fetch a custom fields details: https://developer.close.io/#custom-fields-fetch-custom-fields-details"
   def get_lead_custom_field(custom_field_id, opts \\ []),
     do: fetch_object("custom_fields/lead", custom_field_id, opts)
 
   # Organization
 
+  @impl Closex.ClientBehaviour
   @doc """
   Get an organizations details: https://developer.close.io/#organizations-get-an-organizations-details-including-its-current-members
 
@@ -67,16 +78,19 @@ defmodule Closex.HTTPClient do
 
   # Statuses
 
+  @impl Closex.ClientBehaviour
   # TODO: rename this function - as it's a list operation it feels odd calling it GET in the same sense as the singular getters.
   @doc "List lead statuses for your organization: https://developer.close.io/#lead-statuses-list-lead-statuses-for-your-organization"
   def get_lead_statuses(opts \\ []), do: fetch_object("status", "lead", opts)
 
+  @impl Closex.ClientBehaviour
   # TODO: rename this function - as it's a list operation it feels odd calling it GET in the same sense as the singular getters.
   @doc "List opportunity statuses for your organization: https://developer.close.io/#opportunity-statuses-list-opportunity-statuses-for-your-organization"
   def get_opportunity_statuses(opts \\ []), do: fetch_object("status", "opportunity", opts)
 
   # Emails
 
+  @impl Closex.ClientBehaviour
   @doc "Create an email activity: https://developer.close.io/#activities-create-an-email-activity"
   def send_email(payload, opts \\ []) do
     post_json("/activity/email/", payload, [{"Content-Type", "application/json"}], opts)
@@ -85,6 +99,7 @@ defmodule Closex.HTTPClient do
 
   # Users
 
+  @impl Closex.ClientBehaviour
   @doc "List all users in your organization: https://developer.close.io/#users-list-all-the-users-who-are-members-of-the-same-organizations-as-you-are"
   def get_users(limit \\ 100) do
     find_all("user", "", limit)
@@ -222,6 +237,7 @@ defmodule Closex.HTTPClient do
     |> handle_response
   end
 
+  @impl HTTPoison.Base
   def process_request_headers(headers) do
     case :proplists.get_value("Accept", headers) do
       :undefined -> [{"Accept", "application/json"} | headers]
@@ -229,6 +245,7 @@ defmodule Closex.HTTPClient do
     end
   end
 
+  @impl HTTPoison.Base
   def process_request_options(options) do
     default_opts = [
       hackney: [basic_auth: {api_key(), ""}]
@@ -245,6 +262,7 @@ defmodule Closex.HTTPClient do
     post(path, Jason.encode!(payload), headers, opts)
   end
 
+  @impl HTTPoison.Base
   # Attempt to parse the body into JSON but in case that fails, pass the
   # original body through untouched
   def process_response_body(body) do
@@ -255,6 +273,7 @@ defmodule Closex.HTTPClient do
     end
   end
 
+  @impl HTTPoison.Base
   def process_url(path) do
     @base_url <> path
   end
