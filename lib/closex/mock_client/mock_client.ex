@@ -138,6 +138,11 @@ defmodule Closex.MockClient do
     {:ok, []}
   end
 
+  def find_all_opportunities(term, limit \\ 10) do
+    send(self(), {:closex_mock_client, :find_all_opportunities, [term, limit]})
+    {:ok, load("#{term}_opportunity.json")}
+  end
+
   @doc """
   Gets a lead custom field from CloseIO.
 
