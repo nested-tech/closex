@@ -28,4 +28,6 @@ defmodule Closex.ClientBehaviour do
   @callback send_email(map, opts) :: result
   @callback get_users(opts) :: result
   @callback find_all_opportunities(String.t(), Integer.t()) :: result
+  @callback create_contact(map, opts) :: result
+  @callback update_contact(id, map, opts) :: result
 end
