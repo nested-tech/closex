@@ -558,6 +558,14 @@ defmodule Closex.MockClient do
     {:ok, opportunities}
   end
 
+  def create_contact(map, _) do
+    {:ok, map}
+  end
+
+  def update_contact(id, map, _) do
+    {:ok, Map.merge(map, %{"id" => id})}
+  end
+
   defp load(filename, fallback \\ nil) do
     case Application.fetch_env(:closex, :mock_client_fixtures_dir) do
       {:ok, fixtures_path} ->

@@ -93,7 +93,7 @@ defmodule Closex.HTTPClient do
   @doc "Create an email activity: https://developer.close.io/#activities-create-an-email-activity"
   @impl true
   def send_email(payload, opts \\ []) do
-    post_json("/activity/email/", payload, [{"Content-Type", "application/json"}], opts)
+    post_json("/activity/email/", payload, [], opts)
     |> handle_response
   end
 
@@ -108,6 +108,18 @@ defmodule Closex.HTTPClient do
   @impl true
   def find_all_opportunities(term, limit \\ 100) do
     find_all("opportunity", term, limit)
+  end
+
+  @impl true
+  def create_contact(payload, opts \\ []) do
+    post_json("/contact/", payload, [], opts)
+    |> handle_response
+  end
+
+  @impl true
+  def update_contact(contact_id, payload, opts \\ []) do
+    put_json("/contact/#{contact_id}/", payload, [], opts)
+    |> handle_response
   end
 
   # Private stuff...
@@ -227,21 +239,27 @@ defmodule Closex.HTTPClient do
     put_json(
       "/#{object_type}/#{object_id}/",
       payload,
-      [{"Content-Type", "application/json"}],
+      [],
       opts
     )
     |> handle_response
   end
 
   defp create_object(object_type, payload, opts) do
-    post_json("/#{object_type}/", payload, [{"Content-Type", "application/json"}], opts)
+    post_json("/#{object_type}/", payload, [], opts)
     |> handle_response
   end
 
   @impl true
   def process_request_headers(headers) do
-    case :proplists.get_value("Accept", headers) do
-      :undefined -> [{"Accept", "application/json"} | headers]
+    headers
+    |> add_header({"Accept", "application/json"})
+    |> add_header({"Content-Type", "application/json"})
+  end
+
+  defp add_header(headers, tuple = {name, _value}) do
+    case :proplists.get_value(name, headers) do
+      :undefined -> [tuple | headers]
       _ -> headers
     end
   end

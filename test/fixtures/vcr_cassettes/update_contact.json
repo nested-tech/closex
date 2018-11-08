@@ -1,0 +1,36 @@
+[
+  {
+    "request": {
+      "body": "{\"emails\":[{\"email\":\"biggerbird@example.com\",\"type\":\"home\"}]}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "method": "put",
+      "options": {
+        "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/contact/cont_pfGqLyh99KXfduS17OnPejhc1fGi4KeHYrMvk4itQQa/"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"display_name\": \"Big Bird\", \"name\": \"Big Bird\", \"title\": \"\", \"date_updated\": \"2018-11-08T10:26:25.014000+00:00\", \"phones\": [{\"phone\": \"+441234\", \"phone_formatted\": \"+44 1234\", \"type\": \"office\"}], \"created_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"emails\": [{\"type\": \"home\", \"email\": \"biggerbird@example.com\"}], \"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"urls\": [], \"integration_links\": [], \"date_created\": \"2018-11-08T10:00:27.780000+00:00\", \"lead_id\": \"lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm\", \"id\": \"cont_pfGqLyh99KXfduS17OnPejhc1fGi4KeHYrMvk4itQQa\", \"updated_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\"}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Date": "Thu, 08 Nov 2018 10:26:25 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "320",
+        "X-Rate-Limit-Remaining": "319",
+        "X-Rate-Limit-Reset": "7.002646",
+        "Content-Length": "674",
+        "Connection": "keep-alive"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
