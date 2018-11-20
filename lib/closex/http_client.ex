@@ -122,6 +122,17 @@ defmodule Closex.HTTPClient do
     |> handle_response
   end
 
+  @impl true
+  def merge_leads(source_lead_id, destination_lead_id, opts \\ []) do
+    post_json(
+      "/lead/merge/",
+      %{"source" => source_lead_id, "destination" => destination_lead_id},
+      [],
+      opts
+    )
+    |> handle_response
+  end
+
   # Private stuff...
 
   defp find(resource, search_term, opts) do

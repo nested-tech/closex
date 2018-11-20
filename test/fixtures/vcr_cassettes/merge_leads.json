@@ -1,0 +1,36 @@
+[
+  {
+    "request": {
+      "body": "{\"destination\":\"lead_JFLPvIRrZXv2tSDsApSBlpRlNnNfXNqS0CMkFKV87vX\",\"source\":\"lead_8xlzqZBSz6iKJJLoZ82Fh2vqcUzretDDBClxTmWgLJ1\"}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "method": "post",
+      "options": {
+        "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/lead/merge/"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"status\": \"ok\"}",
+      "headers": {
+        "Content-Type": "application/json; charset=UTF-8",
+        "Date": "Tue, 20 Nov 2018 17:01:38 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "320",
+        "X-Rate-Limit-Remaining": "319",
+        "X-Rate-Limit-Reset": "7.700657",
+        "Content-Length": "16",
+        "Connection": "keep-alive"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
