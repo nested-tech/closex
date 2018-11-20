@@ -845,4 +845,16 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
+  @source_lead_id "lead_8xlzqZBSz6iKJJLoZ82Fh2vqcUzretDDBClxTmWgLJ1"
+  @target_lead_id "lead_JFLPvIRrZXv2tSDsApSBlpRlNnNfXNqS0CMkFKV87vX"
+  describe "merge_leads/2" do
+    test "merges two leads" do
+      use_cassette "merge_leads" do
+        {:ok, response} = merge_leads(@source_lead_id, @target_lead_id)
+
+        assert response == %{"status" => "ok"}
+      end
+    end
+  end
 end

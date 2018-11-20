@@ -30,4 +30,5 @@ defmodule Closex.ClientBehaviour do
   @callback find_all_opportunities(String.t(), Integer.t()) :: result
   @callback create_contact(map, opts) :: result
   @callback update_contact(id, map, opts) :: result
+  @callback merge_leads(id, id) :: result
 end
