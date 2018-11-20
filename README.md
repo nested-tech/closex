@@ -5,7 +5,7 @@
 [![Package Version](https://img.shields.io/hexpm/v/closex.svg)](https://hex.pm/packages/closex)
 [![Documentation](https://img.shields.io/badge/docs-latest-blue.svg)](https://hexdocs.pm/closex/)
 
-Elixir wrapper for the Close.io API.
+🔥 Blazing-fast 🚀 Elixir library 👻️ for the Close.io API 🤖
 
 📔 Learn more about the Close.io API: [http://developer.close.io](http://developer.close.io)
 
@@ -127,10 +127,10 @@ Closex.HTTPClient.get_lead("my_lead_id", rate_limit_retry: true)
 
 This is only limited to certain requests as it's being trialled, if useful then we'll roll it out across other requests. The requests are:
 
-* `find_leads`
-* `find_opportunities`
-* `find_all_opportunities`
-* `get_users`
+- `find_leads`
+- `find_opportunities`
+- `find_all_opportunities`
+- `get_users`
 
 ## Contributing
 
