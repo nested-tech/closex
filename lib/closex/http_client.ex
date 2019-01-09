@@ -133,6 +133,14 @@ defmodule Closex.HTTPClient do
     |> handle_response
   end
 
+  @doc "Log a call activity manually:
+  https://developer.close.io/#activities-log-a-call-activity-manually"
+  @impl true
+  def log_call(payload, opts \\ []) do
+    post_json("/activity/call/", payload, [], opts)
+    |> handle_response
+  end
+
   # Private stuff...
 
   defp find(resource, search_term, opts) do
