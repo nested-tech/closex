@@ -857,4 +857,63 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
+  describe "log_call/1" do
+    test "logs a call activity" do
+      call = %{
+        "user_id" => "user_weWpqmrZZ9sg3FHYQcUwV7tbwZRpe3sA215Ftv8OvbU",
+        "created_by" => "user_weWpqmrZZ9sg3FHYQcUwV7tbwZRpe3sA215Ftv8OvbU",
+        "phone" => "+16505551234",
+        "direction" => "outbound",
+        "status" => "completed",
+        "disposition" => "answered",
+        "note" => "call originated from mobile",
+        "duration" => 345,
+        "recording_url" => "some-recording-url.com"
+      }
+
+      use_cassette "log_call" do
+        {:ok, body} = log_call(call)
+
+        assert Map.keys(body) ==
+                 [
+                   "source",
+                   "_type",
+                   "users",
+                   "phone",
+                   "organization_id",
+                   "remote_phone_formatted",
+                   "transferred_to",
+                   "created_by",
+                   "created_by_name",
+                   "id",
+                   "date_created",
+                   "user_id",
+                   "date_updated",
+                   "local_phone_formatted",
+                   "note",
+                   "updated_by",
+                   "quality_info",
+                   "recording_url",
+                   "transferred_from",
+                   "status",
+                   "dialer_id",
+                   "call_method",
+                   "contact_id",
+                   "local_phone",
+                   "remote_phone",
+                   "has_recording",
+                   "updated_by_name",
+                   "lead_id",
+                   "direction",
+                   "duration",
+                   "dialer_saved_search_id",
+                   "voicemail_duration",
+                   "voicemail_url",
+                   "user_name",
+                   "disposition"
+                 ]
+      end
+    end
+  end
 end

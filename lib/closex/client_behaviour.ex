@@ -31,4 +31,5 @@ defmodule Closex.ClientBehaviour do
   @callback create_contact(map, opts) :: result
   @callback update_contact(id, map, opts) :: result
   @callback merge_leads(id, id) :: result
+  @callback log_call(map, opts) :: result
 end
