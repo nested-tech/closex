@@ -206,6 +206,12 @@ defmodule Closex.HTTPClient do
     create_object("task", payload, opts)
   end
 
+  @impl true
+  @doc "Updates a task. [Optional parameters](https://developer.close.io/#tasks-update-a-task)"
+  def update_task(task_id, params \\ %{}, opts \\ []) do
+    update_object("task", task_id, params, opts)
+  end
+
   defp merge_search_term_into_opts(search_term, opts) do
     search_params = %{query: search_term}
 

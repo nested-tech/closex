@@ -73,6 +73,7 @@ defmodule Closex.HTTPClientTest do
   @intro_email_template_id "tmpl_8Mykq86upeoxJGZPkc0debiBLzcjQ5NJnRUo9UJRCMW"
   @gob_bluth_contact_id "cont_CyVw29BYxNQl4bF1FuT04VTjKRtPsHQB1oLMWxFFBLJ"
   @organization_id "orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj"
+  @valid_task_id "task_OvDSbmI1Gt896KCFsvEcrOVdLYmV07McO6xI0gmXTjr"
 
   describe "get_lead/1" do
     test "when close.io is up and we are passed a valid lead_id, it returns the lead" do
@@ -574,6 +575,17 @@ defmodule Closex.HTTPClientTest do
                  "errors" => [],
                  "field-errors" => %{"lead" => "Object does not exist."}
                }
+      end
+    end
+  end
+
+  describe "update_task/2" do
+    test "when close.io is up and we are passed a valid task_id, it updates and returns the task" do
+      use_cassette "update_task", match_requests_on: [:request_body] do
+        task_id = @valid_task_id
+        payload = %{"is_complete" => true}
+        {:ok, task_after} = update_task(task_id, payload)
+        assert task_after["is_complete"] == true
       end
     end
   end
