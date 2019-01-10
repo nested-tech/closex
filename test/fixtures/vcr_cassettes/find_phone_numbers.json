@@ -1,0 +1,36 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": {
+        "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
+      },
+      "request_body": "",
+      "url": "https://app.close.io/api/v1/phone_number/?number=+442039742049/"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"has_more\": false, \"data\": [{\"voicemail_greeting_url\": null, \"date_updated\": \"2018-12-13T20:20:18.293000+00:00\", \"sms_enabled\": false, \"number\": \"+442039742049\", \"type\": \"virtual\", \"id\": \"phon_OrDCuHzMuqg3nAyBvmSUxlTWpA9Hu4vRlkeQDHvEhvI\", \"phone_numbers\": [], \"forward_to_enabled\": false, \"user_id\": null, \"number_formatted\": \"+44 20 3974 2049\", \"label\": \"BYOC\", \"participants\": [\"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"user_P7CxiTgnGfZBOar8XeKFiRbzCY4LMiDSvGloZ4bpMw9\", \"user_RdF8Nj9NBNX110aFSbn5JuZu8IoowiLnJzVxs3kyZsY\", \"user_lz47i62pmeQA4gFDthrDryLBNcMTrO2xkGQGR6hsIQG\"], \"is_group_number\": true, \"is_verified\": false, \"press_1_to_accept\": false, \"forward_to_formatted\": null, \"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"forward_to\": \"\", \"phone_numbers_formatted\": [], \"carrier\": \"plivo\", \"date_created\": \"2018-09-08T03:48:40.401000+00:00\"}]}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Date": "Thu, 10 Jan 2019 11:30:45 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "320",
+        "X-Rate-Limit-Remaining": "319",
+        "X-Rate-Limit-Reset": "7.347352",
+        "Content-Length": "888",
+        "Connection": "keep-alive"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

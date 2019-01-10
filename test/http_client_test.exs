@@ -928,4 +928,30 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
+  describe "find_phone_numbers/1" do
+    test "if some phone_numbers are found, it returns a list of phone_numbers" do
+      search_term = "number=+442039742049"
+
+      use_cassette "find_phone_numbers", match_requests_on: [:request_body, :query] do
+        {:ok, result} = find_phone_numbers(search_term)
+        assert %{"data" => phone_numbers, "has_more" => false} = result
+        assert is_list(phone_numbers)
+        assert Enum.count(phone_numbers) == 1
+        user = hd(phone_numbers)
+        assert user["number"] == "+442039742049"
+      end
+    end
+
+    test "if no phone_numbers are found, it returns an empty list" do
+      search_term = "number=thisshouldneverexist"
+
+      use_cassette "find_phone_numbers_empty", match_requests_on: [:request_body, :query] do
+        {:ok, result} = find_phone_numbers(search_term)
+        assert %{"has_more" => false, "data" => phone_numbers} = result
+        assert is_list(phone_numbers)
+        assert phone_numbers == []
+      end
+    end
+  end
 end

@@ -141,6 +141,15 @@ defmodule Closex.HTTPClient do
     |> handle_response
   end
 
+  @doc "list or search for phone numbers:
+  https://developer.close.io/#phone-numbers"
+  @impl true
+  def find_phone_numbers(search_term, opts \\ []) do
+    # We call make_find_request directly because the search term IS the query string for this request
+    # i.e. ?number=1234 and not ?query="number=1234"
+    make_find_request("phone_number/?#{search_term}", opts)
+  end
+
   # Private stuff...
 
   defp find(resource, search_term, opts) do
