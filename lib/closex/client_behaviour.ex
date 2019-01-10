@@ -21,6 +21,7 @@ defmodule Closex.ClientBehaviour do
   @callback create_opportunity(map, opts) :: result
   @callback update_opportunity(id, map, opts) :: result
   @callback create_task(id, String.t(), map, opts) :: result
+  @callback update_task(id, map) :: result
   @callback get_lead_custom_field(id, opts) :: result
   @callback get_organization(id, opts) :: result
   @callback get_lead_statuses(opts) :: result
