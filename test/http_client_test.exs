@@ -954,4 +954,47 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
+  describe "create_sms_activity/1" do
+    test "creates an sms activity" do
+      test_sms = %{
+        "status" => "sent",
+        "text" => "this is the message body",
+        "remote_phone" => "+447946666666",
+        "lead_id" => "lead_sA6s1qN2hh1eDHipGxVAKvFlWCEG4xglutTXVUgnNkn",
+        "contact_id" => "cont_gwto1MOgh8nNGpCVn5DFJkmMxZYY6oQbh8X9mS5uEXg"
+      }
+
+      use_cassette "create_sms_activity" do
+        {:ok, body} = create_sms_activity(test_sms)
+
+        assert Map.keys(body) == [
+                 "_type",
+                 "contact_id",
+                 "created_by",
+                 "created_by_name",
+                 "date_created",
+                 "date_scheduled",
+                 "date_sent",
+                 "date_updated",
+                 "direction",
+                 "error_message",
+                 "id",
+                 "lead_id",
+                 "local_phone",
+                 "local_phone_formatted",
+                 "organization_id",
+                 "remote_phone",
+                 "remote_phone_formatted",
+                 "source",
+                 "status",
+                 "text",
+                 "updated_by",
+                 "updated_by_name",
+                 "user_id",
+                 "user_name"
+               ]
+      end
+    end
+  end
 end

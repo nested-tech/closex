@@ -150,6 +150,14 @@ defmodule Closex.HTTPClient do
     make_find_request("phone_number/?#{search_term}", opts)
   end
 
+  @doc "Create an sms activity in close.io:
+  https://developer.close.io/#activities-create-an-sms-activity"
+  @impl true
+  def create_sms_activity(payload, opts \\ []) do
+    post_json("/activity/sms/", payload, [], opts)
+    |> handle_response
+  end
+
   # Private stuff...
 
   defp find(resource, search_term, opts) do
