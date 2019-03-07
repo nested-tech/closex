@@ -7,7 +7,7 @@ defmodule Closex.HTTPClient do
   See: https://developer.close.io/
   """
 
-  @base_url "https://app.close.io/api/v1"
+  @base_url "https://api.close.com/api/v1"
   @behaviour Closex.ClientBehaviour
   @sleep_module Application.get_env(:closex, :sleep_module, Process)
 

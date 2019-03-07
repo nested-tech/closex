@@ -11,7 +11,7 @@
         "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
       },
       "request_body": "",
-      "url": "https://app.close.io/api/v1/phone_number/?number=+442039742049/"
+      "url": "https://api.close.com/api/v1/phone_number/?number=+442039742049/"
     },
     "response": {
       "binary": false,

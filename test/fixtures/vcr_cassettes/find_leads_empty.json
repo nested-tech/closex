@@ -13,7 +13,7 @@
         ]
       },
       "request_body": "",
-      "url": "https://app.close.io/api/v1/lead/?query=FOO"
+      "url": "https://api.close.com/api/v1/lead/?query=FOO"
     },
     "response": {
       "body": "{\"has_more\": false, \"total_results\": 0, \"data\": []}",

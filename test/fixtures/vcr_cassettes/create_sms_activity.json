@@ -11,7 +11,7 @@
         "basic_auth": ["FAKE_CLOSE_IO_API_TOKEN", ""]
       },
       "request_body": "",
-      "url": "https://app.close.io/api/v1/activity/sms/"
+      "url": "https://api.close.com/api/v1/activity/sms/"
     },
     "response": {
       "binary": false,

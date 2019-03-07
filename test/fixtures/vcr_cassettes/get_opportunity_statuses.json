@@ -14,7 +14,7 @@
         ]
       },
       "request_body": "",
-      "url": "https://app.close.io/api/v1/status/opportunity/"
+      "url": "https://api.close.com/api/v1/status/opportunity/"
     },
     "response": {
       "body": "{\"has_more\": false, \"data\": [{\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"active\", \"id\": \"stat_7AT1l4L15KoZWeJlHXminAcPxPG0qKWMRsziU9UOEKH\", \"label\": \"S03: Qualified\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"won\", \"id\": \"stat_MBQNyevXlkrXlo8NKULnG8wTW7nJOyblaGeoI1VxZrW\", \"label\": \"Won\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"lost\", \"id\": \"stat_dgarFhdpfh95YD3F5EX9fVmmeWPeOrdEnEsyA4f8MF1\", \"label\": \"Lost\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"active\", \"id\": \"stat_encUzwVmBig37Xbrsg01AwFwSnVq4rLjKA1awaFNOoU\", \"label\": \"S02: Connected\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"active\", \"id\": \"stat_gc2L6rDDQV9evg1PbdEW0LvgtBrnu1EhMQUgJXZ6Kuy\", \"label\": \"S01: Received Offer Request\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"active\", \"id\": \"stat_vQWQtofUTvlcdgo1R1lsauc5Inez29fxk0SEOKC8qBg\", \"label\": \"Active\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"type\": \"active\", \"id\": \"stat_y21fzqd7VuEXY1gMspJuWfTEOfWQ3AkzUb8F74zH0nW\", \"label\": \"S04: Indicative valuation complete\"}]}",

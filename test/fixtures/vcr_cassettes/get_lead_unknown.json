@@ -14,7 +14,7 @@
         ]
       },
       "request_body": "",
-      "url": "https://app.close.io/api/v1/lead/wibble/"
+      "url": "https://api.close.com/api/v1/lead/wibble/"
     },
     "response": {
       "body": "{\"error\": \"Empty query: Lead matching query does not exist.\"}",

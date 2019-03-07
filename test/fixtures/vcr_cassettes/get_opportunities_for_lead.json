@@ -10,7 +10,7 @@
         "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
       },
       "request_body": "",
-      "url": "https://app.close.io/api/v1/opportunity/?lead_id=lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm"
+      "url": "https://api.close.com/api/v1/opportunity/?lead_id=lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm"
     },
     "response": {
       "binary": false,
