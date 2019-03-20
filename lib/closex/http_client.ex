@@ -158,6 +158,14 @@ defmodule Closex.HTTPClient do
     |> handle_response
   end
 
+  @doc "list or filter all call activities:
+  https://developer.close.com/#activities-list-or-filter-all-call-activities"
+  @impl true
+  def find_call_activities(search_term) do
+    get("/activity/call/?#{search_term}")
+    |> handle_response
+  end
+
   # Private stuff...
 
   defp find(resource, search_term, opts) do
