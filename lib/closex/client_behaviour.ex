@@ -36,5 +36,5 @@ defmodule Closex.ClientBehaviour do
   @callback find_phone_numbers(String.t(), opts) :: result
   @callback create_sms_activity(map, opts) :: result
   @callback create_sms_activity(map) :: result
-  @callback find_call_activies(String.t()) :: result
+  @callback find_call_activities(String.t()) :: result
 end
