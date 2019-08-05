@@ -39,7 +39,6 @@ defmodule Closex.Mixfile do
       {:exvcr, ">= 0.8.0", only: :test, optional: true},
       {:ex_doc, ">= 0.0.0", only: :dev, optional: true},
       {:excoveralls, ">= 0.4.0", only: :test, optional: true},
-      {:dialyxir, ">= 0.0.0", runtime: false, optional: true},
       {:mix_test_watch, ">= 0.3.0", only: :dev, runtime: false, optional: true}
     ]
   end
