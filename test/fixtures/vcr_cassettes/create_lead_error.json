@@ -14,7 +14,7 @@
         ]
       },
       "request_body": "",
-      "url": "https://app.close.io/api/v1/lead/"
+      "url": "https://api.close.com/api/v1/lead/"
     },
     "response": {
       "body": "{\"errors\": [], \"field-errors\": {\"status\": \"Not a valid choice. Please go to Customizations in your organization settings and add \\\"foo\\\" to the list of lead statuses.\"}}",

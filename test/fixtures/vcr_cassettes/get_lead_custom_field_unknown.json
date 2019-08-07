@@ -14,7 +14,7 @@
         ]
       },
       "request_body": "",
-      "url": "https://app.close.io/api/v1/custom_fields/lead/quux/"
+      "url": "https://api.close.com/api/v1/custom_fields/lead/quux/"
     },
     "response": {
       "body": "{\"error\": \"Empty query: LeadCustomField matching query does not exist.\"}",

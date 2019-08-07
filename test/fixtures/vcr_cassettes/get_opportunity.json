@@ -14,7 +14,7 @@
         ]
       },
       "request_body": "",
-      "url": "https://app.close.io/api/v1/opportunity/oppo_FgrpAmjn3038nP03AtkSYza3DVn2ZoUWk682Px55L5o/"
+      "url": "https://api.close.com/api/v1/opportunity/oppo_FgrpAmjn3038nP03AtkSYza3DVn2ZoUWk682Px55L5o/"
     },
     "response": {
       "body": "{\"date_updated\": \"2017-07-24T15:06:48.548000+00:00\", \"created_by_name\": \"API User (DO NOT DELETE)\", \"value_currency\": \"USD\", \"contact_id\": null, \"lead_name\": \"Han Solo\", \"contact_name\": null, \"id\": \"oppo_FgrpAmjn3038nP03AtkSYza3DVn2ZoUWk682Px55L5o\", \"confidence\": 50, \"user_id\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"value_period\": \"one_time\", \"created_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"note\": \"\", \"updated_by_name\": \"API User (DO NOT DELETE)\", \"user_name\": \"API User (DO NOT DELETE)\", \"status_type\": \"active\", \"updated_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"status_id\": \"stat_gc2L6rDDQV9evg1PbdEW0LvgtBrnu1EhMQUgJXZ6Kuy\", \"value_formatted\": \"$200\", \"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"integration_links\": [], \"date_won\": null, \"lead_id\": \"lead_A7hgScTsWRsrRFjvXkghP5mPkJBixfxcBJjgIDGkbuZ\", \"date_lost\": null, \"value\": 20000, \"status_label\": \"S01: Received Offer Request\", \"date_created\": \"2017-07-24T15:06:48.548000+00:00\"}",

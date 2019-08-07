@@ -14,7 +14,7 @@
         ]
       },
       "request_body": "",
-      "url": "https://app.close.io/api/v1/status/lead/"
+      "url": "https://api.close.com/api/v1/status/lead/"
     },
     "response": {
       "body": "{\"has_more\": false, \"data\": [{\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"id\": \"stat_B2vL8OffRrxLAZ3rlwQ5E4To6KbyPfrI2uXJAYhhyYi\", \"label\": \"Seller Active\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"id\": \"stat_G9Jy0oRvcMVTDYVkX9vBbxrkYLz0Q9xc5pf2UwPbYaP\", \"label\": \"Not Interested\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"id\": \"stat_MjsgRZUimJ9VK64p0GMeZHaYkdTYre2DniNGv7Lm2o1\", \"label\": \"Qualified\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"id\": \"stat_W4zAoF9hXtnTamjF8okr0YWtRGDJkQej8z8lXpQ8iqa\", \"label\": \"Interested\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"id\": \"stat_Y0X1U0tdJkLwq8JKrm1dOCic5krLU3PscvlE8UKLOLY\", \"label\": \"Canceled\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"id\": \"stat_dzhTAsvOFDm6CbgRQkPjdjAeO6B8lFCeZcuDwN2yjFd\", \"label\": \"Potential\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"id\": \"stat_hi3c50qO6ExZq14QZ3ZMHWs7FwyYrbNMo0SiJizJj1K\", \"label\": \"Bad Fit\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"id\": \"stat_lvVjyaqI9UCCihDQueGm49zkTF6IOvyRBDHP6tJjfF8\", \"label\": \"Buyer Active\"}, {\"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"id\": \"stat_odNd4FDmFiENyRXmJo2CIItmuUN2mKsgnJqvptgMwDd\", \"label\": \"Customer\"}]}",

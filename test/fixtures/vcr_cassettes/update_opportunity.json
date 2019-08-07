@@ -14,7 +14,7 @@
         ]
       },
       "request_body": "",
-      "url": "https://app.close.io/api/v1/opportunity/oppo_otkBudcuHXq90sC43gex0ddp5XYQjvKndlOGMHjE9Ph/"
+      "url": "https://api.close.com/api/v1/opportunity/oppo_otkBudcuHXq90sC43gex0ddp5XYQjvKndlOGMHjE9Ph/"
     },
     "response": {
       "body": "{\"date_updated\": \"2017-09-29T11:07:23.962000+00:00\", \"created_by_name\": \"API User (DO NOT DELETE)\", \"value_currency\": \"USD\", \"contact_id\": null, \"lead_name\": \"Luke Skywalker\", \"contact_name\": null, \"id\": \"oppo_otkBudcuHXq90sC43gex0ddp5XYQjvKndlOGMHjE9Ph\", \"confidence\": 90, \"user_id\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"value_period\": \"monthly\", \"created_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"note\": \"i hope this deal closes...\", \"updated_by_name\": \"API User (DO NOT DELETE)\", \"user_name\": \"API User (DO NOT DELETE)\", \"status_type\": \"active\", \"updated_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"status_id\": \"stat_vQWQtofUTvlcdgo1R1lsauc5Inez29fxk0SEOKC8qBg\", \"value_formatted\": \"$5 monthly\", \"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"integration_links\": [], \"date_won\": null, \"lead_id\": \"lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm\", \"date_lost\": null, \"value\": 500, \"status_label\": \"Active\", \"date_created\": \"2017-09-29T11:07:23.962000+00:00\"}",
@@ -50,7 +50,7 @@
         ]
       },
       "request_body": "",
-      "url": "https://app.close.io/api/v1/opportunity/oppo_otkBudcuHXq90sC43gex0ddp5XYQjvKndlOGMHjE9Ph/"
+      "url": "https://api.close.com/api/v1/opportunity/oppo_otkBudcuHXq90sC43gex0ddp5XYQjvKndlOGMHjE9Ph/"
     },
     "response": {
       "body": "{\"date_updated\": \"2017-09-29T11:16:47.350000+00:00\", \"created_by_name\": \"API User (DO NOT DELETE)\", \"value_currency\": \"USD\", \"contact_id\": null, \"lead_name\": \"Luke Skywalker\", \"contact_name\": null, \"id\": \"oppo_otkBudcuHXq90sC43gex0ddp5XYQjvKndlOGMHjE9Ph\", \"confidence\": 90, \"user_id\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"value_period\": \"monthly\", \"created_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"note\": \"my_note\", \"updated_by_name\": \"API User (DO NOT DELETE)\", \"user_name\": \"API User (DO NOT DELETE)\", \"status_type\": \"active\", \"updated_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"status_id\": \"stat_vQWQtofUTvlcdgo1R1lsauc5Inez29fxk0SEOKC8qBg\", \"value_formatted\": \"$5 monthly\", \"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"integration_links\": [], \"date_won\": null, \"lead_id\": \"lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm\", \"date_lost\": null, \"value\": 500, \"status_label\": \"Active\", \"date_created\": \"2017-09-29T11:07:23.962000+00:00\"}",
