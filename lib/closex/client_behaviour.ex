@@ -27,6 +27,7 @@ defmodule Closex.ClientBehaviour do
   @callback get_lead_statuses(opts) :: result
   @callback get_opportunity_statuses(opts) :: result
   @callback send_email(map, opts) :: result
+  @callback create_note(map, opts) :: result
   @callback get_users(opts) :: result
   @callback find_all_opportunities(String.t(), Integer.t()) :: result
   @callback create_contact(map, opts) :: result
