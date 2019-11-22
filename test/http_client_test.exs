@@ -788,6 +788,35 @@ defmodule Closex.HTTPClientTest do
     end
   end
 
+  describe "create_note/1" do
+    test "creates a note" do
+      use_cassette "create_note" do
+        {:ok, response} =
+          create_note(%{
+            lead_id: "lead_s6vHFTK1TSRoH6otXOexWDO9jM4xyb1kELHDoU7Fdsp",
+            note: "this is a test note."
+          })
+
+        assert response == %{
+                 "_type" => "Note",
+                 "contact_id" => nil,
+                 "created_by" => "user_MvDoAZA889UMrgsZbnXmHkJSomSi7qk2Iwc4JnGHTbo",
+                 "created_by_name" => "Bruce Wayne",
+                 "date_created" => "2013-02-20T06:39:57.266000+00:00",
+                 "date_updated" => "2013-02-20T06:39:57.266000+00:00",
+                 "id" => "acti_kwWA3rOfy4BnaZ8QQk3RIIAz51dU9ayiluy1s961Oiw",
+                 "lead_id" => "lead_s6vHFTK1TSRoH6otXOexWDO9jM4xyb1kELHDoU7Fdsp",
+                 "note" => "this is a test note.",
+                 "organization_id" => "orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen",
+                 "updated_by" => "user_MvDoAZA889UMrgsZbnXmHkJSomSi7qk2Iwc4JnGHTbo",
+                 "updated_by_name" => "Bruce Wayne",
+                 "user_id" => "user_MvDoAZA889UMrgsZbnXmHkJSomSi7qk2Iwc4JnGHTbo",
+                 "user_name" => "Bruce Wayne"
+               }
+      end
+    end
+  end
+
   describe "create_contact/1" do
     test "creates a contact" do
       use_cassette "create_contact" do

@@ -1,0 +1,36 @@
+[
+  {
+    "request": {
+      "body": "{\"note\": \"this is a test note.\",\n\"lead_id\": \"lead_s6vHFTK1TSRoH6otXOexWDO9jM4xyb1kELHDoU7Fdsp\"\n}",
+      "headers": {
+        "Accept": "application/json",
+        "Content-Type": "application/json"
+      },
+      "method": "post",
+      "options": {
+        "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
+      },
+      "request_body": "",
+      "url": "https://api.close.com/api/v1/activity/note/"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"_type\": \"Note\",\n\"note\": \"this is a test note.\",\n\"user_id\": \"user_MvDoAZA889UMrgsZbnXmHkJSomSi7qk2Iwc4JnGHTbo\",\n\"user_name\": \"Bruce Wayne\",\n\"updated_by\": \"user_MvDoAZA889UMrgsZbnXmHkJSomSi7qk2Iwc4JnGHTbo\",\n\"updated_by_name\": \"Bruce Wayne\",\n\"date_updated\": \"2013-02-20T06:39:57.266000+00:00\",\n\"created_by\": \"user_MvDoAZA889UMrgsZbnXmHkJSomSi7qk2Iwc4JnGHTbo\",\n\"created_by_name\": \"Bruce Wayne\",\n\"organization_id\": \"orga_bwwWG475zqWiQGur0thQshwVXo8rIYecQHDWFanqhen\",\n\"contact_id\": null,\n\"date_created\": \"2013-02-20T06:39:57.266000+00:00\",\n\"id\": \"acti_kwWA3rOfy4BnaZ8QQk3RIIAz51dU9ayiluy1s961Oiw\",\n\"lead_id\": \"lead_s6vHFTK1TSRoH6otXOexWDO9jM4xyb1kELHDoU7Fdsp\"}",
+      "headers": {
+        "Content-Type": "application/json; charset=UTF-8",
+        "Date": "Mon, 17 Sep 2018 17:40:44 GMT",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31536000; includeSubDomains",
+        "Vary": "Accept",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "320",
+        "X-Rate-Limit-Remaining": "318",
+        "X-Rate-Limit-Reset": "4.957783",
+        "Content-Length": "978",
+        "Connection": "keep-alive"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]
