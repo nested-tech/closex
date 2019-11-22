@@ -97,6 +97,14 @@ defmodule Closex.HTTPClient do
     |> handle_response
   end
 
+  # Notes
+
+  @impl true
+  def create_note(payload, opts \\ []) do
+    post_json("/activity/note/", payload, [], opts)
+    |> handle_response
+  end
+
   # Users
 
   @doc "List all users in your organization: https://developer.close.io/#users-list-all-the-users-who-are-members-of-the-same-organizations-as-you-are"
