@@ -4,7 +4,7 @@ defmodule Closex.Mixfile do
   def project do
     [
       app: :closex,
-      version: "1.4.3",
+      version: "1.4.4",
       build_path: "_build",
       config_path: "config/config.exs",
       deps_path: "deps",
