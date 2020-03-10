@@ -11,7 +11,7 @@
         "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
       },
       "request_body": "",
-      "url": "https://api.close.com/api/v1/phone_number/?number=thisshouldneverexist/"
+      "url": "https://api.close.com/api/v1/phone_number?number=thisshouldneverexist"
     },
     "response": {
       "binary": false,

@@ -7,13 +7,10 @@
       },
       "method": "get",
       "options": {
-        "basic_auth": [
-          "FAKE_CLOSEIO_TOKEN",
-          ""
-        ]
+        "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
       },
       "request_body": "",
-      "url": "https://api.close.com/api/v1/opportunity/?query=FOO"
+      "url": "https://api.close.com/api/v1/opportunity?query=FOO"
     },
     "response": {
       "body": "{\"total_value_monthly_formatted\": null, \"total_value_one_time_formatted\": null, \"total_results\": 0, \"has_more\": false, \"expected_value_one_time\": 0, \"total_value_one_time\": 0, \"total_value_annualized_formatted\": null, \"expected_value_monthly\": 0, \"expected_value_annual\": 0, \"total_value_annual\": 0, \"expected_value_annualized_formatted\": null, \"total_value_annualized\": 0, \"expected_value_annual_formatted\": null, \"total_value_monthly\": 0, \"count_by_value_period\": {}, \"total_value_annual_formatted\": null, \"expected_value_annualized\": 0, \"data\": [], \"expected_value_one_time_formatted\": null, \"expected_value_monthly_formatted\": null}",
