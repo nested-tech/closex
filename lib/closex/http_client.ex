@@ -155,7 +155,7 @@ defmodule Closex.HTTPClient do
   def find_phone_numbers(search_term, opts \\ []) do
     # We call make_find_request directly because the search term IS the query string for this request
     # i.e. ?number=1234 and not ?query="number=1234"
-    make_find_request("phone_number?#{search_term}", opts)
+    make_find_request("phone_number/?#{search_term}", opts)
   end
 
   @doc "Create an sms activity in close.io:
@@ -182,7 +182,7 @@ defmodule Closex.HTTPClient do
     if rate_limit_retry?(opts) do
       find_respecting_rate_limit(resource, opts)
     else
-      make_find_request(resource, opts)
+      make_find_request(resource <> "/", opts)
     end
   end
 
@@ -197,7 +197,7 @@ defmodule Closex.HTTPClient do
   # See https://developer.close.io/#ratelimits for more info
   #
   defp find_respecting_rate_limit(resource, opts) do
-    response = make_find_request(resource, opts)
+    response = make_find_request(resource <> "/", opts)
 
     case response do
       {:error, %{status_code: 429, body: %{"rate_reset" => rate_reset}}} ->
@@ -213,7 +213,7 @@ defmodule Closex.HTTPClient do
 
     @sleep_module.sleep(:timer.seconds(seconds + 1))
 
-    make_find_request(resource, opts)
+    make_find_request(resource <> "/", opts)
   end
 
   def find_all(resource, search, limit \\ 100, skip \\ 0, results \\ []) do
