@@ -155,7 +155,7 @@ defmodule Closex.HTTPClient do
   def find_phone_numbers(search_term, opts \\ []) do
     # We call make_find_request directly because the search term IS the query string for this request
     # i.e. ?number=1234 and not ?query="number=1234"
-    make_find_request("phone_number/?#{search_term}", opts)
+    make_find_request("phone_number?#{search_term}", opts)
   end
 
   @doc "Create an sms activity in close.io:
@@ -187,7 +187,7 @@ defmodule Closex.HTTPClient do
   end
 
   defp make_find_request(resource, opts) do
-    get("/#{resource}/", [], opts)
+    get("/#{resource}", [], opts)
     |> handle_response
   end
 
