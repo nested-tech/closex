@@ -1,0 +1,42 @@
+[
+  {
+    "request": {
+      "body": "{\"attachments\":[],\"bcc\":[],\"body_html\":\"Hi! My name is Karan and I'm your Account Manager.\",\"body_text\":\"Hi! My name is Karan and I'm your Account Manager.\",\"cc\":[],\"contact_id\":\"cont_gwto1MOgh8nNGpCVn5DFJkmMxZYY6oQbh8X9mS5uEXg\",\"created_by\":null,\"created_by_name\":\"Bruce Wayne\",\"date_created\":\"2013-02-01T00:54:51.274000+00:00\",\"direction\":\"outgoing\",\"lead_id\":\"lead_sA6s1qN2hh1eDHipGxVAKvFlWCEG4xglutTXVUgnNkn\",\"sender\":\"morgan@nested.com\",\"status\":\"draft\",\"subject\":\"Welcome to Close!\",\"template_id\":null,\"to\":[\"phil+sample@close.com\"]}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "method": "post",
+      "options": {
+        "basic_auth": [
+          "FAKE_CLOSEIO_TOKEN",
+          ""
+        ]
+      },
+      "request_body": "",
+      "url": "https://api.close.com/api/v1/activity/email/"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"body_preview\": \"Hi! My name is Karan and I'm your Account Manager.\", \"attachments\": [], \"in_reply_to_id\": null, \"body_text\": \"Hi! My name is Karan and I'm your Account Manager.\", \"updated_by_name\": \"API User (DO NOT DELETE)\", \"template_name\": null, \"_type\": \"Email\", \"contact_id\": \"cont_gwto1MOgh8nNGpCVn5DFJkmMxZYY6oQbh8X9mS5uEXg\", \"thread_id\": \"acti_IfDYuF3eVQXH6tCg0p5nyn0tCfF3hZtLrSYpTnUdh5P\", \"references\": [], \"message_ids\": [], \"subject\": \"Welcome to Close!\", \"user_id\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"to\": [\"phil+sample@close.com\"], \"created_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"id\": \"acti_GTPmezSVx2Gb0vDSJyB4zKDHKFXv4YXJfgD4UlQL1O5\", \"date_updated\": \"2020-04-15T16:22:22.287000+00:00\", \"followup_sequence_id\": null, \"send_attempts\": [], \"created_by_name\": \"API User (DO NOT DELETE)\", \"user_name\": \"API User (DO NOT DELETE)\", \"opens\": [], \"status\": \"draft\", \"direction\": \"outgoing\", \"updated_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"sequence_name\": null, \"body_html_quoted\": [{\"html\": \"Hi! My name is Karan and I'm your Account Manager.\", \"expand\": true}], \"envelope\": {\"is_autoreply\": false, \"from\": [{\"email\": \"morgan@nested.com\", \"name\": \"\"}], \"sender\": [{\"email\": \"morgan@nested.com\", \"name\": \"\"}], \"cc\": [], \"bcc\": [], \"to\": [{\"email\": \"phil+sample@close.com\", \"name\": \"\"}], \"date\": \"Fri, 01 Feb 2013 00:54:51 -0000\", \"reply_to\": [], \"in_reply_to\": null, \"message_id\": null, \"subject\": \"Welcome to Close!\"}, \"body_html\": \"Hi! My name is Karan and I'm your Account Manager.\", \"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"sequence_id\": null, \"sequence_subscription_id\": null, \"users\": [], \"need_smtp_credentials\": false, \"body_text_quoted\": [{\"text\": \"Hi! My name is Karan and I'm your Account Manager.\", \"expand\": true}], \"cc\": [], \"lead_id\": \"lead_sA6s1qN2hh1eDHipGxVAKvFlWCEG4xglutTXVUgnNkn\", \"has_reply\": false, \"sender\": \"morgan@nested.com\", \"bcc\": [], \"email_account_id\": null, \"date_sent\": null, \"date_created\": \"2013-02-01T00:54:51.274000+00:00\", \"date_scheduled\": null, \"opens_summary\": null, \"template_id\": null, \"bulk_email_action_id\": null, \"followup_sequence_delay\": null}",
+      "headers": {
+        "Content-Type": "application/json",
+        "Date": "Wed, 15 Apr 2020 16:22:22 GMT",
+        "Referrer-Policy": "no-referrer-when-downgrade",
+        "Set-Cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "Strict-Transport-Security": "max-age=31556926; includeSubDomains",
+        "Vary": "Accept",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "SAMEORIGIN",
+        "X-Rate-Limit-Limit": "320",
+        "X-Rate-Limit-Remaining": "319",
+        "X-Rate-Limit-Reset": "7.789782",
+        "X-XSS-Protection": "1; mode=block",
+        "Content-Length": "2186",
+        "Connection": "keep-alive"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

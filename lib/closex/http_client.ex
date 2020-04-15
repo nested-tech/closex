@@ -166,6 +166,14 @@ defmodule Closex.HTTPClient do
     |> handle_response
   end
 
+  @doc "Create an email activity in close.io:
+  https://developer.close.io/#activities-create-an-email-activity"
+  @impl true
+  def create_email_activity(payload, opts \\ []) do
+    post_json("/activity/email/", payload, [], opts)
+    |> handle_response
+  end
+
   @doc "list or filter all call activities:
   https://developer.close.com/#activities-list-or-filter-all-call-activities"
   @impl true

@@ -1027,6 +1027,86 @@ defmodule Closex.HTTPClientTest do
     end
   end
 
+  describe "create_email_activity/1" do
+    test "creates an email activity" do
+      test_email = %{
+        contact_id: "cont_gwto1MOgh8nNGpCVn5DFJkmMxZYY6oQbh8X9mS5uEXg",
+        lead_id: "lead_sA6s1qN2hh1eDHipGxVAKvFlWCEG4xglutTXVUgnNkn",
+        direction: "outgoing",
+        created_by: nil,
+        created_by_name: "Bruce Wayne",
+        date_created: "2013-02-01T00:54:51.274000+00:00",
+        subject: "Welcome to Close!",
+        sender: "morgan@nested.com",
+        to: [
+          "phil+sample@close.com"
+        ],
+        bcc: [],
+        cc: [],
+        status: "draft",
+        body_text: "Hi! My name is Karan and I'm your Account Manager.",
+        body_html: "Hi! My name is Karan and I'm your Account Manager.",
+        attachments: [],
+        template_id: nil
+      }
+
+      use_cassette "create_email_activity" do
+        {:ok, body} = create_email_activity(test_email)
+
+        assert Map.keys(body) == [
+                 "_type",
+                 "sender",
+                 "users",
+                 "body_text",
+                 "organization_id",
+                 "bcc",
+                 "body_html_quoted",
+                 "created_by",
+                 "created_by_name",
+                 "id",
+                 "date_sent",
+                 "date_created",
+                 "template_id",
+                 "opens_summary",
+                 "user_id",
+                 "cc",
+                 "body_text_quoted",
+                 "date_updated",
+                 "need_smtp_credentials",
+                 "template_name",
+                 "updated_by",
+                 "status",
+                 "message_ids",
+                 "thread_id",
+                 "sequence_subscription_id",
+                 "send_attempts",
+                 "contact_id",
+                 "sequence_id",
+                 "in_reply_to_id",
+                 "opens",
+                 "followup_sequence_id",
+                 "attachments",
+                 "envelope",
+                 "updated_by_name",
+                 "followup_sequence_delay",
+                 "has_reply",
+                 "lead_id",
+                 "references",
+                 "direction",
+                 "bulk_email_action_id",
+                 "body_preview",
+                 "date_scheduled",
+                 "to",
+                 "email_account_id",
+                 "user_name",
+                 "subject",
+                 "sequence_name",
+                 "body_html"
+               ]
+      end
+    end
+  end
+
   describe "find_call_activities/1" do
     test "returns a list of call activities" do
       search_term = "lead_id=lead_ZNjVC99F8sKnz4FWKKCBxIsamaEsasV7kN8aoZCl5zM"

@@ -91,6 +91,9 @@ defmodule Closex.ClientBehaviour do
   @callback create_sms_activity(map) :: result
   @callback create_sms_activity(map, opts) :: result
 
+  @callback create_email_activity(map) :: result
+  @callback create_email_activity(map, opts) :: result
+
   @callback find_call_activities(search_term) :: result
 
   @callback create_task(id, String.t()) :: result
