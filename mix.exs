@@ -4,13 +4,13 @@ defmodule Closex.Mixfile do
   def project do
     [
       app: :closex,
-      version: "1.4.7",
+      version: "2.0.0",
       build_path: "_build",
       config_path: "config/config.exs",
       deps_path: "deps",
       lockfile: "mix.lock",
       elixirc_paths: elixirc_paths(Mix.env()),
-      elixir: "~> 1.6",
+      elixir: "~> 1.10",
       description: description(),
       package: package(),
       deps: deps(),
