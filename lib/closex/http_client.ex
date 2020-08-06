@@ -288,6 +288,10 @@ defmodule Closex.HTTPClient do
     {:error, response}
   end
 
+  defp handle_response({:ok, response = %{status_code: 404}}) do
+    {:error, response}
+  end
+
   defp handle_response({:ok, response = %{status_code: 429}}) do
     {:error, response}
   end
