@@ -897,6 +897,44 @@ defmodule Closex.HTTPClientTest do
         assert response == %{"status" => "ok"}
       end
     end
+
+    test "returns an error if it can't find one of the leads" do
+      use_cassette "merge_leads_not_found" do
+        {:error, response} = merge_leads(@source_lead_id, "dont_find_me")
+
+        assert response == %HTTPoison.Response{
+                 body: %{"errors" => ["Source lead does not exist."]},
+                 headers: [
+                   {"content-length", "43"},
+                   {"content-type", "application/json"},
+                   {"date", "Thu, 06 Aug 2020 15:17:36 GMT"},
+                   {"referrer-policy", "no-referrer-when-downgrade"},
+                   {"server", "envoy"},
+                   {"set-cookie",
+                    "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/"},
+                   {"strict-transport-security", "max-age=31556926; includeSubDomains"},
+                   {"x-content-type-options", "nosniff"},
+                   {"x-envoy-upstream-service-time", "51"},
+                   {"x-frame-options", "SAMEORIGIN"},
+                   {"x-rate-limit-limit", "320"},
+                   {"x-rate-limit-remaining", "319"},
+                   {"x-rate-limit-reset", "7.699090"},
+                   {"x-xss-protection", "1; mode=block"}
+                 ],
+                 request: %HTTPoison.Request{
+                   body:
+                     "{\"destination\":\"dont_find_me\",\"source\":\"lead_8xlzqZBSz6iKJJLoZ82Fh2vqcUzretDDBClxTmWgLJ1\"}",
+                   headers: [{"Content-Type", "application/json"}, {"Accept", "application/json"}],
+                   method: :post,
+                   options: [hackney: [basic_auth: {"FAKE_CLOSEIO_TOKEN", ""}]],
+                   params: %{},
+                   url: "https://api.close.com/api/v1/lead/merge/"
+                 },
+                 request_url: "https://api.close.com/api/v1/lead/merge/",
+                 status_code: 404
+               }
+      end
+    end
   end
 
   describe "log_call/1" do
