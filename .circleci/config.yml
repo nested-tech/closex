@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/closex
     docker:
-      - image: elixir:1.6
+      - image: elixir:1.10
         environment:
           COVERALLS_REPO_TOKEN: 3T8c9tUBXMAmGPmnBO1SUv7xGFr32gbLs
           MIX_ENV: test
