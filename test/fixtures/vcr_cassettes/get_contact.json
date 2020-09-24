@@ -1,0 +1,40 @@
+[
+  {
+    "request": {
+      "body": "",
+      "headers": {
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      "method": "get",
+      "options": {
+        "basic_auth": ["FAKE_CLOSEIO_TOKEN", ""]
+      },
+      "request_body": "",
+      "url": "https://api.close.com/api/v1/contact/cont_pfGqLyh99KXfduS17OnPejhc1fGi4KeHYrMvk4itQQa/"
+    },
+    "response": {
+      "binary": false,
+      "body": "{\"updated_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"emails\": [{\"email\": \"biggerbird@example.com\", \"type\": \"home\"}], \"integration_links\": [], \"organization_id\": \"orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj\", \"lead_id\": \"lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm\", \"name\": \"Big Bird\", \"date_updated\": \"2018-11-08T10:26:25.014000+00:00\", \"phones\": [{\"country\": null, \"phone\": \"+441234\", \"type\": \"office\", \"phone_formatted\": \"+44 1234\"}], \"title\": \"\", \"id\": \"cont_pfGqLyh99KXfduS17OnPejhc1fGi4KeHYrMvk4itQQa\", \"display_name\": \"Big Bird\", \"created_by\": \"user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW\", \"date_created\": \"2018-11-08T10:00:27.780000+00:00\", \"urls\": []}",
+      "headers": {
+        "date": "Thu, 24 Sep 2020 10:19:29 GMT",
+        "vary": "Accept",
+        "content-type": "application/json",
+        "content-length": "691",
+        "x-frame-options": "SAMEORIGIN",
+        "x-rate-limit-limit": "320",
+        "x-rate-limit-remaining": "319",
+        "x-rate-limit-reset": "7.885082",
+        "x-xss-protection": "1; mode=block",
+        "x-content-type-options": "nosniff",
+        "strict-transport-security": "max-age=31556926; includeSubDomains",
+        "referrer-policy": "no-referrer-when-downgrade",
+        "set-cookie": "session=; Expires=Thu, 01-Jan-1970 00:00:00 GMT; Max-Age=0; Path=/",
+        "x-envoy-upstream-service-time": "30",
+        "server": "envoy"
+      },
+      "status_code": 200,
+      "type": "ok"
+    }
+  }
+]

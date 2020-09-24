@@ -119,6 +119,10 @@ defmodule Closex.HTTPClient do
   end
 
   @impl true
+  def get_contact(contact_id, opts \\ []),
+    do: fetch_object("contact", contact_id, opts)
+
+  @impl true
   def create_contact(payload, opts \\ []) do
     post_json("/contact/", payload, [], opts)
     |> handle_response
