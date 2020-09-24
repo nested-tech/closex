@@ -817,6 +817,40 @@ defmodule Closex.HTTPClientTest do
     end
   end
 
+  @valid_contact_id "cont_pfGqLyh99KXfduS17OnPejhc1fGi4KeHYrMvk4itQQa"
+
+  describe "get_contact/1" do
+    test "gets a contact by id" do
+      use_cassette "get_contact" do
+        {:ok, response} = get_contact(@valid_contact_id)
+
+        assert response == %{
+                 "created_by" => "user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW",
+                 "date_created" => "2018-11-08T10:00:27.780000+00:00",
+                 "date_updated" => "2018-11-08T10:26:25.014000+00:00",
+                 "display_name" => "Big Bird",
+                 "emails" => [%{"email" => "biggerbird@example.com", "type" => "home"}],
+                 "id" => "cont_pfGqLyh99KXfduS17OnPejhc1fGi4KeHYrMvk4itQQa",
+                 "integration_links" => [],
+                 "lead_id" => "lead_ibiNeZe7yE0ZoJZQUKm0Eymg0nxDH2xb5fHg8IzBsAm",
+                 "name" => "Big Bird",
+                 "organization_id" => "orga_CC25dsMNG4KsRpxn2LEwPUVyGRs4poLYFIBsioIK4Oj",
+                 "phones" => [
+                   %{
+                     "country" => nil,
+                     "phone" => "+441234",
+                     "phone_formatted" => "+44 1234",
+                     "type" => "office"
+                   }
+                 ],
+                 "title" => "",
+                 "updated_by" => "user_CwSfS8J6DsD6tnAsUwNFKCpS7Tq9LVCgJvHapOcpWyW",
+                 "urls" => []
+               }
+      end
+    end
+  end
+
   describe "create_contact/1" do
     test "creates a contact" do
       use_cassette "create_contact" do
@@ -850,7 +884,6 @@ defmodule Closex.HTTPClientTest do
     end
   end
 
-  @valid_contact_id "cont_pfGqLyh99KXfduS17OnPejhc1fGi4KeHYrMvk4itQQa"
   describe "update_contact/2" do
     test "updates a contact" do
       use_cassette "update_contact" do

@@ -73,6 +73,9 @@ defmodule Closex.ClientBehaviour do
   @callback find_all_opportunities(search_term) :: result
   @callback find_all_opportunities(search_term, limit) :: result
 
+  @callback get_contact(id) :: result
+  @callback get_contact(id, opts) :: result
+
   @callback create_contact(map) :: result
   @callback create_contact(map, opts) :: result
 
