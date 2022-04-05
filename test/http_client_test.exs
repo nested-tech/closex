@@ -605,8 +605,8 @@ defmodule Closex.HTTPClientTest do
       use_cassette "send_email" do
         {:ok, body} = send_email(email)
 
-        assert Map.keys(body) ==
-                 [
+        assert Map.keys(body) |> Enum.sort() ==
+                 Enum.sort([
                    "_type",
                    "sender",
                    "users",
@@ -648,7 +648,7 @@ defmodule Closex.HTTPClientTest do
                    "user_name",
                    "subject",
                    "body_html"
-                 ]
+                 ])
       end
     end
   end
@@ -987,8 +987,8 @@ defmodule Closex.HTTPClientTest do
       use_cassette "log_call" do
         {:ok, body} = log_call(call)
 
-        assert Map.keys(body) ==
-                 [
+        assert Map.keys(body) |> Enum.sort() ==
+                 Enum.sort([
                    "source",
                    "_type",
                    "users",
@@ -1024,7 +1024,7 @@ defmodule Closex.HTTPClientTest do
                    "voicemail_url",
                    "user_name",
                    "disposition"
-                 ]
+                 ])
       end
     end
   end
@@ -1124,56 +1124,57 @@ defmodule Closex.HTTPClientTest do
       use_cassette "create_email_activity" do
         {:ok, body} = create_email_activity(test_email)
 
-        assert Map.keys(body) == [
-                 "_type",
-                 "sender",
-                 "users",
-                 "body_text",
-                 "organization_id",
-                 "bcc",
-                 "body_html_quoted",
-                 "created_by",
-                 "created_by_name",
-                 "id",
-                 "date_sent",
-                 "date_created",
-                 "template_id",
-                 "opens_summary",
-                 "user_id",
-                 "cc",
-                 "body_text_quoted",
-                 "date_updated",
-                 "need_smtp_credentials",
-                 "template_name",
-                 "updated_by",
-                 "status",
-                 "message_ids",
-                 "thread_id",
-                 "sequence_subscription_id",
-                 "send_attempts",
-                 "contact_id",
-                 "sequence_id",
-                 "in_reply_to_id",
-                 "opens",
-                 "followup_sequence_id",
-                 "attachments",
-                 "envelope",
-                 "updated_by_name",
-                 "followup_sequence_delay",
-                 "has_reply",
-                 "lead_id",
-                 "references",
-                 "direction",
-                 "bulk_email_action_id",
-                 "body_preview",
-                 "date_scheduled",
-                 "to",
-                 "email_account_id",
-                 "user_name",
-                 "subject",
-                 "sequence_name",
-                 "body_html"
-               ]
+        assert Map.keys(body) |> Enum.sort() ==
+                 Enum.sort([
+                   "_type",
+                   "sender",
+                   "users",
+                   "body_text",
+                   "organization_id",
+                   "bcc",
+                   "body_html_quoted",
+                   "created_by",
+                   "created_by_name",
+                   "id",
+                   "date_sent",
+                   "date_created",
+                   "template_id",
+                   "opens_summary",
+                   "user_id",
+                   "cc",
+                   "body_text_quoted",
+                   "date_updated",
+                   "need_smtp_credentials",
+                   "template_name",
+                   "updated_by",
+                   "status",
+                   "message_ids",
+                   "thread_id",
+                   "sequence_subscription_id",
+                   "send_attempts",
+                   "contact_id",
+                   "sequence_id",
+                   "in_reply_to_id",
+                   "opens",
+                   "followup_sequence_id",
+                   "attachments",
+                   "envelope",
+                   "updated_by_name",
+                   "followup_sequence_delay",
+                   "has_reply",
+                   "lead_id",
+                   "references",
+                   "direction",
+                   "bulk_email_action_id",
+                   "body_preview",
+                   "date_scheduled",
+                   "to",
+                   "email_account_id",
+                   "user_name",
+                   "subject",
+                   "sequence_name",
+                   "body_html"
+                 ])
       end
     end
   end
