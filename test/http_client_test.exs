@@ -1193,4 +1193,19 @@ defmodule Closex.HTTPClientTest do
       end
     end
   end
+
+  describe "find_acitivities/1" do
+    test "returns a list of activities" do
+      search_term = "lead_id=lead_ZNjVC99F8sKnz4FWKKCBxIsamaEsasV7kN8aoZCl5zM"
+
+      use_cassette "find_activities", match_requests_on: [:request_body, :query] do
+        {:ok, result} = find_activities(search_term)
+        assert %{"data" => activities} = result
+        assert is_list(activities)
+        assert Enum.count(activities) == 5
+        call = hd(activities)
+        assert call["lead_id"] == "lead_ZNjVC99F8sKnz4FWKKCBxIsamaEsasV7kN8aoZCl5zM"
+      end
+    end
+  end
 end
